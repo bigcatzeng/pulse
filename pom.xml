@@ -179,7 +179,7 @@
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
-            <version>8.0.0.M1</version>
+            <version>9.2.28.v20190418</version>
             <artifactId>jetty-server</artifactId>
             <scope>test</scope>
         </dependency>

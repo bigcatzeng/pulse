@@ -65,7 +65,7 @@ public final class WebContainer  {
 
 
 	public void start() throws Exception {
-		jettyServer = new Server(0);
+		jettyServer = new Server(1111);
 		
 		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 		context.setContextPath(contextPath);
@@ -75,7 +75,7 @@ public final class WebContainer  {
 	        
 		jettyServer.start();
 		
-		port = jettyServer.getConnectors()[0].getLocalPort();
+		port = 1111;
 	}
 	
 	
