@@ -1,0 +1,86 @@
+/*
+ *  Copyright (c) xlightweb.org, 2006 - 2009. All rights reserved.
+ *
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2.1 of the License, or (at your option) any later version.
+ *
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ * Please refer to the LGPL license at: http://www.gnu.org/copyleft/lesser.txt
+ * The latest copy of this software may be found on http://www.xlightweb.org/
+ */
+package org.xlightweb;
+
+
+
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import junit.framework.Assert;
+
+
+
+import org.junit.Test;
+
+import org.xlightweb.client.HttpClient;
+import org.xlightweb.server.HttpServer;
+
+
+
+/**
+*
+* @author grro@xlightweb.org
+*/
+public final class HttpServerCompressTest  {
+
+
+    @Test
+    public void testLargeData() throws Exception {
+
+    	final File file = QAUtil.createTestfile_4000k();
+		file.deleteOnExit();
+    	
+    	IHttpRequestHandler reqHdl = new IHttpRequestHandler() {
+			
+			public void onRequest(IHttpExchange exchange) throws IOException, BadMessageException {
+				
+				FileInputStream fis = new FileInputStream(file);
+				byte[] data = new byte[(int) file.length()];
+				fis.read(data);
+				fis.close();
+				
+				HttpResponse response = new HttpResponse(200, "text/plain", data);
+				exchange.send(response);
+			}
+		};
+		HttpServer server = new HttpServer(reqHdl);
+		server.start();
+    	
+    	HttpClient httpClient = new HttpClient();
+    	httpClient.setAutoUncompress(true);
+    	
+    	GetRequest request = new GetRequest("http://localhost:" + server.getLocalPort() + "/test");
+    	request.setHeader("Accept-Encoding", "gzip");
+    	
+    	IHttpResponse response = httpClient.call(request);
+    	
+    	Assert.assertEquals(200, response.getStatus());
+    	Assert.assertTrue(response.getHeader("X-XLightweb-Uncompressed").startsWith("true"));
+    	Assert.assertTrue(QAUtil.isEquals(file, response.getBody().readByteBuffer()));
+    	
+    	
+    	httpClient.close();
+    	server.close();
+	}
+}

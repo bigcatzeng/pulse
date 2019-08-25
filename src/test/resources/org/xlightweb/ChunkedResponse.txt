@@ -1,0 +1,14306 @@
+HTTP/1.1 200 OK
+Date: Thu, 22 Oct 2009 15:10:16 GMT
+Server: Apache/2.2.13 (Unix) DAV/2 SVN/1.6.6-dev mod_python/3.3.1 Python/2.6.2 mod_ssl/2.2.13 OpenSSL/0.9.8e
+Expires: Thu, 22 Oct 2009 15:20:16 GMT
+Cache-Control: max-age=600
+ETag: W/"825366"
+Vary: Accept-Encoding
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+ea
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- ViewVC :: http://www.viewvc.org/ -->
+<head>
+<title>
+1
+[
+a
+Apache-SVN
+1
+]
+1
+ 
+4f
+Contents of /tomcat/trunk/java/org/apache/tomcat/util/net/AbstractEndpoint.java
+30
+</title>
+<meta name="generator" content="ViewVC 
+5
+1.1.2
+25
+" />
+<link rel="shortcut icon" href="
+11
+/viewvc/*docroot*
+49
+/images/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="
+11
+/viewvc/*docroot*
+20
+/styles.css" type="text/css" />
+
+43
+
+</head>
+<body>
+<div class="vc_navheader">
+<table><tr>
+<td><strong>
+9
+<a href="
+12
+/viewvc?view=roots
+24
+"><span class="pathdiv">/</span></a>
+9
+<a href="
+8
+/viewvc/
+2
+">
+1
+[
+a
+Apache-SVN
+1
+]
+4
+</a>
+1e
+<span class="pathdiv">/</span>
+9
+<a href="
+f
+/viewvc/tomcat/
+2
+">
+6
+tomcat
+4
+</a>
+1e
+<span class="pathdiv">/</span>
+9
+<a href="
+15
+/viewvc/tomcat/trunk/
+2
+">
+5
+trunk
+4
+</a>
+1e
+<span class="pathdiv">/</span>
+9
+<a href="
+1a
+/viewvc/tomcat/trunk/java/
+2
+">
+4
+java
+4
+</a>
+1e
+<span class="pathdiv">/</span>
+9
+<a href="
+1e
+/viewvc/tomcat/trunk/java/org/
+2
+">
+3
+org
+4
+</a>
+1e
+<span class="pathdiv">/</span>
+9
+<a href="
+25
+/viewvc/tomcat/trunk/java/org/apache/
+2
+">
+6
+apache
+4
+</a>
+1e
+<span class="pathdiv">/</span>
+9
+<a href="
+2c
+/viewvc/tomcat/trunk/java/org/apache/tomcat/
+2
+">
+6
+tomcat
+4
+</a>
+1e
+<span class="pathdiv">/</span>
+9
+<a href="
+31
+/viewvc/tomcat/trunk/java/org/apache/tomcat/util/
+2
+">
+4
+util
+4
+</a>
+1e
+<span class="pathdiv">/</span>
+9
+<a href="
+35
+/viewvc/tomcat/trunk/java/org/apache/tomcat/util/net/
+2
+">
+3
+net
+4
+</a>
+1e
+<span class="pathdiv">/</span>
+9
+<a href="
+53
+/viewvc/tomcat/trunk/java/org/apache/tomcat/util/net/AbstractEndpoint.java?view=log
+2
+">
+15
+AbstractEndpoint.java
+4
+</a>
+2e
+</strong></td>
+<td style="text-align: right;">
+83
+</td>
+</tr></table>
+</div>
+<div style="float: right; padding: 5px;"><a href="http://www.viewvc.org/" title="ViewVC Home"><img src="
+11
+/viewvc/*docroot*
+58
+/images/viewvc-logo.png" alt="ViewVC logotype" width="240" height="70" /></a></div>
+<h1>
+4f
+Contents of /tomcat/trunk/java/org/apache/tomcat/util/net/AbstractEndpoint.java
+6
+</h1>
+
+1
+
+
+16
+<p style="margin:0;">
+
+a
+
+<a href="
+35
+/viewvc/tomcat/trunk/java/org/apache/tomcat/util/net/
+c
+"><img src="
+11
+/viewvc/*docroot*
+57
+/images/back_small.png" class="vc_icon" alt="Parent Directory" /> Parent Directory</a>
+
+c
+
+| <a href="
+53
+/viewvc/tomcat/trunk/java/org/apache/tomcat/util/net/AbstractEndpoint.java?view=log
+c
+"><img src="
+11
+/viewvc/*docroot*
+48
+/images/log.png" class="vc_icon" alt="Revision Log" /> Revision Log</a>
+
+1
+
+
+1
+
+
+1
+
+
+6
+
+</p>
+
+2a
+
+<hr />
+<div class="vc_summary">
+Revision 
+9
+<a href="
+29
+/viewvc?view=revision&amp;revision=825366
+a
+"><strong>
+6
+825366
+d
+</strong></a>
+4
+ -
+(
+9
+<a href="
+5a
+/viewvc/tomcat/trunk/java/org/apache/tomcat/util/net/AbstractEndpoint.java?annotate=825366
+27
+"><strong>show annotations</strong></a>
+2
+)
+
+1
+
+
+1
+
+
+b
+
+<br /><em>
+1c
+Thu Oct 15 01:10:34 2009 UTC
+6
+</em>
+
+1
+(
+10
+7 days, 13 hours
+5
+ ago)
+8
+
+by <em>
+6
+fhanik
+6
+</em>
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+12
+
+<br />File size: 
+5
+13122
+9
+ byte(s)
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+15
+
+<pre class="vc_log">
+52
+Add a simple asynchronous stock ticker.
+Some more refactoring around common code
+
+
+7
+</pre>
+
+8
+
+</div>
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+3c
+
+<div id="vc_file">
+<table cellspacing="0" cellpadding="0">
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+1
+1
+23
+">
+<td class="vc_file_line_number">
+1
+1
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3
+/*
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+1
+2
+23
+">
+<td class="vc_file_line_number">
+1
+2
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+46
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+1
+3
+23
+">
+<td class="vc_file_line_number">
+1
+3
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+49
+ * contributor license agreements.  See the NOTICE file distributed with
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+1
+4
+23
+">
+<td class="vc_file_line_number">
+1
+4
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+47
+ * this work for additional information regarding copyright ownership.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+1
+5
+23
+">
+<td class="vc_file_line_number">
+1
+5
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4b
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+1
+6
+23
+">
+<td class="vc_file_line_number">
+1
+6
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+48
+ * (the "License"); you may not use this file except in compliance with
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+1
+7
+23
+">
+<td class="vc_file_line_number">
+1
+7
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+39
+ * the License.  You may obtain a copy of the License at
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+1
+8
+23
+">
+<td class="vc_file_line_number">
+1
+8
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4
+ * 
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+1
+9
+23
+">
+<td class="vc_file_line_number">
+1
+9
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+33
+ *      http://www.apache.org/licenses/LICENSE-2.0
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+10
+23
+">
+<td class="vc_file_line_number">
+2
+10
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4
+ * 
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+11
+23
+">
+<td class="vc_file_line_number">
+2
+11
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+47
+ * Unless required by applicable law or agreed to in writing, software
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+12
+23
+">
+<td class="vc_file_line_number">
+2
+12
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+45
+ * distributed under the License is distributed on an "AS IS" BASIS,
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+13
+23
+">
+<td class="vc_file_line_number">
+2
+13
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4c
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+14
+23
+">
+<td class="vc_file_line_number">
+2
+14
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+47
+ * See the License for the specific language governing permissions and
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+15
+23
+">
+<td class="vc_file_line_number">
+2
+15
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+22
+ * limitations under the License.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+16
+23
+">
+<td class="vc_file_line_number">
+2
+16
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4
+ */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+17
+23
+">
+<td class="vc_file_line_number">
+2
+17
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+24
+package org.apache.tomcat.util.net;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+18
+23
+">
+<td class="vc_file_line_number">
+2
+18
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+19
+23
+">
+<td class="vc_file_line_number">
+2
+19
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1d
+import java.net.InetAddress;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+20
+23
+">
+<td class="vc_file_line_number">
+2
+20
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+23
+import java.net.InetSocketAddress;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+21
+23
+">
+<td class="vc_file_line_number">
+2
+21
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+26
+import java.util.concurrent.Executor;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+22
+23
+">
+<td class="vc_file_line_number">
+2
+22
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+26
+import java.util.concurrent.TimeUnit;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+23
+23
+">
+<td class="vc_file_line_number">
+2
+23
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+24
+23
+">
+<td class="vc_file_line_number">
+2
+24
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+24
+import org.apache.juli.logging.Log;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+25
+23
+">
+<td class="vc_file_line_number">
+2
+25
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+2b
+import org.apache.juli.logging.LogFactory;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+26
+23
+">
+<td class="vc_file_line_number">
+2
+26
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+32
+import org.apache.tomcat.util.IntrospectionUtils;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+27
+23
+">
+<td class="vc_file_line_number">
+2
+27
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+31
+import org.apache.tomcat.util.res.StringManager;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+28
+23
+">
+<td class="vc_file_line_number">
+2
+28
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+39
+import org.apache.tomcat.util.threads.ResizableExecutor;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+29
+23
+">
+<td class="vc_file_line_number">
+2
+29
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+31
+import org.apache.tomcat.util.threads.TaskQueue;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+30
+23
+">
+<td class="vc_file_line_number">
+2
+30
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+39
+import org.apache.tomcat.util.threads.TaskThreadFactory;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+31
+23
+">
+<td class="vc_file_line_number">
+2
+31
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3a
+import org.apache.tomcat.util.threads.ThreadPoolExecutor;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+32
+23
+">
+<td class="vc_file_line_number">
+2
+32
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4
+/**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+33
+23
+">
+<td class="vc_file_line_number">
+2
+33
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4
+ * 
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+34
+23
+">
+<td class="vc_file_line_number">
+2
+34
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+12
+ * @author fhanik
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+35
+23
+">
+<td class="vc_file_line_number">
+2
+35
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+17
+ * @author Mladen Turk
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+36
+23
+">
+<td class="vc_file_line_number">
+2
+36
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1a
+ * @author Remy Maucherat
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+37
+23
+">
+<td class="vc_file_line_number">
+2
+37
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4
+ */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+38
+23
+">
+<td class="vc_file_line_number">
+2
+38
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+29
+public abstract class AbstractEndpoint {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+39
+23
+">
+<td class="vc_file_line_number">
+2
+39
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4a
+    protected static Log log = LogFactory.getLog(AbstractEndpoint.class);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+40
+23
+">
+<td class="vc_file_line_number">
+2
+40
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+5
+    
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+41
+23
+">
+<td class="vc_file_line_number">
+2
+41
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+50
+    // -------------------------------------------------------------- Constants
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+42
+23
+">
+<td class="vc_file_line_number">
+2
+42
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+5d
+    protected StringManager sm = StringManager.getManager("org.apache.tomcat.util.net.res");
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+43
+23
+">
+<td class="vc_file_line_number">
+2
+43
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+44
+23
+">
+<td class="vc_file_line_number">
+2
+44
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+45
+23
+">
+<td class="vc_file_line_number">
+2
+45
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+37
+     * The Request attribute key for the cipher suite.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+46
+23
+">
+<td class="vc_file_line_number">
+2
+46
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+47
+23
+">
+<td class="vc_file_line_number">
+2
+47
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+58
+    public static final String CIPHER_SUITE_KEY = "javax.servlet.request.cipher_suite";
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+48
+23
+">
+<td class="vc_file_line_number">
+2
+48
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+49
+23
+">
+<td class="vc_file_line_number">
+2
+49
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+50
+23
+">
+<td class="vc_file_line_number">
+2
+50
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+33
+     * The Request attribute key for the key size.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+51
+23
+">
+<td class="vc_file_line_number">
+2
+51
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+52
+23
+">
+<td class="vc_file_line_number">
+2
+52
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+50
+    public static final String KEY_SIZE_KEY = "javax.servlet.request.key_size";
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+53
+23
+">
+<td class="vc_file_line_number">
+2
+53
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+54
+23
+">
+<td class="vc_file_line_number">
+2
+54
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+55
+23
+">
+<td class="vc_file_line_number">
+2
+55
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+43
+     * The Request attribute key for the client certificate chain.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+56
+23
+">
+<td class="vc_file_line_number">
+2
+56
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+57
+23
+">
+<td class="vc_file_line_number">
+2
+57
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+5a
+    public static final String CERTIFICATE_KEY = "javax.servlet.request.X509Certificate";
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+58
+23
+">
+<td class="vc_file_line_number">
+2
+58
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+59
+23
+">
+<td class="vc_file_line_number">
+2
+59
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+60
+23
+">
+<td class="vc_file_line_number">
+2
+60
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+35
+     * The Request attribute key for the session id.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+61
+23
+">
+<td class="vc_file_line_number">
+2
+61
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3b
+     * This one is a Tomcat extension to the Servlet spec.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+62
+23
+">
+<td class="vc_file_line_number">
+2
+62
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+63
+23
+">
+<td class="vc_file_line_number">
+2
+63
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+55
+    public static final String SESSION_ID_KEY = "javax.servlet.request.ssl_session";
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+64
+23
+">
+<td class="vc_file_line_number">
+2
+64
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+65
+23
+">
+<td class="vc_file_line_number">
+2
+65
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+66
+23
+">
+<td class="vc_file_line_number">
+2
+66
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3a
+     * The request attribute key for the session manager.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+67
+23
+">
+<td class="vc_file_line_number">
+2
+67
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3b
+     * This one is a Tomcat extension to the Servlet spec.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+68
+23
+">
+<td class="vc_file_line_number">
+2
+68
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+69
+23
+">
+<td class="vc_file_line_number">
+2
+69
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+56
+    public static final String SESSION_MGR = "javax.servlet.request.ssl_session_mgr";
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+70
+23
+">
+<td class="vc_file_line_number">
+2
+70
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4
+   
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+71
+23
+">
+<td class="vc_file_line_number">
+2
+71
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+72
+23
+">
+<td class="vc_file_line_number">
+2
+72
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+36
+     * Different types of socket states to react upon
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+73
+23
+">
+<td class="vc_file_line_number">
+2
+73
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+74
+23
+">
+<td class="vc_file_line_number">
+2
+74
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+26
+    public static interface Handler {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+75
+23
+">
+<td class="vc_file_line_number">
+2
+75
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+22
+        public enum SocketState {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+76
+23
+">
+<td class="vc_file_line_number">
+2
+76
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1f
+            OPEN, CLOSED, LONG
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+77
+23
+">
+<td class="vc_file_line_number">
+2
+77
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+a
+        }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+78
+23
+">
+<td class="vc_file_line_number">
+2
+78
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+a
+    }    
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+79
+23
+">
+<td class="vc_file_line_number">
+2
+79
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+50
+    // ----------------------------------------------------------------- Fields
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+80
+23
+">
+<td class="vc_file_line_number">
+2
+80
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+81
+23
+">
+<td class="vc_file_line_number">
+2
+81
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+82
+23
+">
+<td class="vc_file_line_number">
+2
+82
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+83
+23
+">
+<td class="vc_file_line_number">
+2
+83
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+26
+     * Running state of the endpoint.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+84
+23
+">
+<td class="vc_file_line_number">
+2
+84
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+85
+23
+">
+<td class="vc_file_line_number">
+2
+85
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+30
+    protected volatile boolean running = false;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+86
+23
+">
+<td class="vc_file_line_number">
+2
+86
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+87
+23
+">
+<td class="vc_file_line_number">
+2
+87
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+88
+23
+">
+<td class="vc_file_line_number">
+2
+88
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+89
+23
+">
+<td class="vc_file_line_number">
+2
+89
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3c
+     * Will be set to true whenever the endpoint is paused.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+90
+23
+">
+<td class="vc_file_line_number">
+2
+90
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+91
+23
+">
+<td class="vc_file_line_number">
+2
+91
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+2f
+    protected volatile boolean paused = false;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+92
+23
+">
+<td class="vc_file_line_number">
+2
+92
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+93
+23
+">
+<td class="vc_file_line_number">
+2
+93
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+94
+23
+">
+<td class="vc_file_line_number">
+2
+94
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+37
+     * Track the initialization state of the endpoint.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+95
+23
+">
+<td class="vc_file_line_number">
+2
+95
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+96
+23
+">
+<td class="vc_file_line_number">
+2
+96
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+2b
+    protected boolean initialized = false;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+97
+23
+">
+<td class="vc_file_line_number">
+2
+97
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+5
+    
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+98
+23
+">
+<td class="vc_file_line_number">
+2
+98
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+2
+99
+23
+">
+<td class="vc_file_line_number">
+2
+99
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+29
+     * Are we using an internal executor
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+100
+23
+">
+<td class="vc_file_line_number">
+3
+100
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+101
+23
+">
+<td class="vc_file_line_number">
+3
+101
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+39
+    protected volatile boolean internalExecutor = false;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+102
+23
+">
+<td class="vc_file_line_number">
+3
+102
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+5
+    
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+103
+23
+">
+<td class="vc_file_line_number">
+3
+103
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+104
+23
+">
+<td class="vc_file_line_number">
+3
+104
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+19
+     * Socket properties
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+105
+23
+">
+<td class="vc_file_line_number">
+3
+105
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+106
+23
+">
+<td class="vc_file_line_number">
+3
+106
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4a
+    protected SocketProperties socketProperties = new SocketProperties();
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+107
+23
+">
+<td class="vc_file_line_number">
+3
+107
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+34
+    public SocketProperties getSocketProperties() {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+108
+23
+">
+<td class="vc_file_line_number">
+3
+108
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+21
+        return socketProperties;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+109
+23
+">
+<td class="vc_file_line_number">
+3
+109
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+110
+23
+">
+<td class="vc_file_line_number">
+3
+110
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+111
+23
+">
+<td class="vc_file_line_number">
+3
+111
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+112
+23
+">
+<td class="vc_file_line_number">
+3
+112
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+113
+23
+">
+<td class="vc_file_line_number">
+3
+113
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+114
+23
+">
+<td class="vc_file_line_number">
+3
+114
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+5
+    
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+115
+23
+">
+<td class="vc_file_line_number">
+3
+115
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+54
+    // ----------------------------------------------------------------- Properties
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+116
+23
+">
+<td class="vc_file_line_number">
+3
+116
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+117
+23
+">
+<td class="vc_file_line_number">
+3
+117
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+118
+23
+">
+<td class="vc_file_line_number">
+3
+118
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+2c
+     * External Executor based thread pool.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+119
+23
+">
+<td class="vc_file_line_number">
+3
+119
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+120
+23
+">
+<td class="vc_file_line_number">
+3
+120
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+26
+    private Executor executor = null;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+121
+23
+">
+<td class="vc_file_line_number">
+3
+121
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+32
+    public void setExecutor(Executor executor) { 
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+122
+23
+">
+<td class="vc_file_line_number">
+3
+122
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+22
+        this.executor = executor;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+123
+23
+">
+<td class="vc_file_line_number">
+3
+123
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+32
+        this.internalExecutor = (executor==null);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+124
+23
+">
+<td class="vc_file_line_number">
+3
+124
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+125
+23
+">
+<td class="vc_file_line_number">
+3
+125
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+37
+    public Executor getExecutor() { return executor; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+126
+23
+">
+<td class="vc_file_line_number">
+3
+126
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+127
+23
+">
+<td class="vc_file_line_number">
+3
+127
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+5
+    
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+128
+23
+">
+<td class="vc_file_line_number">
+3
+128
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+129
+23
+">
+<td class="vc_file_line_number">
+3
+129
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1b
+     * Server socket port.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+130
+23
+">
+<td class="vc_file_line_number">
+3
+130
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+131
+23
+">
+<td class="vc_file_line_number">
+3
+131
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+16
+    private int port;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+132
+23
+">
+<td class="vc_file_line_number">
+3
+132
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+2a
+    public int getPort() { return port; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+133
+23
+">
+<td class="vc_file_line_number">
+3
+133
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+37
+    public void setPort(int port ) { this.port=port; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+134
+23
+">
+<td class="vc_file_line_number">
+3
+134
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+135
+23
+">
+<td class="vc_file_line_number">
+3
+135
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+136
+23
+">
+<td class="vc_file_line_number">
+3
+136
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+137
+23
+">
+<td class="vc_file_line_number">
+3
+137
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+26
+     * Address for the server socket.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+138
+23
+">
+<td class="vc_file_line_number">
+3
+138
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+139
+23
+">
+<td class="vc_file_line_number">
+3
+139
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+21
+    private InetAddress address;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+140
+23
+">
+<td class="vc_file_line_number">
+3
+140
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+38
+    public InetAddress getAddress() { return address; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+141
+23
+">
+<td class="vc_file_line_number">
+3
+141
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4c
+    public void setAddress(InetAddress address) { this.address = address; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+142
+23
+">
+<td class="vc_file_line_number">
+3
+142
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+5
+    
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+143
+23
+">
+<td class="vc_file_line_number">
+3
+143
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+144
+23
+">
+<td class="vc_file_line_number">
+3
+144
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3f
+     * Allows the server developer to specify the backlog that
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+145
+23
+">
+<td class="vc_file_line_number">
+3
+145
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+41
+     * should be used for server sockets. By default, this value
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+146
+23
+">
+<td class="vc_file_line_number">
+3
+146
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+f
+     * is 100.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+147
+23
+">
+<td class="vc_file_line_number">
+3
+147
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+148
+23
+">
+<td class="vc_file_line_number">
+3
+148
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1f
+    private int backlog = 100;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+149
+23
+">
+<td class="vc_file_line_number">
+3
+149
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+58
+    public void setBacklog(int backlog) { if (backlog &gt; 0) this.backlog = backlog; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+150
+23
+">
+<td class="vc_file_line_number">
+3
+150
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+30
+    public int getBacklog() { return backlog; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+151
+23
+">
+<td class="vc_file_line_number">
+3
+151
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+152
+23
+">
+<td class="vc_file_line_number">
+3
+152
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+153
+23
+">
+<td class="vc_file_line_number">
+3
+153
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4f
+     * Keepalive timeout, if lesser or equal to 0 then soTimeout will be used.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+154
+23
+">
+<td class="vc_file_line_number">
+3
+154
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+155
+23
+">
+<td class="vc_file_line_number">
+3
+155
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+26
+    private int keepAliveTimeout = 0;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+156
+23
+">
+<td class="vc_file_line_number">
+3
+156
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+68
+    public void setKeepAliveTimeout(int keepAliveTimeout) { this.keepAliveTimeout = keepAliveTimeout; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+157
+23
+">
+<td class="vc_file_line_number">
+3
+157
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+41
+    public int getKeepAliveTimeout() { return keepAliveTimeout;}
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+158
+23
+">
+<td class="vc_file_line_number">
+3
+158
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+159
+23
+">
+<td class="vc_file_line_number">
+3
+159
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+160
+23
+">
+<td class="vc_file_line_number">
+3
+160
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+161
+23
+">
+<td class="vc_file_line_number">
+3
+161
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1c
+     * Socket TCP no delay.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+162
+23
+">
+<td class="vc_file_line_number">
+3
+162
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+163
+23
+">
+<td class="vc_file_line_number">
+3
+163
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4f
+    public boolean getTcpNoDelay() { return socketProperties.getTcpNoDelay();}
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+164
+23
+">
+<td class="vc_file_line_number">
+3
+164
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+62
+    public void setTcpNoDelay(boolean tcpNoDelay) { socketProperties.setTcpNoDelay(tcpNoDelay); }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+165
+23
+">
+<td class="vc_file_line_number">
+3
+165
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+166
+23
+">
+<td class="vc_file_line_number">
+3
+166
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+167
+23
+">
+<td class="vc_file_line_number">
+3
+167
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+168
+23
+">
+<td class="vc_file_line_number">
+3
+168
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+16
+     * Socket linger.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+169
+23
+">
+<td class="vc_file_line_number">
+3
+169
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+170
+23
+">
+<td class="vc_file_line_number">
+3
+170
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4c
+    public int getSoLinger() { return socketProperties.getSoLingerTime(); }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+171
+23
+">
+<td class="vc_file_line_number">
+3
+171
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+2d
+    public void setSoLinger(int soLinger) { 
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+172
+23
+">
+<td class="vc_file_line_number">
+3
+172
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+34
+        socketProperties.setSoLingerTime(soLinger);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+173
+23
+">
+<td class="vc_file_line_number">
+3
+173
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+38
+        socketProperties.setSoLingerOn(soLinger&gt;=0);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+174
+23
+">
+<td class="vc_file_line_number">
+3
+174
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+175
+23
+">
+<td class="vc_file_line_number">
+3
+175
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+176
+23
+">
+<td class="vc_file_line_number">
+3
+176
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+177
+23
+">
+<td class="vc_file_line_number">
+3
+177
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+178
+23
+">
+<td class="vc_file_line_number">
+3
+178
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+17
+     * Socket timeout.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+179
+23
+">
+<td class="vc_file_line_number">
+3
+179
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+180
+23
+">
+<td class="vc_file_line_number">
+3
+180
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4a
+    public int getSoTimeout() { return socketProperties.getSoTimeout(); }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+181
+23
+">
+<td class="vc_file_line_number">
+3
+181
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+5a
+    public void setSoTimeout(int soTimeout) { socketProperties.setSoTimeout(soTimeout); }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+182
+23
+">
+<td class="vc_file_line_number">
+3
+182
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+183
+23
+">
+<td class="vc_file_line_number">
+3
+183
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+184
+23
+">
+<td class="vc_file_line_number">
+3
+184
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+13
+     * SSL engine.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+185
+23
+">
+<td class="vc_file_line_number">
+3
+185
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+186
+23
+">
+<td class="vc_file_line_number">
+3
+186
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+28
+    private boolean SSLEnabled = false;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+187
+23
+">
+<td class="vc_file_line_number">
+3
+187
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+39
+    public boolean isSSLEnabled() { return SSLEnabled; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+188
+23
+">
+<td class="vc_file_line_number">
+3
+188
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+54
+    public void setSSLEnabled(boolean SSLEnabled) { this.SSLEnabled = SSLEnabled; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+189
+23
+">
+<td class="vc_file_line_number">
+3
+189
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+190
+23
+">
+<td class="vc_file_line_number">
+3
+190
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+191
+23
+">
+<td class="vc_file_line_number">
+3
+191
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+26
+    private int minSpareThreads = 10;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+192
+23
+">
+<td class="vc_file_line_number">
+3
+192
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+26
+    public int getMinSpareThreads() {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+193
+23
+">
+<td class="vc_file_line_number">
+3
+193
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3a
+        return Math.min(minSpareThreads,getMaxThreads());
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+194
+23
+">
+<td class="vc_file_line_number">
+3
+194
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+195
+23
+">
+<td class="vc_file_line_number">
+3
+195
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3a
+    public void setMinSpareThreads(int minSpareThreads) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+196
+23
+">
+<td class="vc_file_line_number">
+3
+196
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+30
+        this.minSpareThreads = minSpareThreads;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+197
+23
+">
+<td class="vc_file_line_number">
+3
+197
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+31
+        if (running &amp;&amp; executor!=null) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+198
+23
+">
+<td class="vc_file_line_number">
+3
+198
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4f
+            if (executor instanceof java.util.concurrent.ThreadPoolExecutor) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+199
+23
+">
+<td class="vc_file_line_number">
+3
+199
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+61
+                ((java.util.concurrent.ThreadPoolExecutor)executor).setCorePoolSize(maxThreads);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+200
+23
+">
+<td class="vc_file_line_number">
+3
+200
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+40
+            } else if (executor instanceof ResizableExecutor) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+201
+23
+">
+<td class="vc_file_line_number">
+3
+201
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+57
+                ((ResizableExecutor)executor).resizePool(minSpareThreads, maxThreads);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+202
+23
+">
+<td class="vc_file_line_number">
+3
+202
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+e
+            }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+203
+23
+">
+<td class="vc_file_line_number">
+3
+203
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+a
+        }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+204
+23
+">
+<td class="vc_file_line_number">
+3
+204
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+205
+23
+">
+<td class="vc_file_line_number">
+3
+205
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+5
+    
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+206
+23
+">
+<td class="vc_file_line_number">
+3
+206
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+207
+23
+">
+<td class="vc_file_line_number">
+3
+207
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+29
+     * Maximum amount of worker threads.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+208
+23
+">
+<td class="vc_file_line_number">
+3
+208
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+209
+23
+">
+<td class="vc_file_line_number">
+3
+209
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+22
+    private int maxThreads = 200;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+210
+23
+">
+<td class="vc_file_line_number">
+3
+210
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+30
+    public void setMaxThreads(int maxThreads) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+211
+23
+">
+<td class="vc_file_line_number">
+3
+211
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+26
+        this.maxThreads = maxThreads;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+212
+23
+">
+<td class="vc_file_line_number">
+3
+212
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+31
+        if (running &amp;&amp; executor!=null) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+213
+23
+">
+<td class="vc_file_line_number">
+3
+213
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4f
+            if (executor instanceof java.util.concurrent.ThreadPoolExecutor) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+214
+23
+">
+<td class="vc_file_line_number">
+3
+214
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+64
+                ((java.util.concurrent.ThreadPoolExecutor)executor).setMaximumPoolSize(maxThreads);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+215
+23
+">
+<td class="vc_file_line_number">
+3
+215
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+40
+            } else if (executor instanceof ResizableExecutor) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+216
+23
+">
+<td class="vc_file_line_number">
+3
+216
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+57
+                ((ResizableExecutor)executor).resizePool(minSpareThreads, maxThreads);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+217
+23
+">
+<td class="vc_file_line_number">
+3
+217
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+e
+            }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+218
+23
+">
+<td class="vc_file_line_number">
+3
+218
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+a
+        }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+219
+23
+">
+<td class="vc_file_line_number">
+3
+219
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+220
+23
+">
+<td class="vc_file_line_number">
+3
+220
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+21
+    public int getMaxThreads() {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+221
+23
+">
+<td class="vc_file_line_number">
+3
+221
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+31
+        if (running &amp;&amp; executor!=null) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+222
+23
+">
+<td class="vc_file_line_number">
+3
+222
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4f
+            if (executor instanceof java.util.concurrent.ThreadPoolExecutor) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+223
+23
+">
+<td class="vc_file_line_number">
+3
+223
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+61
+                return ((java.util.concurrent.ThreadPoolExecutor)executor).getMaximumPoolSize();
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+224
+23
+">
+<td class="vc_file_line_number">
+3
+224
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+40
+            } else if (executor instanceof ResizableExecutor) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+225
+23
+">
+<td class="vc_file_line_number">
+3
+225
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+46
+                return ((ResizableExecutor)executor).getMaxThreads();
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+226
+23
+">
+<td class="vc_file_line_number">
+3
+226
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+15
+            } else {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+227
+23
+">
+<td class="vc_file_line_number">
+3
+227
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1b
+                return -1;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+228
+23
+">
+<td class="vc_file_line_number">
+3
+228
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+e
+            }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+229
+23
+">
+<td class="vc_file_line_number">
+3
+229
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+11
+        } else {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+230
+23
+">
+<td class="vc_file_line_number">
+3
+230
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1f
+            return maxThreads;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+231
+23
+">
+<td class="vc_file_line_number">
+3
+231
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+a
+        }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+232
+23
+">
+<td class="vc_file_line_number">
+3
+232
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+233
+23
+">
+<td class="vc_file_line_number">
+3
+233
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+234
+23
+">
+<td class="vc_file_line_number">
+3
+234
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+235
+23
+">
+<td class="vc_file_line_number">
+3
+235
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+20
+     * Max keep alive requests 
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+236
+23
+">
+<td class="vc_file_line_number">
+3
+236
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+237
+23
+">
+<td class="vc_file_line_number">
+3
+237
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+47
+    private int maxKeepAliveRequests=100; // as in Apache HTTPD server
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+238
+23
+">
+<td class="vc_file_line_number">
+3
+238
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+2b
+    public int getMaxKeepAliveRequests() {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+239
+23
+">
+<td class="vc_file_line_number">
+3
+239
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+25
+        return maxKeepAliveRequests;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+240
+23
+">
+<td class="vc_file_line_number">
+3
+240
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+241
+23
+">
+<td class="vc_file_line_number">
+3
+241
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+44
+    public void setMaxKeepAliveRequests(int maxKeepAliveRequests) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+242
+23
+">
+<td class="vc_file_line_number">
+3
+242
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3a
+        this.maxKeepAliveRequests = maxKeepAliveRequests;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+243
+23
+">
+<td class="vc_file_line_number">
+3
+243
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+244
+23
+">
+<td class="vc_file_line_number">
+3
+244
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+5
+    
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+245
+23
+">
+<td class="vc_file_line_number">
+3
+245
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+246
+23
+">
+<td class="vc_file_line_number">
+3
+246
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+4d
+     * Name of the thread pool, which will be used for naming child threads.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+247
+23
+">
+<td class="vc_file_line_number">
+3
+247
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+248
+23
+">
+<td class="vc_file_line_number">
+3
+248
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+20
+    private String name = "TP";
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+249
+23
+">
+<td class="vc_file_line_number">
+3
+249
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3b
+    public void setName(String name) { this.name = name; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+250
+23
+">
+<td class="vc_file_line_number">
+3
+250
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+2d
+    public String getName() { return name; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+251
+23
+">
+<td class="vc_file_line_number">
+3
+251
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+252
+23
+">
+<td class="vc_file_line_number">
+3
+252
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+253
+23
+">
+<td class="vc_file_line_number">
+3
+253
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+39
+     * The default is true - the created threads will be
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+254
+23
+">
+<td class="vc_file_line_number">
+3
+254
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3c
+     *  in daemon mode. If set to false, the control thread
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+255
+23
+">
+<td class="vc_file_line_number">
+3
+255
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3e
+     *  will not be daemon - and will keep the process alive.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+256
+23
+">
+<td class="vc_file_line_number">
+3
+256
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+257
+23
+">
+<td class="vc_file_line_number">
+3
+257
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+23
+    private boolean daemon = true;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+258
+23
+">
+<td class="vc_file_line_number">
+3
+258
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+35
+    public void setDaemon(boolean b) { daemon = b; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+259
+23
+">
+<td class="vc_file_line_number">
+3
+259
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+32
+    public boolean getDaemon() { return daemon; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+260
+23
+">
+<td class="vc_file_line_number">
+3
+260
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+261
+23
+">
+<td class="vc_file_line_number">
+3
+261
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+262
+23
+">
+<td class="vc_file_line_number">
+3
+262
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+263
+23
+">
+<td class="vc_file_line_number">
+3
+263
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+27
+     * Priority of the worker threads.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+264
+23
+">
+<td class="vc_file_line_number">
+3
+264
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+265
+23
+">
+<td class="vc_file_line_number">
+3
+265
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+39
+    protected int threadPriority = Thread.NORM_PRIORITY;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+266
+23
+">
+<td class="vc_file_line_number">
+3
+266
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+60
+    public void setThreadPriority(int threadPriority) { this.threadPriority = threadPriority; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+267
+23
+">
+<td class="vc_file_line_number">
+3
+267
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3e
+    public int getThreadPriority() { return threadPriority; }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+268
+23
+">
+<td class="vc_file_line_number">
+3
+268
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+269
+23
+">
+<td class="vc_file_line_number">
+3
+269
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+270
+23
+">
+<td class="vc_file_line_number">
+3
+270
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+271
+23
+">
+<td class="vc_file_line_number">
+3
+271
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+272
+23
+">
+<td class="vc_file_line_number">
+3
+272
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+28
+     * Generic properties, introspected
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+273
+23
+">
+<td class="vc_file_line_number">
+3
+273
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+274
+23
+">
+<td class="vc_file_line_number">
+3
+274
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3c
+    public boolean setProperty(String name, String value) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+275
+23
+">
+<td class="vc_file_line_number">
+3
+275
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+2d
+        final String socketName = "socket.";
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+276
+23
+">
+<td class="vc_file_line_number">
+3
+276
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+e
+        try {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+277
+23
+">
+<td class="vc_file_line_number">
+3
+277
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+2f
+            if (name.startsWith(socketName)) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+278
+23
+">
+<td class="vc_file_line_number">
+3
+278
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+75
+                return IntrospectionUtils.setProperty(socketProperties, name.substring(socketName.length()), value);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+279
+23
+">
+<td class="vc_file_line_number">
+3
+279
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+15
+            } else {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+280
+23
+">
+<td class="vc_file_line_number">
+3
+280
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+48
+                return IntrospectionUtils.setProperty(this,name,value);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+281
+23
+">
+<td class="vc_file_line_number">
+3
+281
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+e
+            }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+282
+23
+">
+<td class="vc_file_line_number">
+3
+282
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+21
+        }catch ( Exception x ) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+283
+23
+">
+<td class="vc_file_line_number">
+3
+283
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+52
+            log.error("Unable to set attribute \""+name+"\" to \""+value+"\"",x);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+284
+23
+">
+<td class="vc_file_line_number">
+3
+284
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1a
+            return false;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+285
+23
+">
+<td class="vc_file_line_number">
+3
+285
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+a
+        }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+286
+23
+">
+<td class="vc_file_line_number">
+3
+286
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+287
+23
+">
+<td class="vc_file_line_number">
+3
+287
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+288
+23
+">
+<td class="vc_file_line_number">
+3
+288
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+289
+23
+">
+<td class="vc_file_line_number">
+3
+289
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+42
+     * Return the amount of threads that are managed by the pool.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+290
+23
+">
+<td class="vc_file_line_number">
+3
+290
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+7
+     *
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+291
+23
+">
+<td class="vc_file_line_number">
+3
+291
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+42
+     * @return the amount of threads that are managed by the pool
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+292
+23
+">
+<td class="vc_file_line_number">
+3
+292
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+293
+23
+">
+<td class="vc_file_line_number">
+3
+293
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+29
+    public int getCurrentThreadCount() {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+294
+23
+">
+<td class="vc_file_line_number">
+3
+294
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1e
+        if (executor!=null) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+295
+23
+">
+<td class="vc_file_line_number">
+3
+295
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3a
+            if (executor instanceof ThreadPoolExecutor) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+296
+23
+">
+<td class="vc_file_line_number">
+3
+296
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+45
+                return ((ThreadPoolExecutor)executor).getPoolSize();
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+297
+23
+">
+<td class="vc_file_line_number">
+3
+297
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+40
+            } else if (executor instanceof ResizableExecutor) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+298
+23
+">
+<td class="vc_file_line_number">
+3
+298
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+44
+                return ((ResizableExecutor)executor).getPoolSize();
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+299
+23
+">
+<td class="vc_file_line_number">
+3
+299
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+15
+            } else {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+300
+23
+">
+<td class="vc_file_line_number">
+3
+300
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1b
+                return -1;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+301
+23
+">
+<td class="vc_file_line_number">
+3
+301
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+e
+            }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+302
+23
+">
+<td class="vc_file_line_number">
+3
+302
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+11
+        } else {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+303
+23
+">
+<td class="vc_file_line_number">
+3
+303
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+17
+            return -2;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+304
+23
+">
+<td class="vc_file_line_number">
+3
+304
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+a
+        }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+305
+23
+">
+<td class="vc_file_line_number">
+3
+305
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+306
+23
+">
+<td class="vc_file_line_number">
+3
+306
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+307
+23
+">
+<td class="vc_file_line_number">
+3
+307
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+308
+23
+">
+<td class="vc_file_line_number">
+3
+308
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+35
+     * Return the amount of threads that are in use 
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+309
+23
+">
+<td class="vc_file_line_number">
+3
+309
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+7
+     *
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+310
+23
+">
+<td class="vc_file_line_number">
+3
+310
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+35
+     * @return the amount of threads that are in use
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+311
+23
+">
+<td class="vc_file_line_number">
+3
+311
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+312
+23
+">
+<td class="vc_file_line_number">
+3
+312
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+29
+    public int getCurrentThreadsBusy() {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+313
+23
+">
+<td class="vc_file_line_number">
+3
+313
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1e
+        if (executor!=null) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+314
+23
+">
+<td class="vc_file_line_number">
+3
+314
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3a
+            if (executor instanceof ThreadPoolExecutor) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+315
+23
+">
+<td class="vc_file_line_number">
+3
+315
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+48
+                return ((ThreadPoolExecutor)executor).getActiveCount();
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+316
+23
+">
+<td class="vc_file_line_number">
+3
+316
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+40
+            } else if (executor instanceof ResizableExecutor) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+317
+23
+">
+<td class="vc_file_line_number">
+3
+317
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+47
+                return ((ResizableExecutor)executor).getActiveCount();
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+318
+23
+">
+<td class="vc_file_line_number">
+3
+318
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+15
+            } else {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+319
+23
+">
+<td class="vc_file_line_number">
+3
+319
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1b
+                return -1;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+320
+23
+">
+<td class="vc_file_line_number">
+3
+320
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+e
+            }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+321
+23
+">
+<td class="vc_file_line_number">
+3
+321
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+11
+        } else {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+322
+23
+">
+<td class="vc_file_line_number">
+3
+322
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+17
+            return -2;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+323
+23
+">
+<td class="vc_file_line_number">
+3
+323
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+a
+        }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+324
+23
+">
+<td class="vc_file_line_number">
+3
+324
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+325
+23
+">
+<td class="vc_file_line_number">
+3
+325
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+326
+23
+">
+<td class="vc_file_line_number">
+3
+326
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+21
+    public boolean isRunning() {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+327
+23
+">
+<td class="vc_file_line_number">
+3
+327
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+18
+        return running;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+328
+23
+">
+<td class="vc_file_line_number">
+3
+328
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+329
+23
+">
+<td class="vc_file_line_number">
+3
+329
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+5
+    
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+330
+23
+">
+<td class="vc_file_line_number">
+3
+330
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+20
+    public boolean isPaused() {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+331
+23
+">
+<td class="vc_file_line_number">
+3
+331
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+17
+        return paused;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+332
+23
+">
+<td class="vc_file_line_number">
+3
+332
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+333
+23
+">
+<td class="vc_file_line_number">
+3
+333
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+5
+    
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+334
+23
+">
+<td class="vc_file_line_number">
+3
+334
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+335
+23
+">
+<td class="vc_file_line_number">
+3
+335
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+23
+    public void createExecutor() {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+336
+23
+">
+<td class="vc_file_line_number">
+3
+336
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+21
+        internalExecutor = true;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+337
+23
+">
+<td class="vc_file_line_number">
+3
+337
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+2f
+        TaskQueue taskqueue = new TaskQueue();
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+338
+23
+">
+<td class="vc_file_line_number">
+3
+338
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+69
+        TaskThreadFactory tf = new TaskThreadFactory(getName() + "-exec-", daemon, getThreadPriority());
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+339
+23
+">
+<td class="vc_file_line_number">
+3
+339
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+76
+        executor = new ThreadPoolExecutor(getMinSpareThreads(), getMaxThreads(), 60, TimeUnit.SECONDS,taskqueue, tf);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+340
+23
+">
+<td class="vc_file_line_number">
+3
+340
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3d
+        taskqueue.setParent( (ThreadPoolExecutor) executor);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+341
+23
+">
+<td class="vc_file_line_number">
+3
+341
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+342
+23
+">
+<td class="vc_file_line_number">
+3
+342
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+5
+    
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+343
+23
+">
+<td class="vc_file_line_number">
+3
+343
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+25
+    public void shutdownExecutor() {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+344
+23
+">
+<td class="vc_file_line_number">
+3
+344
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3c
+        if ( executor!=null &amp;&amp; internalExecutor ) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+345
+23
+">
+<td class="vc_file_line_number">
+3
+345
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3c
+            if ( executor instanceof ThreadPoolExecutor ) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+346
+23
+">
+<td class="vc_file_line_number">
+3
+346
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+47
+                //this is our internal one, so we need to shut it down
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+347
+23
+">
+<td class="vc_file_line_number">
+3
+347
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+48
+                ThreadPoolExecutor tpe = (ThreadPoolExecutor) executor;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+348
+23
+">
+<td class="vc_file_line_number">
+3
+348
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+23
+                tpe.shutdownNow();
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+349
+23
+">
+<td class="vc_file_line_number">
+3
+349
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+3e
+                TaskQueue queue = (TaskQueue) tpe.getQueue();
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+350
+23
+">
+<td class="vc_file_line_number">
+3
+350
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+27
+                queue.setParent(null);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+351
+23
+">
+<td class="vc_file_line_number">
+3
+351
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+e
+            }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+352
+23
+">
+<td class="vc_file_line_number">
+3
+352
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1d
+            executor = null;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+353
+23
+">
+<td class="vc_file_line_number">
+3
+353
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+a
+        }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+354
+23
+">
+<td class="vc_file_line_number">
+3
+354
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6
+    }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+355
+23
+">
+<td class="vc_file_line_number">
+3
+355
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1
+
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+356
+23
+">
+<td class="vc_file_line_number">
+3
+356
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+    /**
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+357
+23
+">
+<td class="vc_file_line_number">
+3
+357
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+41
+     * Unlock the server socket accept using a bogus connection.
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+358
+23
+">
+<td class="vc_file_line_number">
+3
+358
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+8
+     */
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+359
+23
+">
+<td class="vc_file_line_number">
+3
+359
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+24
+    protected void unlockAccept() {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+360
+23
+">
+<td class="vc_file_line_number">
+3
+360
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+22
+        java.net.Socket s = null;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+361
+23
+">
+<td class="vc_file_line_number">
+3
+361
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+28
+        InetSocketAddress saddr = null;
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+362
+23
+">
+<td class="vc_file_line_number">
+3
+362
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+e
+        try {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+363
+23
+">
+<td class="vc_file_line_number">
+3
+363
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+43
+            // Need to create a connection to unlock the accept();
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+364
+23
+">
+<td class="vc_file_line_number">
+3
+364
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+23
+            if (address == null) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+365
+23
+">
+<td class="vc_file_line_number">
+3
+365
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+20
+                //TODO fix IPv6
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+366
+23
+">
+<td class="vc_file_line_number">
+3
+366
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+47
+                saddr = new InetSocketAddress("127.0.0.1", getPort());
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+367
+23
+">
+<td class="vc_file_line_number">
+3
+367
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+15
+            } else {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+368
+23
+">
+<td class="vc_file_line_number">
+3
+368
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+42
+                saddr = new InetSocketAddress(address,getPort());
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+369
+23
+">
+<td class="vc_file_line_number">
+3
+369
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+e
+            }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+370
+23
+">
+<td class="vc_file_line_number">
+3
+370
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+27
+            s = new java.net.Socket();
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+371
+23
+">
+<td class="vc_file_line_number">
+3
+371
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+42
+            s.setSoTimeout(getSocketProperties().getSoTimeout());
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+372
+23
+">
+<td class="vc_file_line_number">
+3
+372
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+6a
+            s.setSoLinger(getSocketProperties().getSoLingerOn(),getSocketProperties().getSoLingerTime());
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+373
+23
+">
+<td class="vc_file_line_number">
+3
+373
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+28
+            if (log.isDebugEnabled()) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+374
+23
+">
+<td class="vc_file_line_number">
+3
+374
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+40
+                log.debug("About to unlock socket for:"+saddr);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+375
+23
+">
+<td class="vc_file_line_number">
+3
+375
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+e
+            }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+376
+23
+">
+<td class="vc_file_line_number">
+3
+376
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+47
+            s.connect(saddr,getSocketProperties().getUnlockTimeout());
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+377
+23
+">
+<td class="vc_file_line_number">
+3
+377
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+28
+            if (log.isDebugEnabled()) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+378
+23
+">
+<td class="vc_file_line_number">
+3
+378
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+41
+                log.debug("Socket unlock completed for:"+saddr);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+379
+23
+">
+<td class="vc_file_line_number">
+3
+379
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+e
+            }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+380
+23
+">
+<td class="vc_file_line_number">
+3
+380
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1f
+        } catch(Exception e) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+381
+23
+">
+<td class="vc_file_line_number">
+3
+381
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+28
+            if (log.isDebugEnabled()) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+382
+23
+">
+<td class="vc_file_line_number">
+3
+382
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+55
+                log.debug(sm.getString("endpoint.debug.unlock", "" + getPort()), e);
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+383
+23
+">
+<td class="vc_file_line_number">
+3
+383
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+e
+            }
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+384
+23
+">
+<td class="vc_file_line_number">
+3
+384
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+14
+        } finally {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+385
+23
+">
+<td class="vc_file_line_number">
+3
+385
+6
+</td>
+
+1f
+
+<td class="vc_file_line_text">
+1d
+            if (s != null) {
+
+c
+</td>
+</tr>
+
+1
+
+
+1
+
+
+1
+
+
+c
+
+<tr class="
+a
+vc_row_odd
+7
+" id="l
+3
+386
+23
+">
+<td class="vc_file_line_number">
+3
+386
+6
+</td>
+
+1f
+
+<td c

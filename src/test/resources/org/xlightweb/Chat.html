@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Chat</title>
+</head>
+
+
+<body>	 
+	<p id="user">anonymous</p>
+    <div id="chat"> </div>
+     
+  	<form> 
+    	<input type="button" name="reset_chat" value="Reset Chat" onclick="javascript:resetChatText();"/> <br/>
+    	<input type="text" id="message" name="message"/>
+		<input type="hidden" id="channel" name="channel" value="common"/>
+		<input type="button" name="btn_send_chat" id="addChatMessage" value="Send" onclick="javascript:sendChatText();" /> 
+  	</form>
+
+    <script type="text/javascript" src="pi.js"></script>
+	<script type="text/javascript" src="Chat.js"></script>    
+</body>
+</html>
