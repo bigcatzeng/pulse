@@ -1,5 +1,6 @@
 package com.trxs.pulse;
 
+import com.trxs.commons.bean.AccessObject;
 import com.trxs.commons.util.SpringUtil;
 import com.trxs.pulse.data.CronExpression;
 import org.joda.time.DateTime;
@@ -43,6 +44,8 @@ public class PulseApplicationTests
     {
         DateTime now = new DateTime();
         CronExpression cronExpression = new CronExpression("0/5 * 16-23 3,4 3 ? *");
+
+        AccessObject accessObject = new AccessObject(cronExpression);
 
         int count = 0;
         long t0 = System.currentTimeMillis();

@@ -1,7 +1,7 @@
 package com.trxs.pulse.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.jing.utils.io.FileTools;
+import com.trxs.commons.io.FileTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,7 +49,7 @@ public class SwaggerController
     private String yml2Json(String source)
     {
         Yaml yaml = new Yaml();
-        Object obj = yaml.load(String.join("\n", FileTools.readStaticResource(source)));
+        Object obj = yaml.load(String.join("\n", FileTools.getInstance().readStaticResource(source)));
 
         ((Map)obj).put("host", getHost());
 

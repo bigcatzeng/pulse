@@ -1,7 +1,6 @@
-package com.trxs.commons.util;
+package com.trxs.commons.io;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,25 +13,27 @@ import java.util.stream.Stream;
 
 public class FileTools
 {
+    private FileTools(){}
+
     private enum Singleton
     {
         INSTANCE;
         private FileTools singleton;
+        // JVM 会保证此方法绝对只调用一次
         Singleton()
         {
             singleton = new FileTools();
         }
+
         public FileTools getInstance()
         {
             return singleton;
         }
     }
 
-    private FileTools(){}
-
     public static FileTools getInstance()
     {
-        return Singleton.INSTANCE.getInstance();
+        return null;
     }
 
     public Path createDirectories(String dir) throws IOException
@@ -115,4 +116,14 @@ public class FileTools
         return bufferedWriter;
     }
 
+    public List<String> readStaticResource( String source )
+    {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(FileTools.class.getResourceAsStream(source)));
+        return bufferedReader.lines().collect(Collectors.toList());
+    }
+
+    public static InputStream getInputStream( String source )
+    {
+        return FileTools.class.getResourceAsStream(source);
+    }
 }

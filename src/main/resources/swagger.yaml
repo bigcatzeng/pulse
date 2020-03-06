@@ -1,0 +1,1583 @@
+  # Code completion support is available so start typing for available options.
+swagger: '2.0'
+
+info:
+  version: "1.0.0"
+  title: 定时任务服务
+  description: 定时任务服务接口说明
+
+# localhost, ejw.hnjing.com, 192.168.135.90:9999
+host: 192.168.135.80:80
+
+basePath: /v1
+
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+
+#数据返回的约定
+#1.响应码只有200、400、403、404、405、500。
+#2.获取列表接口无数据时响应码200，返回空列表和page信息。
+#3.获取单个资源接口无数据时响应码404，返回404错误信息。
+#4.路径中的参数错误导致资源不存在，响应码404，返回404错误信息。
+#5.没有权限读取、修改、删除资源响应码403，返回403错误信息。
+#6.输入参数校验失败响应码400，返回400错误信息。
+#7.资源没有对应的方法响应码405，返回405错误信息。
+#8.删除资源时同时删除其相关关联关系，不要产生500错误。
+
+#必填字段约定
+#1.必填是指添加或修改信息时，该字段必须传值。
+#2.修改信息时必填字段可以不传，即为不修改。
+
+#  /** 200_访问正常 */           HTTP_SUSESS( 200, "访问正常"),
+#  /** 500_服务器异常 */         HTTP_SERVER_ERROR(500, "服务器异常"),
+#  /** 400_请求参数异常 */       HTTP_BAD_REQUEST(400, "请求参数异常"),
+#  /** 401_未登录 */             HTTP_NOT_LOGIN(401, "未登录"),
+#  /** 402_没有找到相应数据 */   HTTP_INVALID ( 402, "没有找到相应数据"),
+#  /** 403_权限不足 */           HTTP_NOT_PERMISSION(403, "权限不足"),
+#  /** 404_找不到资源 */         HTTP_NOT_FOUND(404, "找不到资源"),
+#  /** 405_不支持当前请求方法 */ HTTP_NOT_ALLOWED ( 405, "不支持当前请求方法"),
+#  /** 406_数据被锁定 */         HTTP_DATA_LOCK ( 406, "数据被锁定");
+
+################################################################################
+#                              API Information                                 #
+################################################################################
+paths:
+  /schedule-task:
+    post:
+      summary: 新建定时任务
+      description: 新建定时任务
+      parameters:
+        - $ref: '#/parameters/SecretKey'
+        - name: scheduleTask
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ScheduleTaskPost'
+      tags:
+        - 定时任务
+      responses:
+        200:
+          $ref: '#/responses/ScheduleTaskPostResp'
+        400:
+          $ref: '#/responses/ParametersErr'
+        404:
+          $ref: '#/responses/NotFoundErr'
+        500:
+          $ref: '#/responses/InnerErr'
+
+  /partner/{partnerId}/employee/{employeeId}/questionnaire/{id}:
+    get:
+      summary: 问卷详情
+      description: 问卷详情
+      parameters:
+        - $ref: '#/parameters/PartnerId'
+        - $ref: '#/parameters/EmployeeId'
+        - $ref: '#/parameters/QuestionnaireId'
+      tags:
+        - 我的问卷
+      responses:
+        200:
+          $ref: '#/responses/QuestionnairePut'
+        400:
+          $ref: '#/responses/ParametersErr'
+        404:
+          $ref: '#/responses/NotFoundErr'
+        500:
+          $ref: '#/responses/InnerErr'
+
+    put:
+      summary: 修改问卷
+      description: 修改问卷
+      parameters:
+        - $ref: '#/parameters/UserId'
+        - $ref: '#/parameters/PartnerId'
+        - $ref: '#/parameters/EmployeeId'
+        - $ref: '#/parameters/QuestionnaireId'
+        - name: questionnaire
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/QuestionnairePut'
+      tags:
+        - 我的问卷
+      responses:
+        200:
+          $ref: '#/responses/PutResp'
+        400:
+          $ref: '#/responses/ParametersErr'
+        404:
+          $ref: '#/responses/NotFoundErr'
+        500:
+          $ref: '#/responses/InnerErr'
+
+  /partner/{partnerId}/employee/{employeeId}/batch-update-questionnaire:
+    put:
+      summary: 批量修改问卷
+      description: 批量修改问卷
+      parameters:
+        - $ref: '#/parameters/PartnerId'
+        - $ref: '#/parameters/EmployeeId'
+        - name: batchUpdateQuestionnairesPut
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/BatchQuestionnaireUpdateArray'
+      tags:
+        - 我的问卷
+      responses:
+        200:
+          $ref: '#/responses/PutResp'
+        400:
+          $ref: '#/responses/ParametersErr'
+        404:
+          $ref: '#/responses/NotFoundErr'
+        500:
+          $ref: '#/responses/InnerErr'
+
+  /partner/{partnerId}/employee/{employeeId}/statistics/questionnaire/{id}:
+    get:
+      summary: 答卷统计
+      description: 答卷统计
+      parameters:
+        - $ref: '#/parameters/PartnerId'
+        - $ref: '#/parameters/EmployeeId'
+        - $ref: '#/parameters/QuestionnaireId'
+        - name: export
+          in: query
+          type: integer
+          required: false
+          description: 是否导出数据
+      tags:
+        - 答卷统计
+      responses:
+        200:
+          description: 答卷统计详情
+          schema:
+            properties:
+              page:
+                $ref: '#/definitions/Page'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/AnswerSheetResp'
+        400:
+          $ref: '#/responses/ParametersErr'
+        404:
+          $ref: '#/responses/NotFoundErr'
+        500:
+          $ref: '#/responses/InnerErr'
+
+  /partner/{partnerId}/employee/{employeeId}/answer-sheet/{id}:
+    get:
+      summary: 答卷详情
+      description: 答卷详情
+      parameters:
+        - $ref: '#/parameters/PartnerId'
+        - $ref: '#/parameters/EmployeeId'
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: 答卷id
+      tags:
+        - 答卷统计
+      responses:
+        200:
+          description: 问卷实例详情
+          schema:
+            $ref: '#/definitions/QuestionnaireInstance'
+        400:
+          $ref: '#/responses/ParametersErr'
+        404:
+          $ref: '#/responses/NotFoundErr'
+        500:
+          $ref: '#/responses/InnerErr'
+
+  /questionnaire/{previewKey}:
+    get:
+      summary: 预览问卷
+      description: 若调查对象是客户问卷，则显示PC预览和手机预览，若调查对象是代客答卷或员工问卷，则不显示手机预览。
+      parameters:
+        - $ref: '#/parameters/EmployeeInHeader'
+        - $ref: '#/parameters/PartnerInHeader'
+        - $ref: '#/parameters/PreviewKey'
+        - name: fingerprint
+          in: header
+          type: string
+          required: false
+          description: 浏览器指纹
+        - name: uuid
+          in: query
+          type: string
+          description: 答卷识别码
+      tags:
+        - 填写问卷
+      responses:
+        200:
+          description: 问卷实例详情
+          schema:
+            $ref: '#/definitions/QuestionnaireInstance'
+        400:
+          $ref: '#/responses/ParametersErr'
+        404:
+          $ref: '#/responses/NotFoundErr'
+        500:
+          $ref: '#/responses/InnerErr'
+
+    put:
+      summary: 填写问卷
+      description: 填写问卷 答题
+      parameters:
+        - $ref: '#/parameters/EmployeeInHeader'
+        - $ref: '#/parameters/PartnerInHeader'
+        - name: fingerprint
+          in: header
+          type: string
+          required: false
+        - $ref: '#/parameters/PreviewKey'
+        - name: answerSheet
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AnswerSheetPut'
+      tags:
+        - 填写问卷
+      responses:
+        200:
+          $ref: '#/responses/PutResp'
+        400:
+          $ref: '#/responses/ParametersErr'
+        404:
+          $ref: '#/responses/NotFoundErr'
+        500:
+          $ref: '#/responses/InnerErr'
+
+  /partner/{partnerId}/employee/{employeeId}/questionnaires:
+    get:
+      summary: 获取问卷列表
+      description: 我的问卷列表, 如果EmployeeId是管理员返回企业所有问卷的列表
+      parameters:
+        - $ref: '#/parameters/PartnerId'
+        - $ref: '#/parameters/EmployeeId'
+        - $ref: '#/parameters/PageNo'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/Sort'
+        - name: masterId
+          in: query
+          type: integer
+          description: 问卷属主 id
+        - name: title
+          in: query
+          type: string
+          description: 问卷标题
+        - name: targetType
+          in: query
+          type: integer
+          description: 问卷类型 0 员工问卷(需登录), 1 代客户答题问卷 , 2 客户问卷
+        - name: status
+          in: query
+          type: integer
+          description: 0草稿 1发布收集中 2暂停 3关闭 4删除
+        - name: isAdmin
+          in: query
+          type: string
+          description: 是否管理员 0 or 1
+        - $ref: '#/parameters/BeginTime'
+        - $ref: '#/parameters/EndTime'
+      tags:
+        - 问卷管理
+        - 我的问卷
+      responses:
+        200:
+          description: 问卷列表
+          schema:
+            properties:
+              page:
+                $ref: '#/definitions/Page'
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/QuestionnaireItem'
+        400:
+          $ref: '#/responses/ParametersErr'
+        404:
+          $ref: '#/responses/NotFoundErr'
+        500:
+          $ref: '#/responses/InnerErr'
+
+
+  /partner/{partnerId}/departments:
+    get:
+      summary: 获取部门列表
+      description: 获取部门列表
+      parameters:
+        - $ref: '#/parameters/UserId'
+        - $ref: '#/parameters/PartnerId'
+        - $ref: '#/parameters/PageNo'
+        - $ref: '#/parameters/PageSize'
+        - name: masterId
+          in: query
+          type: integer
+          description: 问卷所有人员工id
+      tags:
+        - 部门员工
+      responses:
+        200:
+          description: 问卷列表
+          schema:
+              $ref: '#/definitions/Departments'
+        400:
+          $ref: '#/responses/ParametersErr'
+        404:
+          $ref: '#/responses/NotFoundErr'
+        500:
+          $ref: '#/responses/InnerErr'
+
+
+  /partner/{partnerId}/employees:
+    get:
+      summary: 获取伙伴企业员工列表
+      description: 获取伙伴企业员工列表
+      tags:
+        - 部门员工
+      parameters:
+        - $ref: '#/parameters/PartnerId'
+        - name: depId
+          in: query
+          description: 部门id，1、部门id不为0，查该部门以及所有子部门的员工； 2、部门id为0，查所有未分配部门的员工；3、部门id为null（未传部门id）则不做部门过滤
+          type: string
+        - name: userId
+          in: query
+          description: 用户id，全匹配
+          type: string
+        - name: status
+          in: query
+          description: 状态，0：停用；1：启用；2：未激活
+          type: integer
+        - name: jobNoOrEmpName
+          in: query
+          description: 工号或姓名，工号或者姓名模糊匹配。
+          type: string
+        - $ref: '#/parameters/PageNo'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/Sort'
+
+      responses:
+        200:
+          description: 员工列表
+          schema:
+            $ref: '#/definitions/Employees'
+        400:
+          $ref: '#/responses/ParametersErr'
+        404:
+          $ref: '#/responses/NotFoundErr'
+        500:
+          $ref: '#/responses/InnerErr'
+
+  /partner/{partnerId}/department/{departmentId}/employees:
+    get:
+      summary: 获取部门员工列表
+      description: 获取部门员工列表
+      tags:
+        - 部门员工
+      parameters:
+        - $ref: '#/parameters/PartnerId'
+        - $ref: '#/parameters/DepartmentId'
+        - $ref: '#/parameters/PageNo'
+        - $ref: '#/parameters/PageSize'
+        - $ref: '#/parameters/Sort'
+
+      responses:
+        200:
+          description: 员工列表
+          schema:
+            $ref: '#/definitions/EmployeeAlls'
+        400:
+          $ref: '#/responses/ParametersErr'
+        404:
+          $ref: '#/responses/NotFoundErr'
+        500:
+          $ref: '#/responses/InnerErr'
+
+  /partner/{partnerId}/employee/{employeeId}/questionnaire/upload:
+    post:
+      summary: 问卷图片上传
+      description: 问卷图片上传
+      tags:
+        - 上传管理
+      consumes:
+        - multipart/form-data
+      parameters:
+        - $ref: '#/parameters/UserId'
+        - $ref: '#/parameters/PartnerId'
+        - $ref: '#/parameters/EmployeeId'
+        - name: upLoad
+          in: formData
+          description: 图片上传
+          required: true
+          type: string
+      responses:
+        '200':
+          $ref: '#/definitions/UpLoad'
+        '400':
+          $ref: '#/responses/ParametersErr'
+        '404':
+          $ref: '#/responses/NotFoundErr'
+        '500':
+          $ref: '#/responses/InnerErr'
+
+################################################################################
+#                                 Definitions                                  #
+################################################################################
+definitions:
+  AnswerSheetResp:
+    type: object
+    description: 答卷实体
+    properties:
+      id:
+        type: integer
+        description: 答卷id
+      answerName:
+        type: string
+        description: 答题人
+      customerName:
+        type: string
+        description: 客户名称
+      beginTime:
+        type: string
+        description: 答题开始时间
+      endTime:
+        type: string
+        description: 提交答卷时间
+      answerChannel:
+        type: string
+        description: 答卷来源 0-PC 1-Mobile 2-Pad 3-待定
+
+  AnswerSheetPut:
+    type: object
+    description: 答卷实体
+    properties:
+      answerSheetId:
+        type: integer
+        description: 答卷id
+      customerName:
+        type: string
+        description: 客户名称
+      answerName:
+        type: string
+        description: 答题人
+      answerChannel:
+        type: integer
+        description: 答题来源, 0-PC 1-Mobile 2-Pad 3-待定
+      additionalInfo:
+        type: string
+        description: 客户端附加信息, 比如浏览器指纹、IP等等
+      status:
+        type: integer
+        description: 答题状态(客户自答问卷直接是已提交，只有员工问卷和代客问卷有草稿状态)'0' 草稿 ‘1’ 已提交
+      questionKeys:
+        $ref: '#/definitions/QuestionKeys'
+
+  QuestionKeys:
+    type: array
+    description: 题目答案列表
+    items:
+      $ref: '#/definitions/QuestionKey'
+
+  QuestionKeyBase:
+    type: object
+    description: 题目答案
+    properties:
+      selectedOptions:
+        type: array
+        description: 选择题 选项列表
+        items:
+          type: integer
+          description: 题目选项快照 id
+      fillBlankContents:
+        type: array
+        description: 填空题内容列表
+        items:
+          type: string
+          description: 填空题内容
+
+  QuestionKey:
+    type: object
+    description: 题目答案
+    allOf:
+    - $ref: '#/definitions/QuestionKeyBase'
+    properties:
+      id:
+        type: integer
+        description: 题目快照id
+      type:
+        type: integer
+        description: 题目类型
+
+  QuestionnaireItem:
+    type: object
+    description: 问卷创建实体
+    properties:
+      id:
+        type: integer
+        description: 问卷id
+      targetType:
+        type: integer
+        description: 问卷类型 0 员工问卷(需登录), 1 代客户答题问卷 , 2 客户问卷
+      status:
+        type: integer
+        description: 问卷状态 0草稿 1发布收集中 2暂停 3关闭 4删除
+      answerCount:
+        type: integer
+        description: 答卷份数
+      title:
+        type: string
+        description: 问卷标题文本
+      masterEmpId:
+        type: integer
+        description: 问卷归属人 伙伴企业员工id
+      masterEmpName:
+        type: string
+        description: 问卷归属人 伙伴企业员工姓名
+      createDate:
+        type: string
+        description: 创建时间
+      modifyDate:
+        type: string
+        description: 最近更新时间
+      publishKey:
+        type: string
+        description: 问卷发布id
+      previewKey:
+        type: string
+        description: 问卷预览id
+      publishUrl:
+        type: string
+        description: 问卷发布链接
+
+  QuestionnairePost:
+    type: object
+    description: 问卷创建实体
+    properties:
+      questionnaire:
+        $ref: '#/definitions/Questionnaire'
+      profile:
+        $ref: '#/definitions/QuestionnaireProfile'
+      sections:
+        $ref: '#/definitions/QuestionSectionPosts'
+
+  Questionnaire:
+    type: object
+    description: 问卷创建实体
+    properties:
+      status:
+        type: integer
+        description: 问卷状态 0草稿 1发布收集中 2暂停 3关闭 4删除
+      targetType:
+        type: integer
+        description: 问卷类型 0 员工问卷(需登录), 1 代客户答题问卷 , 2 客户问卷
+      partnerId:
+        type: integer
+        description: 伙伴企业id
+      employeeId:
+        type: integer
+        description: 创建人 伙伴企业员工id
+      richTitle:
+        type: string
+        description: 问卷标题文本 rich text
+      richDesc:
+        type: string
+        description: 问卷描述文本 rich text
+
+  QuestionnaireIns:
+    type: object
+    description: 问卷实例实体
+    allOf:
+    - $ref: '#/definitions/Questionnaire'
+    properties:
+      id:
+        type: integer
+        description: 问卷id
+
+  QuestionSectionPosts:
+    type: array
+    description: 段落数组
+    items:
+      $ref: '#/definitions/QuestionSectionPost'
+
+  QuestionSectionPost:
+    type: object
+    description: 段落
+    properties:
+      content:
+        type: string
+        description: 段落内容
+      questions:
+        $ref: '#/definitions/Questions'
+
+  Questions:
+    type: array
+    description: 题目列表
+    items:
+      $ref: '#/definitions/QuestionPost'
+
+  QuestionnaireInstance:
+    type: object
+    description: 问卷实例对象，用于预览
+    properties:
+      answerSheet:
+        $ref: '#/definitions/AnswerSheetResp'
+      questionnaire:
+        $ref: '#/definitions/QuestionnaireInsResp'
+      profile:
+        $ref: '#/definitions/QuestionnaireProfileResp'
+      sections:
+        $ref: '#/definitions/QuestionSections'
+
+  QuestionSections:
+    type: array
+    description: 问卷段落列表
+    items:
+      $ref: '#/definitions/QuestionSection'
+
+  QuestionSection:
+    type: object
+    description: 问卷段落实体快照
+    properties:
+      content:
+        type: string
+        description: 段落内容
+      questions:
+        $ref: '#/definitions/QuestionVersions'
+
+  QuestionVersions:
+    type: array
+    description: 题目快照列表
+    items:
+      $ref: '#/definitions/QuestionVersion'
+
+  QuestionVersion:
+    type: object
+    description: 问卷段落实体快照
+    properties:
+      versionId:
+        type: integer
+        description: 题目快照id
+      type:
+        type: integer
+        description: 0 段落 1 单选 2 多选 3 问答题
+      isRequired:
+        type: integer
+        description: 是否必答 0 or 1
+      textHeight:
+        type: integer
+        description: 填空题 输入框高度文本高度
+      viewType:
+        type: integer
+        description: 显示样式 0-默认, 1-下拉框
+      contentType:
+        type: integer
+        description: 填空题内容类型 例如 -> 0不限制 1数字 2字母 3汉字 4电子邮箱 5手机号码 等等
+      minLength:
+        type: integer
+        description: 内容最小长度
+      maxLength:
+        type: integer
+        description: 内容最大长度
+      content:
+        type: string
+        description: 题目内容
+      options:
+        type: array
+        description: 题目选项列表
+        items:
+          type: object
+          description: 题目选项
+          properties:
+            optionVersionId:
+              type: integer
+              description: 题目选项快照 id
+            content:
+              type: string
+              description: 选项内容
+      questionKey:
+        $ref: '#/definitions/QuestionKeyBase'
+
+  BatchQuestionnaireUpdateArray:
+    type: object
+    description: 批量修改
+    properties:
+      ids:
+        type: array
+        description: 问卷id列表
+        items:
+          type: integer
+      masterId:
+        type: integer
+        description: 问卷归属人id
+      masterName:
+        type: string
+        description: 问卷归属人姓名
+      status:
+        type: integer
+        description: 问卷状态
+
+
+  QuestionnairePut:
+    type: object
+    description: 问卷创建实体
+    properties:
+      questionnaire:
+        $ref: '#/definitions/QuestionnaireResp'
+      profile:
+        $ref: '#/definitions/QuestionnaireProfileResp'
+      sections:
+        $ref: '#/definitions/QuestionSectionPuts'
+
+  QuestionSectionPuts:
+    type: array
+    description: 段落数组
+    items:
+      $ref: '#/definitions/QuestionSectionPut'
+
+  QuestionSectionPut:
+    type: object
+    description: 段落
+    properties:
+      content:
+        type: string
+        description: 段落内容
+      questions:
+        $ref: '#/definitions/QuestionsResp'
+
+  QuestionnaireResp:
+    type: object
+    description: 问卷实体
+    allOf:
+    - $ref: '#/definitions/Questionnaire'
+    properties:
+      id:
+        type: integer
+        description: 问卷id
+      previewKey:
+        type: string
+        description: 问卷预览id
+      publishKey:
+        type: string
+        description: 问卷发布id
+      publishUrl:
+        type: string
+        description: 问卷发布链接
+
+  QuestionnaireInsResp:
+    type: object
+    description: 问卷实体
+    allOf:
+    - $ref: '#/definitions/QuestionnaireIns'
+    properties:
+      answerSheetId:
+        type: integer
+        description: 答卷id
+      answerStatus:
+        type: integer
+        description: 答卷状态
+      qnrVersionId:
+        type: integer
+        description: 问卷快照id
+      preview:
+        type: integer
+        description: 偶数预览 奇数答题
+
+  QuestionnaireInsProfileResp:
+    type: object
+    description: 问卷设置实体
+    allOf:
+    - $ref: '#/definitions/QuestionnaireInsProfile'
+    properties:
+      id:
+        type: integer
+        description: 问卷设置id
+
+  QuestionnaireProfileResp:
+    type: object
+    description: 问卷设置实体
+    allOf:
+    - $ref: '#/definitions/QuestionnaireProfile'
+    properties:
+      id:
+        type: integer
+        description: 问卷设置id
+
+  QuestionnaireInsProfile:
+    type: object
+    description: 问卷设置实体
+    properties:
+      isShowOrder:
+        type: integer
+        description: 是否显示问题编号
+      isRandomOrder:
+        type: integer
+        description: 是否打乱题序
+      isLimit:
+        type: integer
+        description: 是否控制答题范围, ’0‘ 不控制 本企业内员工都能答题, ’1‘ 允许指定的员工答题
+      isRepeat:
+        type: integer
+        description: 同一员工是否允许重复答题
+      isExpired:
+        type: integer
+        description: 是否设置截止时间, 0 不设置， 1 设置
+      expiredDate:
+        type: string
+        description: 过期时间 格式 yyyy-mm-dd 24hh:mi:ss
+
+  QuestionnaireProfile:
+    type: object
+    description: 问卷设置实体
+    properties:
+      isShowOrder:
+        type: integer
+        description: 是否显示问题编号
+      isRandomOrder:
+        type: integer
+        description: 是否打乱题序
+      isLimit:
+        type: integer
+        description: 是否控制答题范围, ’0‘ 不控制 本企业内员工都能答题, ’1‘ 允许指定的员工答题
+      isRepeat:
+        type: integer
+        description: 同一员工是否允许重复答题
+      isExpired:
+        type: integer
+        description: 是否设置截止时间, 0 不设置， 1 设置
+      expiredDate:
+        type: string
+        description: 过期时间 格式 yyyy-mm-dd 24hh:mi:ss
+      welcomePic:
+        type: string
+        description: 问卷Welcome图片链接
+      welcomePicMobile:
+        type: string
+        description: 移动端 问卷Welcome图片链接
+      viewLogics:
+        type: array
+        description: 显示逻辑列表
+        items:
+          $ref: '#/definitions/ViewLogic'
+      authorizedEmployees:
+        type: array
+        description: 允许答题员工 id 列表
+        items:
+          $ref: '#/definitions/Integer'
+
+  ViewLogic:
+    type: object
+    description: 问卷显示逻辑
+    properties:
+      id:
+        type: integer
+        description: 主键 id, 新增时可不填
+      viewLogicExp:
+        type: string
+        description: 显示逻辑表达式, 只读
+      targetQuestions:
+        type: array
+        description: 目标题 orderNo 列表
+        items:
+          $ref: '#/definitions/Integer'
+      conditions:
+        type: array
+        description: 显示逻辑条件列表
+        items:
+          $ref: '#/definitions/ViewCondition'
+
+  ViewCondition:
+    type: object
+    description: 问卷显示逻辑条件
+    properties:
+      id:
+        type: integer
+        description: 主键 id, 新增时可不填
+      conditionOrderNo:
+        type: integer
+        description: 条件题序号
+      options:
+        type: string
+        description: 选项列表,英文逗号分隔 1,2,3
+      logicOperation:
+        type: string
+        description: 本条件与下一个条件的逻辑运算关系 AND, OR
+
+  QuestionPost:
+    type: object
+    description: 题目实体
+    properties:
+      type:
+        type: integer
+        description: 0 段落 1 单选 2 多选 3 问答题
+      isRequired:
+        type: integer
+        description: 是否必答 0 or 1
+      isRandom:
+        type: integer
+        description: 选项是否随机
+      textHeight:
+        type: integer
+        description: 填空题 输入框高度文本高度
+      viewType:
+        type: integer
+        description: 显示样式 0-默认, 1-下拉框
+      contentType:
+        type: integer
+        description: 填空题内容类型 例如 -> 0不限制 1数字 2字母 3汉字 4电子邮箱 5手机号码 等等
+      minLength:
+        type: integer
+        description: 内容最小长度
+      maxLength:
+        type: integer
+        description: 内容最大长度
+      content:
+        type: string
+        description: 题目内容
+      options:
+        type: array
+        description: 题目选项
+        items:
+          $ref: '#/definitions/QuestionOption'
+
+  QuestionOption:
+    type: object
+    description: 题目选项
+    properties:
+      id:
+        type: integer
+        description: 选项id
+      content:
+        type: string
+        description: 选项内容
+
+  QuestionsResp:
+    type: array
+    description: 题目列表
+    items:
+      $ref: '#/definitions/QuestionPostResp'
+
+  QuestionPostResp:
+    type: object
+    description: 题目实体
+    allOf:
+    - $ref: '#/definitions/QuestionPost'
+    properties:
+      id:
+        type: integer
+        description: 题目id
+
+
+  Departments:
+    type: object
+    description: 伙伴企业部门信息分页对象
+    properties:
+      page:
+        $ref: '#/definitions/Page'
+      data:
+        $ref: '#/definitions/DepartmentList'
+
+  DepartmentList:
+    type: array
+    description: 伙伴企业部门列表
+    items:
+      $ref: '#/definitions/DepartmentResp'
+
+  DepartmentResp:
+    type: object
+    description: 伙伴企业部门信息
+    allOf:
+    - $ref: '#/definitions/Department'
+    properties:
+      partnerId:
+        type: integer
+        description: 合作伙伴id
+      depId:
+        type: integer
+        description: 部门id
+      departPath:
+        type: string
+        description: 部门层级路径
+      departPathName:
+        type: string
+        description: 部门层级路径名称
+
+  Department:
+    type: object
+    description: 部门
+    properties:
+      departName:
+        type: string
+        description: 部门名称，必填，1-50字符
+        minLength: 1
+        maxLength: 50
+      departNo:
+        type: string
+        description: 部门编号，0-20字符
+        maxLength: 20
+      parentId:
+        type: integer
+        description: 上级部门id
+        default: 0
+      status:
+        type: integer
+        enum:
+          - 0
+          - 1
+        description: 状态，1：正常；0：停用
+        default: 1
+
+  EmployeeAlls:
+    type: object
+    description: 员工列表
+    properties:
+      page:
+        $ref: '#/definitions/Page'
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/EmployeeAllResp'
+
+  EmployeeAllResp:
+    type: object
+    description: 员工所有信息响应实体（基本信息+扩展信息+部门信息列表+角色信息列表）
+    properties:
+      employee:
+        $ref: '#/definitions/EmployeeResp'
+      employeeExt:
+        $ref: '#/definitions/EmployeeExtResp'
+      departments:
+        description: 部门信息列表
+        type: array
+        items:
+          $ref: '#/definitions/EmployeeLinkDepartmentResp'
+
+  EmployeeResp:
+    type: object
+    description: 员工基本信息响应实体
+    allOf:
+    - $ref: '#/definitions/Employee'
+    properties:
+      empId:
+        type: integer
+        description: 员工id
+      partnerId:
+        type: integer
+        description: 所属合作伙伴id
+      isAdmin:
+        type: integer
+        description: 是否为管理员，1：是；0：否
+        default: 0
+
+  Employee:
+    type: object
+    description: 员工基本信息
+    properties:
+      empName:
+        type: string
+        description: 员工姓名
+        minLength: 1
+        maxLength: 10
+      userId:
+        type: integer
+        description: 所属用户id
+      jobNo:
+        type: string
+        description: 员工工号，只允许数字
+        maxLength: 20
+        pattern: '[0-9]{0,20}'
+      jobName:
+        type: string
+        description: 员工岗位
+        maxLength: 20
+      sex:
+        type: integer
+        enum:
+          - 1
+          - 2
+          - 0
+        description: 性别，0：未知，1：男，2：女
+        default: 0
+      email:
+        type: string
+        description: 邮箱，格式：xxx@yyy.zzz
+        maxLength: 30
+      phone:
+        type: string
+        description: 手机，只允许数字
+        minLength: 11
+        maxLength: 11
+      tel:
+        type: string
+        description: 电话，多个号码以英文逗号分隔，最多5个
+        maxLength: 100
+      im:
+        type: string
+        description: im联系方式，0-20字符
+        maxLength: 20
+      wx:
+        type: string
+        description: 微信号
+        maxLength: 20
+      qq:
+        type: string
+        description: QQ号
+        maxLength: 20
+      status:
+        type: integer
+        enum:
+          - 0
+          - 1
+        description: 状态 | 0，停用；1：正常
+        default: 1
+      jobStatus:
+        type: integer
+        enum:
+          - 0
+          - 1
+        description: 在职状态 | 0，离职；1：在职
+        default: 1
+
+  EmployeeExtResp:
+    type: object
+    description: 员工扩展信息响应实体
+    allOf:
+    - $ref: '#/definitions/EmployeeExt'
+    properties:
+      empId:
+        type: integer
+        description: 员工id
+
+  EmployeeExt:
+    type: object
+    description: 员工扩展信息
+    properties:
+      birth:
+        type: string
+        format: date-time
+        description: 出生日期
+      nation:
+        type: string
+        description: 民族
+        maxLength: 10
+      area:
+        type: string
+        description: 区域
+        maxLength: 50
+      postcode:
+        type: string
+        description: 邮编
+        maxLength: 6
+      address:
+        type: string
+        description: 地址
+        maxLength: 50
+      idcard:
+        type: string
+        description: 身份证号码
+        maxLength: 18
+      education:
+        type: string
+        description: 文化程度
+        maxLength: 10
+      emergencyContact:
+        type: string
+        description: 紧急联系人
+        maxLength: 20
+      emergencyPhone:
+        type: string
+        description: 紧急联系人电话，只允许数字
+        maxLength: 11
+      bankName:
+        type: string
+        description: 开户行
+        maxLength: 30
+      bankAccount:
+        type: string
+        description: 银行卡号，只允许数字
+        maxLength: 28
+        pattern: '[0-9]{0,28}'
+      entryDate:
+        type: string
+        format: date-time
+        description: 入职日期
+      turnDate:
+        type: string
+        format: date-time
+        description: 转正日期
+      quitDate:
+        type: string
+        format: date-time
+        description: 离职日期
+
+  EmployeeLinkDepartmentResp:
+    type: object
+    description: 员工部门关系响应实体
+    allOf:
+    - $ref: '#/definitions/EmployeeLinkDepartment'
+    properties:
+      empId:
+        type: integer
+        description: 员工id
+      departName:
+        type: string
+        description: 部门名称
+      departPath:
+        type: string
+        description: 部门层级路径
+      departPathName:
+        type: string
+        description: 部门层级路径名称
+
+  EmployeeLinkDepartment:
+    type: object
+    description: 员工部门关系
+    properties:
+      depId:
+        type: integer
+        description: 部门id
+      position:
+        type: integer
+        description: 员工在该部门职位
+
+  Employees:
+    type: object
+    description: 员工基本信息列表
+    properties:
+      page:
+        $ref: '#/definitions/Page'
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/EmployeeResp'
+################################################################################
+
+  PostResp:
+    type: object
+    description: 创建成功响应实体
+    properties:
+      id:
+        type: integer
+        description: 创建实体id
+
+  QuestionnairePostResp:
+    type: object
+    description: 创建问卷成功响应实体
+    allOf:
+    - $ref: '#/definitions/PostResp'
+    properties:
+      publishKey:
+        type: string
+        description: 问卷发布id
+      previewKey:
+        type: string
+        description: 问卷预览id
+      publishUrl:
+        type: string
+        description: 问卷发布链接
+
+  PutResp:
+    type: object
+    description: 修改成功响应实体
+    properties:
+      rows:
+        type: integer
+        description: 影响行数
+
+  RowsResp:
+    type: object
+    description: 修改/删除成功响应实体
+    properties:
+      id:
+        type: integer
+        description: 创建实体id
+      rows:
+        type: integer
+        description: 影响行数
+
+  RespPages:
+    type: object
+    description: 响应分页对象
+    properties:
+      page:
+        $ref: '#/definitions/Page'
+
+  Page:
+    type: object
+    description: 分页信息
+    properties:
+      page:
+        type: integer
+        description: 当前页码
+      nextPage:
+        type: integer
+        description: 下一页页码
+      prePage:
+        type: integer
+        description: 上一页页码
+      totalPages:
+        type: integer
+        description: 总页数
+      totalCount:
+        type: integer
+        description: 总记录数
+      firstPage:
+        type: boolean
+        description: 是否为首页
+      lastPage:
+        type: boolean
+        description: 是否为尾页
+      hasPrePage:
+        type: boolean
+        description: 是否有上一页
+      hasNextPage:
+        type: boolean
+        description: 是否有下一页
+      startRow:
+        type: integer
+        description: 当前页起始行
+      endRow:
+        type: integer
+        description: 当前页结束行
+
+  Error:
+    type: object
+    description: 错误Bean
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: string
+        description: 错误码
+      message:
+        type: string
+        description: 错误描述
+      errors:
+        type: array
+        description: 具体错误
+        items:
+          $ref: '#/definitions/ErrorMsg'
+
+  ErrorMsg:
+    type: object
+    description: 错误消息详细信息
+    properties:
+      field:
+        type: string
+        description: 错误字段
+      message:
+        type: string
+        description: 错误原因
+
+  EmployeeId:
+    description: 伙伴企业员工id
+    type: integer
+
+  PartnerId:
+    type: integer
+    description: 伙伴企业id
+
+  PrimaryKey:
+    type: integer
+    description: 主键
+
+  Integer:
+    type: integer
+    description: 整数
+
+  String:
+    type: string
+    description: 字符串文本
+
+  UpLoad:
+    type: object
+    description: 返回
+    properties:
+      imgUrl:
+        type: string
+        description: 上传后的url
+
+################################################################################
+#                                 Parameters                                  #
+################################################################################
+parameters:
+  SecretKey:
+    name: secretKey
+    in: header
+    description: 安全密钥
+    required: false
+    type: string
+
+  BeginTime:
+    name: beginTime
+    in: query
+    description: 查询开始时间 yyyy-mm-dd
+    required: false
+    type: string
+    format: date-time
+
+  EndTime:
+    name: endTime
+    in: query
+    description: 查询结束时间 yyyy-mm-dd
+    required: false
+    type: string
+    format: date-time
+
+  PageNo:
+    name: pageNo
+    in: query
+    description: 当前页码，默认第1页
+    required: false
+    type: integer
+    format: int32
+    minimum: 1
+    default: 1
+
+  PageSize:
+    name: pageSize
+    in: query
+    description: 每页记录数，默认20条
+    required: false
+    type: integer
+    format: int32
+    minimum: 1
+    maximum: 99999
+    default: 20
+
+  Sort:
+    name: _sort
+    in: query
+    description: 排序格式 -> A,desc;B,desc
+    required: false
+    type: string
+
+  PreviewKey:
+    name: previewKey
+    in: path
+    description: 问卷 识别码, 32位字符串
+    required: true
+    type: string
+
+  QuestionnaireId:
+    name: id
+    in: path
+    description: 问卷id
+    required: true
+    type: integer
+
+  UserId:
+    name: user-id
+    in: header
+    description: 当前操作用户id
+    required: false
+    type: string
+
+  PartnerId:
+    name: partnerId
+    in: path
+    description: 合作伙伴企业id
+    required: true
+    type: integer
+
+  DepartmentId:
+    name: departmentId
+    in: path
+    description: 合作伙伴企业 部门id
+    required: true
+    type: integer
+
+  EmployeeId:
+    name: employeeId
+    in: path
+    description: 合作伙伴企业员工id
+    required: true
+    type: integer
+
+  EmployeeInHeader:
+    name: employeeId
+    in: header
+    description: 合作伙伴企业员工id
+    required: false
+    type: integer
+
+  PartnerInHeader:
+    name: partnerId
+    in: header
+    description: 合作伙伴企业id
+    required: false
+    type: integer
+
+  EntIds:
+    name: ent-id
+    in: header
+    description: HTTP Header中 伙伴企业id
+    type: integer
+
+  EmpIds:
+    name: emp-id
+    in: header
+    description: 伙伴企业员工id
+    type: integer
+
+  Token:
+    name: token
+    in: header
+    description: 访问令牌
+    required: false
+    type: string
+
+
+################################################################################
+#                                 Responses                                  #
+################################################################################
+responses:
+  QuestionnairePut:
+    description: 问卷实体
+    schema:
+      $ref: '#/definitions/QuestionnairePut'
+
+  PostResp:
+    description: 创建成功
+    schema:
+      $ref: '#/definitions/PostResp'
+
+  QuestionnairePostResp:
+    description: 创建成功
+    schema:
+      $ref: '#/definitions/QuestionnairePostResp'
+
+  PutResp:
+    description: 修改成功
+    schema:
+      $ref: '#/definitions/RowsResp'
+
+  DeleteResp:
+    description: 删除成功
+    schema:
+      $ref: '#/definitions/RowsResp'
+
+  ParametersErr:
+    description: 参数异常
+    schema:
+      $ref: '#/definitions/Error'
+
+  NotFoundErr:
+    description: 资源不存在
+    schema:
+      $ref: '#/definitions/Error'
+
+  InnerErr:
+    description: 内部错误
+    schema:
+      $ref: '#/definitions/Error'
