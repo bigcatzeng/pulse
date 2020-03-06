@@ -1,8 +1,8 @@
 package com.trxs.pulse;
 
-import com.trxs.pulse.data.TimerMessage;
+import com.trxs.pulse.data.TimerJob;
 
-public class Action extends TimerMessage
+public class Action extends TimerJob
 {
     private String requestURL;
     private String parameters;

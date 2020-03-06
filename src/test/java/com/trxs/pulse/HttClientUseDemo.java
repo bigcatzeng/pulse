@@ -38,7 +38,6 @@ public class HttClientUseDemo extends HttpClientService {
         urlParams.add(new BasicNameValuePair("pageSize", "10000"));
         urlParams.add(new BasicNameValuePair("metrics", "user_name,create_time"));
         exeHttpReq(url, false, urlParams, null, new BiCall());
-
     }
 
     public void getConfCall() {
@@ -53,9 +52,11 @@ public class HttClientUseDemo extends HttpClientService {
     public void exeHttpReq(String baseUrl, boolean isPost,
                            List<BasicNameValuePair> urlParams,
                            List<BasicNameValuePair> postBody,
-                           FutureCallback<HttpResponse> callback) {
+                           FutureCallback<HttpResponse> callback)
+    {
 
-        try {
+        try
+        {
             System.out.println("enter exeAsyncReq");
             exeAsyncReq(baseUrl, isPost, urlParams, postBody, callback);
         } catch (Exception e) {

@@ -1,6 +1,6 @@
 package com.trxs.pulse;
 
-import com.trxs.pulse.data.TimerMessage;
+import com.trxs.pulse.data.TimerJob;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,6 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.trxs.commons.util.LangUtils.SLEEP;
@@ -28,6 +27,9 @@ import static com.trxs.commons.util.LangUtils.SLEEP;
 public class TimerServer
 {
     private static Logger logger = LoggerFactory.getLogger(TimerServer.class.getSimpleName());
+
+    private volatile boolean ticktockInterrupted;
+    private volatile boolean jobWatchInterrupted;
 
     private AtomicBoolean ticktockRunning;
     private AtomicBoolean jobWatchRunning;
@@ -44,8 +46,8 @@ public class TimerServer
     public static final byte       SLANT = 0X7E; // /
 
     private static Queue<Long> ticktockQueue = new ConcurrentLinkedDeque<>();
-    private static Map<Integer, TimerMessage> timerMessageMap = new ConcurrentHashMap<>(1024);
-    private static PriorityQueue<TimerMessage> timerMessageQueue;
+    private static Map<Integer, TimerJob> timerMessageMap = new ConcurrentHashMap<>(1024);
+    private static PriorityQueue<TimerJob> timerMessageQueue;
 
     private static AtomicBoolean timerMessageQueueAtomic;
     private static long maxTimestamp;
@@ -65,7 +67,7 @@ public class TimerServer
         timerMessageQueueAtomic = new AtomicBoolean(false);
     }
 
-    private boolean delMessages(TimerMessage message)
+    private boolean delMessages(TimerJob message)
     {
         if ( timerMessageQueue.contains(message))
             return timerMessageQueue.remove(message);
@@ -73,7 +75,7 @@ public class TimerServer
             return true;
     }
 
-    private int addMessages(List<TimerMessage> messageList)
+    private int addMessages(List<TimerJob> messageList)
     {
         messageList.forEach( timerMessage ->
         {
@@ -93,11 +95,6 @@ public class TimerServer
         return timerMessageQueue.peek().getExpectTime().getTime() <= timestamp;
     }
 
-    public Long getTimestamp()
-    {
-        return ticktockQueue.poll();
-    }
-
     @Async("timerTaskExecutor")
     public void jobLoad()
     {
@@ -107,17 +104,18 @@ public class TimerServer
     @Async("timerTaskExecutor")
     public void jobWatchRunnable()
     {
-        boolean result = jobWatchRunning.compareAndSet(false,true);
-        if ( result == false )
-        {
-            logger.warn("JobWatchRunnable Startup {} failed!", this.toString());
-            return;
-        }
-
-        jobWatchThread = Thread.currentThread();
-
+        boolean result = false;
         try
         {
+            result = jobWatchRunning.compareAndSet(false,true);
+            if ( result == false )
+            {
+                logger.warn("JobWatchRunnable Startup failed! jobWatchRunning={}", jobWatchRunning );
+                return;
+            }
+
+            jobWatchThread = Thread.currentThread();
+            logger.info( "doJobWatchProc, go go go ...");
             jobWatchProcLoop();
         }
         catch (Exception e)
@@ -126,7 +124,7 @@ public class TimerServer
         }
         finally
         {
-            jobWatchRunning.set(false);
+            if ( result ) jobWatchRunning.set(false);
         }
     }
 
@@ -134,7 +132,7 @@ public class TimerServer
     {
         Long currentTime;
 
-        logger.info( "doJobWatchProc, go go go ...");
+        ticktockInterrupted = false;
 
         do
         {
@@ -147,10 +145,15 @@ public class TimerServer
 
             scanTimerMessageQueue(currentTime.longValue());
 
-        } while (jobWatchRunning.get());
+        } while ( ticktockInterrupted == false );
 
         logger.info("doJobWatchProc exit.");
 
+    }
+
+    public Long getTimestamp()
+    {
+        return ticktockQueue.poll();
     }
 
     private void scanTimerMessageQueue( long timestamp )
@@ -163,7 +166,7 @@ public class TimerServer
                 lock(timerMessageQueueAtomic);
 
                 dateTime = new DateTime( timestamp );
-                logger.debug("doTicktockProc -> {}.", dateTime.toString("yyyy-MM-dd  HH:mm:ss.SSS"));
+                // logger.debug("doTicktockProc -> {}.", dateTime.toString("yyyy-MM-dd  HH:mm:ss.SSS"));
             }
             finally
             {
@@ -181,6 +184,8 @@ public class TimerServer
             logger.warn("TicktockRunnable startup {} failed!", this.toString());
             return;
         }
+
+        logger.info( "doTicktockProc, go go go ...");
 
         ticktockThread = Thread.currentThread();
 
@@ -203,7 +208,7 @@ public class TimerServer
         int  millis, dt;
         long currentTime;
 
-        logger.info( "doTicktockProc, go go go ...");
+        jobWatchInterrupted = false;
 
         do
         {
@@ -214,7 +219,7 @@ public class TimerServer
 
             SLEEP(dt);
             addTimestamp(currentTime);
-        } while (ticktockRunning.get());
+        } while (jobWatchInterrupted == false);
 
         logger.info("doTicktockProc exit.");
     }
@@ -238,8 +243,8 @@ public class TimerServer
 
     public void shutdown()
     {
-        ticktockRunning.set(false);
-        jobWatchRunning.set(false);
+        ticktockInterrupted = true;
+        jobWatchInterrupted = true;
     }
 
     public void lock( AtomicBoolean atomicRef )

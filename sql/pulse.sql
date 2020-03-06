@@ -1,103 +1,82 @@
 create database pulse default character set utf8mb4 collate utf8mb4_unicode_ci;
+-- we don't know how to generate schema pulse (class Schema) :(
 
-drop table if exists hosts;
-create table hosts
+drop table if exists p_domains;
+drop table if exists p_subsystems;
+drop table if exists p_parameters;
+drop table if exists p_instances;
+drop table if exists p_tasks;
+drop table if exists p_cron_tasks;
+drop table if exists p_http_jobs;
+drop table if exists p_http_job_responses;
+
+
+create table p_domains
 (
-	id int null,
+	id int auto_increment primary key,
 	domain varchar(64) not null,
+	reference int not null,
 	status tinyint null comment '主机状态, 暂时未用, 可以用来标示主机类型,黑白名单,是否启用等等'
 );
 
-drop table if exists instances;
-create table instances
+create table p_subsystems
+(
+	id int auto_increment primary key,
+	service_name varchar(64) null comment '请求所属服务名称',
+	ip varchar(32) null,
+	secret_key varchar(128) not null comment '密钥',
+	create_time datetime default CURRENT_TIMESTAMP null
+);
+
+create table p_parameters
+(
+	id int not null comment 'http_requests->id' primary key,
+	headers varchar(1024) null,
+	text_body varchar(1024) null comment 'HTTP请求参数正文'
+);
+
+create table p_instances
 (
 	host_name varchar(64) not null primary key,
 	last_access_time datetime null
-);
+) engine=MEMORY;
 
-drop table if exists message_params;
-create table message_params
-(
-	id int not null primary key,
-	message_id int not null,
-	key_name varchar(64) null comment '参数名',
-	key_value varchar(1024) null comment '参数值'
-);
-
-create index message_params_message_id_index on message_params (message_id);
-
-drop table if exists message_states;
-create table message_states
-(
-	id int not null primary key,
-	retry tinyint not null ,
-	status tinyint not null comment '任务状态 0等待发送 1监视中 2发送中 3结束',
-	fire_time datetime not null comment '触发时间',
-	actual_time datetime null comment '实际触发时间',
-	finish_time datetime null comment '完成时间'
-) comment '消息任务' ;
-
-drop table if exists messages;
-create table messages
+create table p_tasks
 (
 	id int auto_increment primary key,
-	protocol tinyint null comment '0-http, 1-https',
-	host_id smallint(6) null comment 'http 请求主机id',
-	content_path varchar(1024) null comment 'http content path'
+	job_type tinyint not null comment '任务动作类型 0-http 1-MQ ...',
+	job_id int null comment '任务动作id',
+	state tinyint null comment '0-等待加载 1-等待执行 2-执行中 3-结束 4-执行错误 5-结果未知',
+	plan_time datetime default CURRENT_TIMESTAMP null
 );
 
-drop table if exists message_results;
-create table message_results
+create table p_cron_tasks
 (
-	id int not null primary key,
-	message_id int not null,
-	result varchar(1024) not null
+	id int auto_increment primary key,
+	subsystem int null comment '定时任务所属子系统, 用于区别请求来源',
+	title varchar(64) null comment '任务名称',
+	job_type tinyint not null comment '任务动作类型 0-http 1-MQ ...',
+	job_id int null comment '任务动作id',
+	state tinyint null comment '0-停止状态 1-激活状态',
+	cront_expression varchar(128) not null comment 'cron 表达式',
+	create_time datetime default CURRENT_TIMESTAMP not null
 );
 
-drop table if exists message_logs;
-create table message_logs
+create table p_http_jobs
 (
-	id int not null primary key,
-	message_id int not null,
-	actual_time datetime not null comment '实际触发时间',
-	finish_time datetime null comment '完成时间',
-	status_code smallint null
+	id int auto_increment primary key,
+	subsystem int null comment '定时任务所属子系统, 用于区别请求来源',
+	title varchar(64) null comment '任务名称',
+	protocol tinyint default '0' null comment '0-http 1-https',
+	host_id int null,
+	method tinyint null comment '0-POST 1-PUT 2-GET 3-DELETE',
+	create_time datetime default CURRENT_TIMESTAMP null,
+	url varchar(1024) null
 );
 
-drop table if exists scheduled_jobs;
-create table scheduled_jobs
+create table p_http_job_responses
 (
-	id int auto_increment not null primary key,
-	protocol tinyint null comment '0-http, 1-https',
-	host_id int(6) null comment 'http 请求主机id',
-	cron_expression varchar(32),
-	content_path varchar(1024) null comment 'http content path'
-);
-
-drop table if exists scheduled_params;
-create table scheduled_params
-(
-	id int not null primary key,
-	scheduled_id int not null,
-	key_name varchar(64) null comment '参数名',
-	key_value varchar(1024) null comment '参数值'
-);
-
-
-drop table if exists scheduled_results;
-create table scheduled_results
-(
-	id int not null primary key,
-	scheduled_id int not null,
-	result varchar(1024) not null
-);
-
-drop table if exists scheduled_logs;
-create table scheduled_logs
-(
-	id int not null primary key,
-	scheduled_id int not null,
-	actual_time datetime not null comment '实际触发时间',
-	finish_time datetime null comment '完成时间',
-	status_code smallint null
+	id int primary key not null comment 'p_http_jobs->id',
+	create_time datetime default CURRENT_TIMESTAMP not null,
+	content varchar(1024) null
 );

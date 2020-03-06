@@ -1,8 +1,12 @@
 package com.trxs.pulse;
 
 import com.trxs.commons.util.SpringUtil;
+import com.trxs.pulse.data.CronExpression;
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.xlightweb.HttpRequestHeader;
@@ -22,6 +26,7 @@ import java.util.Optional;
 @SpringBootTest
 public class PulseApplicationTests
 {
+    private static Logger logger = LoggerFactory.getLogger(PulseApplicationTests.class);
 
     @Test
     public void contextLoads() throws IOException
@@ -31,6 +36,27 @@ public class PulseApplicationTests
         MyResponseHandler respHdl = new MyResponseHandler();
         httpClient.send(new HttpRequestHeader("GET", "http://www.gmx.com/index.html"), respHdl);
         httpClient.close();
+    }
+
+    @Test
+    public void testDateTime() throws InterruptedException
+    {
+        DateTime now = new DateTime();
+        CronExpression cronExpression = new CronExpression("0/5 * 16-23 3,4 3 ? *");
+
+        int count = 0;
+        long t0 = System.currentTimeMillis();
+        for ( int i=0; i < 86400; ++i )
+        {
+            if ( cronExpression.checkTime(now) )
+            {
+                count++;
+                logger.debug("{}:{}:{} {}-{}-{} week:{} -> {}", now.getHourOfDay(), now.getMinuteOfHour(), now.getSecondOfMinute(), now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), now.getDayOfWeek(), cronExpression.checkTime(now));
+            }
+            now = now.plusSeconds(1);
+        }
+        long t1 = System.currentTimeMillis();
+        logger.debug("dt={}, count={}", t1-t0, count);
     }
 
     @Test

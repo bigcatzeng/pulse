@@ -56,6 +56,7 @@ public final class WebSocketsContextTest  {
         class MyWebSocketHandler implements IWebSocketHandler {
             
             public void onMessage(IWebSocketConnection con) throws IOException {
+                System.out.println("onMessage");
                 con.writeMessage(con.readMessage());
             }
             
@@ -82,12 +83,11 @@ public final class WebSocketsContextTest  {
         Assert.assertEquals(200, response.getStatus());
         Assert.assertEquals("OK", response.getBody().readString());
 
-        
         response = httpClient.call(new GetRequest("http://localhost:" + server.getLocalPort() + "/ws/test"));
         Assert.assertEquals(404, response.getStatus());
 
         
-        IWebSocketConnection wsCon = httpClient.openWebSocketConnection("http://localhost:" + server.getLocalPort() + "/ws/test");
+        IWebSocketConnection wsCon = httpClient.openWebSocketConnection("ws://localhost:" + server.getLocalPort() + "/ws/test");
         
         wsCon.writeMessage(new TextMessage("Hello"));
         Assert.assertEquals("Hello", wsCon.readMessage().toString());

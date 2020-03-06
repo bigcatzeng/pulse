@@ -2,7 +2,7 @@ package com.trxs.pulse.data;
 
 import java.util.Date;
 
-public class TimerMessage implements Comparable<TimerMessage>
+public class TimerJob implements Comparable<TimerJob>
 {
     private int id;
     private int status;
@@ -61,7 +61,7 @@ public class TimerMessage implements Comparable<TimerMessage>
     }
 
     @Override
-    public int compareTo(TimerMessage o)
+    public int compareTo(TimerJob o)
     {
         if ( o == null ) return -1;
 
@@ -75,7 +75,7 @@ public class TimerMessage implements Comparable<TimerMessage>
     {
         if ( o == null ) return false;
         if ( this == o ) return true;
-        if ( o instanceof  TimerMessage ) return this.getExpectTime().getTime() == ((TimerMessage) o).getExpectTime().getTime();
+        if ( o instanceof TimerJob) return this.getExpectTime().getTime() == ((TimerJob) o).getExpectTime().getTime();
         return false;
     }
 }
