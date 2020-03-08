@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class GeneralBean
+public class GeneralBeanTools
 {
     /**
      * 实体Object
@@ -20,12 +20,12 @@ public class GeneralBean
      */
     private  BeanMap beanMap = null;
 
-    public GeneralBean() {
+    public GeneralBeanTools() {
         super();
     }
 
     @SuppressWarnings("unchecked")
-    public GeneralBean(Map propertyMap) {
+    public GeneralBeanTools(Map propertyMap) {
         this.object = generateBean(propertyMap);
         this.beanMap = BeanMap.create(this.object);
     }
@@ -74,7 +74,7 @@ public class GeneralBean
     public static Object genBean(Map<String,Class<?>>  propertyClassMap, Map<String,Object> values)
     {
         // 生成动态 Bean
-        GeneralBean bean = new GeneralBean(propertyClassMap);
+        GeneralBeanTools bean = new GeneralBeanTools(propertyClassMap);
         // 设置 Bean 属性值
         values.forEach((key,value)-> bean.setValue(key,value));
         // 获得bean的实体

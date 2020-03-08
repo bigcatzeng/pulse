@@ -3,11 +3,13 @@ package com.trxs.pulse;
 import com.trxs.commons.bean.AccessObject;
 import com.trxs.commons.util.SpringUtil;
 import com.trxs.pulse.data.CronExpression;
+import com.trxs.pulse.service.PulseService;
 import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.xlightweb.HttpRequestHeader;
@@ -104,5 +106,14 @@ public class PulseApplicationTests
         public void onException(IOException ioe) throws IOException {
 
         }
+    }
+
+    @Autowired
+    private PulseService pulseService;
+
+    @Test
+    public void testJDBC()
+    {
+        pulseService.test();
     }
 }

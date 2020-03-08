@@ -1,6 +1,6 @@
 package com.trxs.commons.jdbc;
 
-import com.trxs.commons.bean.GeneralBean;
+import com.trxs.commons.bean.GeneralBeanTools;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -49,7 +49,7 @@ public class ObjectRowMapper implements RowMapper<Object>
     {
         try
         {
-            GeneralBean bean = new GeneralBean(propertyClassMap);
+            GeneralBeanTools bean = new GeneralBeanTools(propertyClassMap);
             ResultSetMetaData metaData = resultSet.getMetaData();
             for ( int i = 1, count = metaData.getColumnCount(); i <= count; ++i )
             {

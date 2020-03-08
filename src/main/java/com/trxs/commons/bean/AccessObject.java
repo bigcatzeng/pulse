@@ -46,24 +46,24 @@ public class AccessObject
     {
         Method[] methods = objClass.getMethods();
 
-        List<Method> setMethods = Arrays.asList(methods).stream().filter( method -> method.getName().startsWith("set")).collect(Collectors.toList());
+        List<Method> setMethods = Arrays.asList(methods).stream().filter( method -> method.getName().length() > 3 && method.getName().startsWith("set")).collect(Collectors.toList());
         setMethodNames = new String[setMethods.size()];
         setProperties = new String[setMethods.size()];
 
         for ( int i = 0, max = setMethods.size(); i < max; ++i )
         {
+            setProperties [i] = String.join("", setMethods.get(i).getName().substring(3, 4).toLowerCase(), setMethods.get(i).getName().substring(4) );
             setMethodNames[i] = setMethods.get(i).getName();
-            setProperties[i]  = setMethods.get(i).getName().substring(3);
         }
 
-        List<Method> getMethods = Arrays.asList(methods).stream().filter( method -> method.getName().startsWith("get") && ! method.getName().equals("getClass") ).collect(Collectors.toList());
+        List<Method> getMethods = Arrays.asList(methods).stream().filter( method -> method.getName().length() > 3 && method.getName().startsWith("get") && ! method.getName().equals("getClass") ).collect(Collectors.toList());
         getMethodNames = new String[getMethods.size()];
         getProperties = new String[getMethods.size()];
 
         for ( int i = 0, max = getMethods.size(); i < max; ++i )
         {
+            getProperties [i] = String.join("", getMethods.get(i).getName().substring(3, 4).toLowerCase(), getMethods.get(i).getName().substring(4) );
             getMethodNames[i] = getMethods.get(i).getName();
-            getProperties[i]  = getMethods.get(i).getName().substring(3);
         }
 
         return;
@@ -79,14 +79,12 @@ public class AccessObject
 
     public int findPropertyIndex( String propertyName, String[]properties )
     {
-        for ( int i = 0; i < properties.length; ++i ) if ( properties[i].equals(propertyName) ) return i;
+        for ( int i = 0; i < properties.length; ++i ) if ( properties[i].equalsIgnoreCase(propertyName) ) return i;
         return -1;
     }
 
     public AccessObject setProperty(String propertyName, Object value)
     {
-        if ( value == null ) return this;
-
         int index = findPropertyIndex( propertyName, setProperties );
 
         if ( index < 0 )
@@ -99,38 +97,35 @@ public class AccessObject
 
         if ( value == null )
         {
-            methodAccess.invoke(self, setMethodNames[index], value); return this;
+            methodAccess.invoke(self, setMethodNames[index], null);
         }
-
-        if ( parameterTypes[0].getName().equals(value.getClass().getName()) )
+        else if ( parameterTypes[0].getName().equals(value.getClass().getName()) )
         {
-            methodAccess.invoke(self, setMethodNames[index], value); return this;
+            methodAccess.invoke(self, setMethodNames[index], value);
         }
-
-        if ( value instanceof Long && parameterTypes[0].getName().equals("java.util.Integer"))
+        else if ( value instanceof Long && parameterTypes[0].getName().equals("java.util.Integer"))
         {
-            methodAccess.invoke(self, setMethodNames[index], long2int((Long) value)); return this;
+            methodAccess.invoke(self, setMethodNames[index], long2int((Long) value));
         }
-
-        if ( value instanceof Timestamp )
+        else if ( value instanceof Timestamp )
         {
             if ( parameterTypes[0].getName().equals("java.util.Date") )
             {
-                methodAccess.invoke(self, setMethodNames[index], value); return this;
+                methodAccess.invoke(self, setMethodNames[index], value);
             }
             if ( parameterTypes[0].getName().equals("java.util.String") )
             {
                 methodAccess.invoke(self, setMethodNames[index], DateConverter.dateFormat((Date) value, "yyyy-MM-dd HH:mm:ss"));
-                return this;
             }
         }
-
-        if ( value instanceof List && parameterTypes[0].getName().equals("java.util.List"))
+        else if ( value instanceof List && parameterTypes[0].getName().equals("java.util.List"))
         {
-            methodAccess.invoke(self, setMethodNames[index], value); return this;
+            methodAccess.invoke(self, setMethodNames[index], value);
         }
-
-        logger.warn("The propertyType[{}]->{} is not equals valueType[{}]!!!", parameterTypes[0].getName(), propertyName, value.getClass().getName());
+        else
+        {
+            logger.warn("The propertyType[{}]->{} is not equals valueType[{}]!!!", parameterTypes[0].getName(), propertyName, value.getClass().getName());
+        }
 
         return this;
     }

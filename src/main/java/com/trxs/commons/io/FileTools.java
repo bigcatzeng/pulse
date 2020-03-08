@@ -33,7 +33,7 @@ public class FileTools
 
     public static FileTools getInstance()
     {
-        return null;
+        return Singleton.INSTANCE.getInstance();
     }
 
     public Path createDirectories(String dir) throws IOException
