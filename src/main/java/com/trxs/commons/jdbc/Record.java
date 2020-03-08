@@ -5,11 +5,12 @@ import net.sf.cglib.beans.BeanGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import static com.trxs.commons.jdbc.SnakeToCamelRequestParameterUtil.camelToSnake;
 
@@ -117,11 +118,31 @@ final public class Record
 
         Map<String, Integer> propertySortMap = tablePropertySortMap.get(tableName);
 
+        List<String> fieldList = new ArrayList<>();
+        List<Object> valueList = new ArrayList<>();
+
+        sb.append("insert into ").append(tableName).append(" ( ");
+
         propertySortMap.entrySet().stream().sorted( Map.Entry.comparingByValue()).forEachOrdered(property ->
         {
-            sb.append(camelToSnake(property.getKey())).append(", ");
-            logger.debug("", camelToSnake(property.getKey()) );
+            Object value = accessData.getProperty(property.getKey());
+
+            if ( value != null ) fieldList.add(camelToSnake(property.getKey()));
         });
+
+        sb.append(String.join(", ", fieldList));
+
+        sb.append(" ) value ( ");
+
+        propertySortMap.entrySet().stream().sorted( Map.Entry.comparingByValue()).forEachOrdered(property ->
+        {
+            Object value = accessData.getProperty(property.getKey());
+            if ( value != null ) valueList.add(value);
+        });
+
+        sb.append(String.join(", ", fieldList.stream().map( f -> "?").collect(Collectors.toList())));
+
+        sb.append(" );");
 
         return sb.toString();
     }

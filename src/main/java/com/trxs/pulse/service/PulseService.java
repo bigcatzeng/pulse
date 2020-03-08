@@ -21,6 +21,8 @@ public class PulseService  extends BaseService
         final String tableName = "p_cron_tasks";
         Record domainsRecord = Record.newInstance(tableName);
         domainsRecord.setField("id", Integer.valueOf(-1));
+        domainsRecord.setField("subsystem", Integer.valueOf(33));
+
         logger.debug("id = {}, insertSQL:{}", domainsRecord.getField("id"), domainsRecord.insertSQL());
 
         return;
