@@ -1,5 +1,6 @@
 package com.trxs.commons.jdbc;
 
+import com.trxs.commons.util.StringRenderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+
+import static com.trxs.commons.jdbc.SnakeToCamelRequestParameterUtil.camelToSnake;
 
 public class BaseService
 {
@@ -143,7 +146,7 @@ public class BaseService
         return jdbcTemplate.update(sqlProvider.getSQL(sqlKey), args);
     }
 
-    public int update(String newSession, Map<String, Object> parameters, boolean requireKey)
+    public int update(String sqlKey, Map<String, Object> parameters, boolean requireKey)
     {
         int rows;
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource(parameters);
@@ -153,18 +156,18 @@ public class BaseService
         if ( requireKey )
         {
             KeyHolder keyholder=new GeneratedKeyHolder();
-            rows = nameParamJdbcTemp.update(sqlProvider.getSQL(newSession), sqlParameterSource, keyholder);
+            rows = nameParamJdbcTemp.update(sqlProvider.getSQL(sqlKey), sqlParameterSource, keyholder);
             parameters.put("lastId", keyholder.getKey());
             return rows;
         }
 
-        rows = nameParamJdbcTemp.update(sqlProvider.getSQL(newSession), sqlParameterSource);
+        rows = nameParamJdbcTemp.update(sqlProvider.getSQL(sqlKey), sqlParameterSource);
         return rows;
     }
 
-    public <T> int[][] insertObjects(String key, List<T> objects, final ParameterizedPreparedStatementSetter<T> pss)
+    public <T> int[][] insertObjects(String sqlKey, List<T> objects, final ParameterizedPreparedStatementSetter<T> pss)
     {
-        return jdbcTemplate.batchUpdate( sqlProvider.getSQL(key), objects, objects.size(), pss );
+        return jdbcTemplate.batchUpdate( sqlProvider.getSQL(sqlKey), objects, objects.size(), pss );
     }
 
     public void test()
@@ -225,5 +228,35 @@ public class BaseService
         }
 
         return className;
+    }
+
+    public Record save(Record record)
+    {
+        if ( record == null ) return null;
+
+        SQLAction insertAction = record.insertAction();
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        int rows = jdbcTemplate.update(connection ->
+        {
+            PreparedStatement ps  = connection.prepareStatement(insertAction.getSqlText(), Statement.RETURN_GENERATED_KEYS);
+            Object[] parameters = insertAction.getParameters();
+            for ( int i = 0, max = parameters.length; i < max; ++i )
+            {
+                ps.setObject(i+1, parameters[i] );
+            }
+            return ps;
+        }, keyHolder);
+
+        if ( rows > 0 ) record.setField( "id", keyHolder.getKey().intValue() );
+        return record;
+    }
+
+    public int dropRecordById( final String objectName, int id)
+    {
+        StringRenderUtil render = StringRenderUtil.getInstance();
+        final String tableName = objectName.indexOf('_') >= 0 ? objectName : camelToSnake(objectName);
+        final String sqlText = render.renderText("delete from {0} where id = ?;", tableName);
+        return jdbcTemplate.update(sqlText, Integer.valueOf(id));
     }
 }

@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration scan="false" scanPeriod="60000" debug="false">
     <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
-
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>[%-5p][%d{yyyy-MM-dd HH:mm:ss}][%thread][pulse]%c:%L|%m%n</pattern>
             <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{30} - %msg%n</pattern> -->
-</layout>
-</appender>
+        </layout>
+    </appender>
 
-<appender name="ROLLING-FILE-1" class="ch.qos.logback.core.rolling.RollingFileAppender">
-<layout class="ch.qos.logback.classic.PatternLayout">
-    <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{30} - %msg%n</pattern>
-</layout>
-<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-    <fileNamePattern>logs/scanner-%d{yyyy-MM-dd}.log</fileNamePattern>
-    <maxHistory>30</maxHistory>
-</rollingPolicy>
-<encoder>
-    <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{30} - %msg%n</pattern>
-</encoder>
-</appender>
+    <appender name="ROLLING-FILE-1" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{30} - %msg%n</pattern>
+        </layout>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/pulse-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{30} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
 <!--显示日志-->
     <logger name="java.sql.Connection" additivity="true" level="TRACE">

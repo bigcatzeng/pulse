@@ -1,12 +1,16 @@
 package com.trxs.commons.jdbc;
 
+import java.util.Map;
+
 public class SQLAction
 {
+    private SQLEnum action;
     private String sqlText;
     private Object[] parameters;
 
-    public SQLAction(String sql, Object []args)
+    public SQLAction(SQLEnum sqlEnum, String sql, Object []args)
     {
+        action = sqlEnum;
         sqlText = sql;
         parameters = args;
     }
@@ -25,5 +29,13 @@ public class SQLAction
 
     public void setParameters(Object[] parameters) {
         this.parameters = parameters;
+    }
+
+    public SQLEnum getAction() {
+        return action;
+    }
+
+    public void setAction(SQLEnum action) {
+        this.action = action;
     }
 }
