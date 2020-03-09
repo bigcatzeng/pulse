@@ -4,6 +4,8 @@ import com.trxs.commons.bean.AccessObject;
 import net.sf.cglib.beans.BeanGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,15 +60,18 @@ final public class Record
 
     public static Record newInstance(String tableName)
     {
+        Record record;
         try
         {
-            Record record = new Record(tableName);
-            return record.create();
+            record = new Record(tableName);
+            while ( false == generatorMutex.compareAndSet(0,1) ) Thread.yield();
+            record.create();
         }
         finally
         {
             generatorMutex.set(0);
         }
+        return record;
     }
 
     /**
@@ -79,12 +84,11 @@ final public class Record
      */
     public static void addField(String tableName, Map<String, Object> metaMap)
     {
-        String fieldName = (String)metaMap.get("COLUMN_NAME");
-        String propertyName = SnakeToCamelRequestParameterUtil.snakeToCamel(fieldName);
+        String propertyName = SnakeToCamelRequestParameterUtil.snakeToCamel((String)metaMap.get("COLUMN_NAME"));
         Record.addField( tableName, propertyName, (String)metaMap.get("CLASS_NAME"), (Integer)metaMap.get("ORDINAL_POSITION") );
     }
 
-    private Record create()
+    protected Record create()
     {
         Map<String, Class> propertyMap = tablePropertyMap.get(tableName);
         if ( propertyMap == null ) return null;
@@ -112,16 +116,16 @@ final public class Record
         return this;
     }
 
-    public String insertSQL()
+    public SQLAction insertAction()
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sqlBuilder = new StringBuilder();
 
         Map<String, Integer> propertySortMap = tablePropertySortMap.get(tableName);
 
         List<String> fieldList = new ArrayList<>();
         List<Object> valueList = new ArrayList<>();
 
-        sb.append("insert into ").append(tableName).append(" ( ");
+        sqlBuilder.append("insert into ").append(tableName).append(" ( ");
 
         propertySortMap.entrySet().stream().sorted( Map.Entry.comparingByValue()).forEachOrdered(property ->
         {
@@ -130,9 +134,9 @@ final public class Record
             if ( value != null ) fieldList.add(camelToSnake(property.getKey()));
         });
 
-        sb.append(String.join(", ", fieldList));
+        sqlBuilder.append(String.join(", ", fieldList));
 
-        sb.append(" ) value ( ");
+        sqlBuilder.append(" ) value ( ");
 
         propertySortMap.entrySet().stream().sorted( Map.Entry.comparingByValue()).forEachOrdered(property ->
         {
@@ -140,10 +144,10 @@ final public class Record
             if ( value != null ) valueList.add(value);
         });
 
-        sb.append(String.join(", ", fieldList.stream().map( f -> "?").collect(Collectors.toList())));
+        sqlBuilder.append(String.join(", ", fieldList.stream().map( f -> "?").collect(Collectors.toList())));
 
-        sb.append(" );");
+        sqlBuilder.append(" );");
 
-        return sb.toString();
+        return new SQLAction(sqlBuilder.toString(), valueList.toArray());
     }
 }

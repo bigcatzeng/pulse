@@ -23,7 +23,7 @@ public class PulseService  extends BaseService
         domainsRecord.setField("id", Integer.valueOf(-1));
         domainsRecord.setField("subsystem", Integer.valueOf(33));
 
-        logger.debug("id = {}, insertSQL:{}", domainsRecord.getField("id"), domainsRecord.insertSQL());
+        logger.debug("id = {}, insertSQL:{}", domainsRecord.getField("id"), domainsRecord.insertAction().getSqlText() );
 
         return;
     }
