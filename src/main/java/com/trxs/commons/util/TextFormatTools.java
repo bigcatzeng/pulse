@@ -5,34 +5,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class StringRenderUtil
+public class TextFormatTools
 {
     private static RegularExpressionTools regularExpressionTools = RegularExpressionTools.getInstance();
     private static Map<String, TemplateItem[]> templateMap = new ConcurrentHashMap<>();
 
-    private StringRenderUtil(){}
+    private TextFormatTools(){}
 
     private enum Singleton
     {
         Instance;
-        private StringRenderUtil singleton;
+        private TextFormatTools singleton;
         Singleton()
         {
-            singleton = new StringRenderUtil();
+            singleton = new TextFormatTools();
         }
 
-        public StringRenderUtil getInstance()
+        public TextFormatTools getInstance()
         {
             return singleton;
         }
     }
 
-    public static StringRenderUtil getInstance()
+    public static TextFormatTools getInstance()
     {
         return Singleton.Instance.getInstance();
     }
 
-    public String renderText(String template, Map<String,Object> parameterMap )
+    public String render(String template, Map<String,Object> parameterMap )
     {
         StringBuffer sb = new StringBuffer();
         TemplateItem[] items = templateMap.get(template);
@@ -59,7 +59,7 @@ public class StringRenderUtil
      * @return
      *
      */
-    public String renderText(String template, Object... parameters)
+    public String render(String template, Object... parameters)
     {
         if ( parameters == null ) return template;
 

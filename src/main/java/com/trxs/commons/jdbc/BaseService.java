@@ -1,6 +1,6 @@
 package com.trxs.commons.jdbc;
 
-import com.trxs.commons.util.StringRenderUtil;
+import com.trxs.commons.util.TextFormatTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -252,11 +252,28 @@ public class BaseService
         return record;
     }
 
-    public int dropRecordById( final String objectName, int id)
+    public Record modify(Record record)
     {
-        StringRenderUtil render = StringRenderUtil.getInstance();
+        if ( record == null ) return null;
+
+        SQLAction modifyAction = record.modifyAction();
+
+        jdbcTemplate.update(modifyAction.getSqlText(), modifyAction.getParameters());
+
+        return record;
+    }
+
+    public int delRecordById( final String objectName, int id)
+    {
+        TextFormatTools textFormat = TextFormatTools.getInstance();
         final String tableName = objectName.indexOf('_') >= 0 ? objectName : camelToSnake(objectName);
-        final String sqlText = render.renderText("delete from {0} where id = ?;", tableName);
+        final String sqlText = textFormat.render("delete from {0} where id = ?;", tableName);
         return jdbcTemplate.update(sqlText, Integer.valueOf(id));
     }
+
+    public int getRecordById( final String objectName, int id)
+    {
+        return 0;
+    }
+
 }

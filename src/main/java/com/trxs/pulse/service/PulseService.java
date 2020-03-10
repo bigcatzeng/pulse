@@ -25,8 +25,12 @@ public class PulseService  extends BaseService
 
         logger.debug("id = {}, insertSQL:{}", domainsRecord.getField("id"), domainsRecord.insertAction().getSqlText() );
 
-        rows = dropRecordById("pDomains", 50);
+        rows = delRecordById("pDomains", 50);
         logger.debug("rows={}", rows);
+
+        rows = delRecordById("p_domains", 49);
+        logger.debug("rows={}", rows);
+
         return;
     }
 }

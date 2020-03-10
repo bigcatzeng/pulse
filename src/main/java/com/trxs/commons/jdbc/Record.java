@@ -1,16 +1,14 @@
 package com.trxs.commons.jdbc;
 
 import com.trxs.commons.bean.AccessObject;
+import com.trxs.commons.util.TextFormatTools;
 import net.sf.cglib.beans.BeanGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Proxy;
+import java.text.MessageFormat;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -25,12 +23,23 @@ final public class Record
     private final static Map<String, Map<String, Class>> tablePropertyMap = new ConcurrentHashMap<>();
     private final static Map<String, Map<String, Integer>> tablePropertySortMap = new ConcurrentHashMap<>();
 
+    private final static String primaryKeyName = "id";
+
     private String tableName;
+    private List<String> emptyFields = null;
+    private Object data = null;
+    private AccessObject accessData = null;
 
-    private Object data;
-    private AccessObject accessData;
+    private Record(String table)
+    {
+        if ( table == null )
+        {
+            logger.warn("The name of table can't be null!");
+            throw new RuntimeException("Table name is null!!!");
+        }
 
-    private Record(String table){ tableName = table; }
+        tableName = table;
+    }
 
     protected static void addField(String table, String propertyName, String className, Integer index)
     {
@@ -92,7 +101,11 @@ final public class Record
     protected Record create()
     {
         Map<String, Class> propertyMap = tablePropertyMap.get(tableName);
-        if ( propertyMap == null ) return null;
+        if ( propertyMap == null )
+        {
+            logger.warn("Pls create the table -> {} in database!", tableName);
+            throw new RuntimeException(MessageFormat.format("The table[{0}] is not exists in databases!", tableName));
+        }
 
         propertyMap.forEach( (key,value) -> generator.addProperty(key, propertyMap.get(key)) );
         data = generator.create();
@@ -126,7 +139,7 @@ final public class Record
         List<String> fieldList = new ArrayList<>();
         List<Object> valueList = new ArrayList<>();
 
-        sqlBuilder.append("insert into ").append(tableName).append(" ( ");
+        sqlBuilder.append("INSERT INTO ").append(tableName).append(" ( ");
 
         propertySortMap.entrySet().stream().sorted( Map.Entry.comparingByValue()).forEachOrdered(property ->
         {
@@ -137,7 +150,7 @@ final public class Record
 
         sqlBuilder.append(String.join(", ", fieldList));
 
-        sqlBuilder.append(" ) value ( ");
+        sqlBuilder.append(" ) VALUE ( ");
 
         propertySortMap.entrySet().stream().sorted( Map.Entry.comparingByValue()).forEachOrdered(property ->
         {
@@ -150,5 +163,64 @@ final public class Record
         sqlBuilder.append(" );");
 
         return new SQLAction(SQLEnum.INSERT, sqlBuilder.toString(), valueList.toArray());
+    }
+
+    public SQLAction modifyAction()
+    {
+        TextFormatTools textFormat = TextFormatTools.getInstance();
+
+        StringBuilder sqlBuilder = new StringBuilder();
+
+        Map<String, Integer> propertySortMap = tablePropertySortMap.get(tableName);
+
+        List<String> fieldItems = new ArrayList<>();
+        List<Object> valueList = new ArrayList<>();
+
+        sqlBuilder.append("UPDATE ").append(tableName).append(" SET ");
+
+        propertySortMap.entrySet().stream().sorted( Map.Entry.comparingByValue()).forEachOrdered(property ->
+        {
+            final String key = property.getKey();
+            if ( key.equalsIgnoreCase(primaryKeyName) ) return;
+            Object value = accessData.getProperty(key);
+            if ( value != null )
+            {
+                valueList.add(value);
+                fieldItems.add( textFormat.render("{0} = ?", camelToSnake(key) ) );
+            }
+            else if ( emptyFields != null && emptyFields.contains(key) )
+            {
+                fieldItems.add( textFormat.render("{0} = null", camelToSnake(key) ) );
+            }
+        });
+        valueList.add(accessData.getProperty(primaryKeyName));
+
+        sqlBuilder.append(String.join(", ", fieldItems));
+
+        sqlBuilder.append(" WHERE ").append(primaryKeyName).append(" = ?;");
+
+        return new SQLAction(SQLEnum.UPDATE, sqlBuilder.toString(), valueList.toArray());
+    }
+
+    /**
+     * 当需要设置表中某个字段为空时, 可以调用本函数
+     * @param fields 需要置空的字段
+     * @return self
+     *
+     */
+    public Record nullFields( final String... fields )
+    {
+        if ( fields == null ) return this;
+        if ( emptyFields == null ) emptyFields = new ArrayList<>(4);
+
+        Arrays.asList(fields).forEach( field ->
+        {
+            if ( emptyFields.contains(field) ) return;
+
+            emptyFields.add(field);
+            accessData.setProperty(field, null);
+        } );
+
+        return this;
     }
 }
