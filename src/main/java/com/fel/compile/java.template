@@ -1,0 +1,16 @@
+package com.fel.compile;
+
+import com.fel.common.*;
+import com.fel.Expression;
+import com.fel.context.*;
+//import org.apache.commons.lang3.ObjectUtils;
+//import org.apache.commons.lang3.StringUtils;
+
+public class ${classname}  implements Expression
+{
+    ${attrs}
+    public Object eval(FelContext context) {
+        ${localVars}
+        return ${expression};
+    }
+}

@@ -38,3 +38,21 @@ FROM
        LEFT JOIN questionnaire_rich_text qrt on qrt.qnr_id = qt.id
 where
     qt.id = ?;
+
+/**
+ ID : addDomainX
+ */
+select
+    *
+from
+     question
+#
+#
+where
+     id in (1,2,3,4)
+# if ( name !=
+#
+
+/**
+ * End of File.
+ */

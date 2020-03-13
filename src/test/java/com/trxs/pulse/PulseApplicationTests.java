@@ -87,7 +87,8 @@ public class PulseApplicationTests
             //利用反射执行对应方法
             Method method = object.getClass().getMethod(methodName);
             method.invoke(object);
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }

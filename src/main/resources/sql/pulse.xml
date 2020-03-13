@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pulse>
+    <query id="modifyQuestion">
+        UPDATE question SET
+        <trim prefix=" " prefixOverrides="AND|OR">
+            <if test="question.id != null">AND id = #{question.id} </if>
+            <if test="question.sectionId != null">AND section_id = #{question.sectionId} </if>
+            <if test="question.type != null">AND type = #{question.type} </if>
+            <if test="question.contentType != null">AND content_type = #{question.contentType} </if>
+            <if test="question.orderNo != null">AND order_no = #{question.orderNo} </if>
+            <if test="question.isRequired != null">AND is_required = #{question.isRequired} </if>
+            <if test="question.isRandom != null">AND is_random = #{question.isRandom} </if>
+            <if test="question.textHeight != null">AND text_height = #{question.textHeight} </if>
+            <if test="question.viewType != null">AND view_type = #{question.viewType} </if>
+            <if test="question.minLength != null">AND min_length = #{question.minLength} </if>
+            <if test="question.maxLength != null">AND max_length = #{question.maxLength} </if>
+            <if test="question.content != null">AND content like concat(#{question.content}, '%') </if>
+        </trim>
+        WHERE id = #{id}
+    </query>
+</pulse>

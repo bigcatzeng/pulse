@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pulse>
+    <query id = "modifyQuestion" parameterName = "question">
+        UPDATE
+            question
+        SET
+        <trim prefix=" " prefixOverrides=" AND | OR " >
+            <if test="question.id != null">AND id = :id </if>
+            <if test="question.sectionId != null">AND section_id = :sectionId </if>
+            <if test="question.viewType != null">AND view_type = :viewType </if>
+            <if test="question.minLength != null">AND min_length = :minLength </if>
+            <if test="question.maxLength != null">AND max_length = :maxLength </if>
+            <if test="question.content != null">AND content like concat( :content, '%') </if>
+        </trim>
+        view_logic_id IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        WHERE id = #{id}
+    </query>
+
+    <insert id="addQuestionnaireTargetQuestions" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO questionnaire_target_question
+        (
+            id, view_logic_id, order_no
+        )
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            0, #{item.viewLogicId}, #{item.orderNo}
+            )
+        </foreach>
+    </insert>
+
+    <select id="queryQuestionnaireTemplateForPage"  resultMap="QuestionnaireTemplateResultMap" >
+        SELECT
+            <include refid="sql_questionnaireTemplate_item"/>,
+            (
+                select
+                    ifnull(count(*),0)
+                from
+                    answer_sheet t
+                where
+                    t.status = 1 and
+                    exists
+                    (
+                        select 1 from questionnaire_version qv where qv.qnr_id = qt.id and qv.id = t.qnr_version_id
+                    )
+            ) as answer_count
+        FROM questionnaire_template qt
+        <where>
+            <trim prefix=" " prefixOverrides="AND|OR">
+                <choose>
+                    <when test="questionnaireTemplate.status != null">
+                        AND status = #{questionnaireTemplate.status}
+                    </when>
+                    <otherwise>
+                        AND status > 0 and 4 > status
+                    </otherwise>
+                </choose>
+
+                <if test="questionnaireTemplate.targetType != null">AND target_type = #{questionnaireTemplate.targetType} </if>
+                <if test="questionnaireTemplate.answerCount != null">AND answer_count = #{questionnaireTemplate.answerCount} </if>
+                <if test="questionnaireTemplate.beginTime != null">
+                    AND create_date between #{questionnaireTemplate.beginTime} and #{questionnaireTemplate.endTime}
+                </if>
+                <if test="questionnaireTemplate.createEmpId != null">AND create_emp_id = #{questionnaireTemplate.createEmpId} </if>
+                <if test="questionnaireTemplate.createEmpName != null">AND create_emp_name like concat(#{questionnaireTemplate.createEmpName}, '%') </if>
+
+                <if test="questionnaireTemplate.masterEmpId != null and questionnaireTemplate.isAdmin == '0'.toString() ">
+                    AND master_emp_id = #{questionnaireTemplate.masterEmpId}
+                </if>
+
+                <if test="questionnaireTemplate.masterEmpName != null">AND master_emp_name like concat(#{questionnaireTemplate.masterEmpName}, '%') </if>
+                <if test="questionnaireTemplate.modifyEmpId != null">AND modify_emp_id = #{questionnaireTemplate.modifyEmpId} </if>
+                <if test="questionnaireTemplate.modifyEmpName != null">AND modify_emp_name like concat(#{questionnaireTemplate.modifyEmpName}, '%') </if>
+                <if test="questionnaireTemplate.title != null">AND title like concat('%', #{questionnaireTemplate.title}, '%') </if>
+                <if test="questionnaireTemplate.partnerId != null">AND partner_id = #{questionnaireTemplate.partnerId} </if>
+                <if test="questionnaireTemplate.partnerName != null">AND partner_name like concat(#{questionnaireTemplate.partnerName}, '%') </if>
+            </trim>
+        </where>
+    </select>
+</pulse>

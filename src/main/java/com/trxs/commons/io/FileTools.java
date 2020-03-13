@@ -126,4 +126,16 @@ public class FileTools
     {
         return FileTools.class.getResourceAsStream(source);
     }
+
+    public static BufferedReader getBufferedReaderBySource( String source )
+    {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(FileTools.class.getResourceAsStream(source)), 4096);
+        return bufferedReader;
+    }
+
+    public static BufferedReader getBufferedReaderByString( String text )
+    {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(text.getBytes())));
+        return bufferedReader;
+    }
 }

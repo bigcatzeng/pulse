@@ -6,56 +6,71 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import static com.trxs.commons.jdbc.SnakeToCamelRequestParameterUtil.snakeToCamel;
 
 /**
  * @author zengshengwen 2019 19-1-17 下午11:43
  */
 public class ObjectRowMapper implements RowMapper<Object>
 {
-    final Map<String, Class<?>> propertyClassMap = new HashMap();
+    private final static Map<String, Map<String, Class<?>>> propertyClassMap = new ConcurrentHashMap<>();
 
-    public ObjectRowMapper(){}
+    private String sqlId;
+    private Map<String, Class<?>> classMap;
+    private GeneralBeanTools generalBeanTools = new GeneralBeanTools(propertyClassMap);
+
+    public ObjectRowMapper(String sqlKey)
+    {
+        sqlId = sqlKey;
+        classMap = propertyClassMap.get(sqlId);
+    }
 
     @Override
     public Object mapRow(ResultSet resultSet, int rowNum) throws SQLException
     {
-        if ( rowNum == 0 )
+        if ( classMap == null )
         {
-            getPropertyClassInfo(propertyClassMap, resultSet.getMetaData());
+            classMap = new ConcurrentHashMap<>();
+            getClassInfo(classMap , resultSet.getMetaData());
+            generalBeanTools = new GeneralBeanTools(classMap);
+            propertyClassMap.put(sqlId, classMap);
         }
 
-        return newObject(propertyClassMap,resultSet);
+        return newObject(resultSet);
     }
 
-    public void getPropertyClassInfo(Map<String, Class<?>> propertyMap, ResultSetMetaData metaData)
+    public void getClassInfo(Map<String, Class<?>> propertyMap, ResultSetMetaData metaData)
     {
 
         try
         {
             for ( int i = 1, count = metaData.getColumnCount(); i <= count; ++i )
             {
-                propertyMap.put(metaData.getColumnLabel(i), Class.forName(metaData.getColumnClassName(i)));
+                String columnLabel = metaData.getColumnLabel(i);
+                propertyMap.put(columnLabel.indexOf('_') >= 0 ? snakeToCamel(columnLabel): columnLabel, Class.forName(metaData.getColumnClassName(i)));
             }
         }
         catch (ClassNotFoundException | SQLException e)
         {
             e.printStackTrace();
         }
+        return;
     }
 
-    public Object newObject(Map<String, Class<?>> propertyClassMap, ResultSet resultSet )
+    public Object newObject( ResultSet resultSet )
     {
         try
         {
-            GeneralBeanTools bean = new GeneralBeanTools(propertyClassMap);
             ResultSetMetaData metaData = resultSet.getMetaData();
             for ( int i = 1, count = metaData.getColumnCount(); i <= count; ++i )
             {
-                bean.setValue(resultSet.getMetaData().getColumnLabel(i), resultSet.getObject(i));
+                String columnLabel = metaData.getColumnLabel(i);
+                generalBeanTools.setValue(columnLabel.indexOf('_') >= 0 ? snakeToCamel(columnLabel): columnLabel, resultSet.getObject(i));
             }
-            return bean.getObject();
+            return generalBeanTools.getObject();
         }
         catch (SQLException e)
         {
@@ -64,5 +79,4 @@ public class ObjectRowMapper implements RowMapper<Object>
 
         return null;
     }
-
 }

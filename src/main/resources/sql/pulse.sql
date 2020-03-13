@@ -25,16 +25,16 @@ select
        qp.is_expired as isExpired,
        qp.expired_date as expiredDate,
        (
-       select
-              group_concat(emp_id)
-       from
-            questionnaire_authorized qa
-       where
-           qa.qnr_id = qt.id
+              select
+                     group_concat(emp_id)
+              from
+                   questionnaire_authorized qa
+              where
+                  qa.qnr_id = qt.id
        ) as authorizedEmployees
 FROM
      questionnaire_template qt
-       LEFT JOIN questionnaire_profile qp on qp.qnr_id = qt.id
-       LEFT JOIN questionnaire_rich_text qrt on qrt.qnr_id = qt.id
+LEFT JOIN questionnaire_profile qp on qp.qnr_id = qt.id
+LEFT JOIN questionnaire_rich_text qrt on qrt.qnr_id = qt.id
 where
     qt.id = ?;
