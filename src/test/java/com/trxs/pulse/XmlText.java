@@ -1,6 +1,7 @@
 package com.trxs.pulse;
 
-import org.junit.Test;
+import com.trxs.commons.xml.Node;
+import com.trxs.commons.xml.NodeType;
 
 public class XmlText extends Node
 {

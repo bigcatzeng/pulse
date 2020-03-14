@@ -1,6 +1,8 @@
 package com.trxs.pulse;
 
 import com.trxs.commons.io.FileTools;
+import com.trxs.commons.util.ObjectStack;
+import com.trxs.commons.xml.*;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,19 +48,13 @@ public class XmlTests
     public void test1()
     {
         FileTools fileTools = FileTools.getInstance();
-
-        IntegerStack sStack = new IntegerStack(1024);
-        ObjectStack<Element> eStack = new ObjectStack<>(1024);
+        ObjectStack<Element> stack = new ObjectStack<>(128);
 
         BufferedReader bufferedReader = getBufferedReaderBySource("/sql/pulse.xml");
-
-        sStack.push(Integer.valueOf(0));
 
         Analyser analyser = new Analyser(bufferedReader, 1024);
 
         Element version = analyser.getVersion(null);
-
-        ObjectStack<Element> stack = new ObjectStack<>(128);
 
         long t0 = System.nanoTime();
         TagAnalyser tempTag;
@@ -69,27 +65,49 @@ public class XmlTests
         do
         {
             tempTag = analyser.advance(tag);
-            if ( tempTag == null ) break;
+            if ( tempTag == null )
+            {
+                parent = stack.pop();
+                continue;
+            }
 
             if ( tag.getType() == NodeType.ELEMENT )
             {
                 element = tag.createElement(parent);
+                if ( parent == null && element.isHeader() )
+                {
+                    parent = element;
+                    stack.push(parent);
+                    continue;
+                }
+                else if ( parent == null )
+                {
+                    throw new RuntimeException("Xml格式不对, 没有根节点!!!");
+                }
+
                 if ( element.isHeader() )
                 {
+                    parent.addContent(element);
                     stack.push(element);
                     parent = element;
                 }
+                else if ( element.isNoBody() ) // 没有内容节点 <include refid="sql_questionnaireTemplate_item"/>
+                {
+                    parent.addContent(element);
+                }
+                else if ( stack.isNotEmpty() )
+                {
+                    stack.pop(); parent = stack.peek();
+                }
                 else
                 {
-                    Element e = stack.pop();
-
-                    parent = e;
+                    throw new RuntimeException("Xml格式不对!!!");
                 }
             }
             else
             {
                 XmlText xmlText = new XmlText(tag.getContent(), parent);
-                parent.addContent(xmlText);
+                if ( parent != null ) parent.addContent(xmlText);
             }
         }while (tempTag != null);
         long t1 = System.nanoTime();
@@ -97,6 +115,4 @@ public class XmlTests
         logger.debug("dt={}", (t1-t0)/1000);
         return;
     }
-
-
 }

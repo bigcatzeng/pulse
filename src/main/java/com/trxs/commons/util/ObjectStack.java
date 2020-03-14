@@ -1,4 +1,4 @@
-package com.trxs.pulse;
+package com.trxs.commons.util;
 
 public class ObjectStack<E>
 {
@@ -23,7 +23,7 @@ public class ObjectStack<E>
         return elements == null ? 0 : elements.length;
     }
 
-    public boolean isEmpty()
+    public boolean isNotEmpty()
     {
         return index >= 0 ;
     }
@@ -35,7 +35,7 @@ public class ObjectStack<E>
             elements[++index] = e;
             return e;
         }
-        throw new RuntimeException("The stack is full!");
+        throw new RuntimeException("The stack was overflow!");
     }
 
     public E pop()

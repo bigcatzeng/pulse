@@ -1,4 +1,4 @@
-package com.trxs.pulse;
+package com.trxs.commons.xml;
 
 public class Attribute
 {

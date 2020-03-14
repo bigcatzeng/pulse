@@ -1,4 +1,4 @@
-package com.trxs.pulse;
+package com.trxs.commons.xml;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;

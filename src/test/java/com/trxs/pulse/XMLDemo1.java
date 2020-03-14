@@ -53,6 +53,7 @@ public class XMLDemo1
              */
             //1
             //org.dom4j.xxxx
+
             SAXReader reader = new SAXReader();
 
             //2
@@ -73,7 +74,10 @@ public class XMLDemo1
              * Document对象中。
              * Document对象可以描述当前xml文档
              */
+            long t0 = System.nanoTime();
             Document doc = reader.read(inputStream);
+            long t1 = System.nanoTime();
+
 
             //3
             Element root = doc.getRootElement();
@@ -111,6 +115,7 @@ public class XMLDemo1
 
             elements.forEach( element -> scanElement(element) );
 
+            logger.debug("dt={}", (t1-t0)/1000);
         }
         catch(Exception e)
         {

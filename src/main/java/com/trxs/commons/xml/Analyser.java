@@ -1,4 +1,4 @@
-package com.trxs.pulse;
+package com.trxs.commons.xml;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class Analyser
         maxIndex = defaultCapacity - 1;
     }
 
-    Analyser(BufferedReader bufferedReader, int capacity)
+    public Analyser(BufferedReader bufferedReader, int capacity)
     {
         index = 0;
         reader = bufferedReader;
@@ -144,7 +144,7 @@ public class Analyser
                             if ( c == '/' )
                             {
                                 int lastChar = reader.read(); // 吃掉 '>'
-                                if ( lastChar == '>' ) return element;
+                                if ( lastChar == '>' ) return element.setNoBody(true);
                             }
                             else
                             {
