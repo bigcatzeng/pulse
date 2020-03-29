@@ -1,4 +1,4 @@
-package com.trxs.commons.jdbc;
+package com.trxs.pulse.jdbc;
 
 public enum SQLEnum
 {

@@ -4,9 +4,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ArrayCtxImpl implements ArrayCtx {
-
-
+public class ArrayCtxImpl implements ArrayCtx
+{
 	/**
 	 * 保存对象类型的变量,包含数值类型的变量
 	 */
@@ -14,11 +13,16 @@ public class ArrayCtxImpl implements ArrayCtx {
 
 	private Map<String,Integer> indexMap = new HashMap<String,Integer>();
 
-	public ArrayCtxImpl(){
+	public ArrayCtxImpl()
+	{
 	}
-	public ArrayCtxImpl(Map<String,Object> vars){
-		if(vars!=null){
-			for (Map.Entry<String, Object> e : vars.entrySet()) {
+
+	public ArrayCtxImpl(Map<String,Object> vars)
+	{
+		if(vars!=null)
+		{
+			for (Map.Entry<String, Object> e : vars.entrySet())
+			{
 				this.set(e.getKey(), e.getValue());
 			}
 		}
@@ -30,22 +34,26 @@ public class ArrayCtxImpl implements ArrayCtx {
 	}
 
 	@Override
-	public int getIndex(String name) {
+	public int getIndex(String name)
+	{
 		Integer i = indexMap.get(name);
-		return i!=null?i:-1;
+		return i != null ? i : -1;
 	}
 
 
 	@Override
-	public Object get(String name) {
+	public Object get(String name)
+	{
 		Var var = getVar(name);
-		return var!=null?var.getValue():null;
+		return var != null ? var.getValue() : null;
 	}
 
 	@Override
-	public Var getVar(String name) {
+	public Var getVar(String name)
+	{
 		int index = getIndex(name);
-		if(index == -1){
+		if(index == -1)
+		{
 			return null;
 		}
 		return vars[index];
@@ -56,9 +64,11 @@ public class ArrayCtxImpl implements ArrayCtx {
 	 * @param name
 	 * @return
 	 */
-	private Var getVarWithoutNull(String name){
+	private Var getVarWithoutNull(String name)
+	{
 		Var var = getVar(name);
-		if(var == null){
+		if(var == null)
+		{
 			var = new Var(name,null);
 			setVar(var);
 		}
@@ -71,35 +81,44 @@ public class ArrayCtxImpl implements ArrayCtx {
      * 确保vars.length>minCapacity
      * @param minCapacity
      */
-    public void ensureCapacity(int minCapacity) {
+    public void ensureCapacity(int minCapacity)
+	{
     	int oldCapacity = vars.length;
-    	if (minCapacity > oldCapacity) {
+    	if (minCapacity > oldCapacity)
+    	{
     	    int newCapacity = (oldCapacity * 3)/2 + 1;
-        	    if (newCapacity < minCapacity)
+    	    if (newCapacity < minCapacity)
     		newCapacity = minCapacity;
-                // minCapacity is usually close to size, so this is a win:
-                vars = Arrays.copyOf(vars, newCapacity);
+            // minCapacity is usually close to size, so this is a win:
+            vars = Arrays.copyOf(vars, newCapacity);
     	}
     }
 
 	@Override
-	public void set(String name, Object value) {
+	public void set(String name, Object value)
+	{
 		getVarWithoutNull(name).setValue(value);
 	}
 	
 	@Override
-	public void setVar(Var var) {
+	public void setVar(Var var)
+	{
 		int i = addToIndexMap(var.getName());
-		if(i<vars.length){
-		}else{
+		if(i<vars.length)
+		{
+		}
+		else
+		{
 			ensureCapacity(i+1);
 		}
 		vars[i] = var;
 	}
 	
 	
-	private int addToIndexMap(String name){
-		synchronized (indexMap) {
+	private int addToIndexMap(String name)
+	{
+		synchronized (indexMap)
+		{
 			Integer i = indexMap.get(name);
 			if(i!=null){
 				return i ;

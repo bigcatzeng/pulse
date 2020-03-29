@@ -1,4 +1,4 @@
-package com.trxs.commons.jdbc;
+package com.trxs.pulse.jdbc;
 
 import org.springframework.jdbc.core.RowMapper;
 

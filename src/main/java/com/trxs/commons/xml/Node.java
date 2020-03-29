@@ -1,9 +1,11 @@
 package com.trxs.commons.xml;
 
-public class Node
+abstract public class Node
 {
     private NodeType nodeType;
     private Node parentNode;
+
+    private String id;
 
     private boolean isHeader = false;
 
@@ -28,5 +30,13 @@ public class Node
 
     public void setHeader(boolean header) {
         isHeader = header;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

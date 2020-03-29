@@ -4,6 +4,7 @@ import com.fel.common.FelBuilder;
 import com.fel.compile.CompileService;
 import com.fel.context.ArrayCtxImpl;
 import com.fel.context.FelContext;
+import com.fel.context.MapContext;
 import com.fel.context.Var;
 import com.fel.function.FunMgr;
 import com.fel.function.Function;
@@ -55,7 +56,7 @@ public class FelEngineImpl implements FelEngine {
 	public FelEngineImpl()
 	{
 		this(new ArrayCtxImpl());
-		// this(new MapContext());
+		//this(new MapContext());
 	}
 
 	@Override

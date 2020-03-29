@@ -1,83 +1,114 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<pulse>
-    <query id = "modifyQuestion" parameterName = "question">
-        UPDATE
-            question
-        SET
-        <trim prefix=" " prefixOverrides=" AND | OR " >
-            <if test="question.id != null">AND id = :id </if>
-            <if test="question.sectionId != null">AND section_id = :sectionId </if>
-            <if test="question.viewType != null">AND view_type = :viewType </if>
-            <if test="question.minLength != null">AND min_length = :minLength </if>
-            <if test="question.maxLength != null">AND max_length = :maxLength </if>
-            <if test="question.content != null">AND content like concat( :content, '%') </if>
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapper parameterBind="placeholderParameter" parameterType="bean" >
+
+    <sql id="sql_qualityInspection_item">
+        `id`, `qi_type`, `qit_id`, `status`, `service_id`, `outbound_call_id`, `customer_name`, `qi_seat`, `qi_target`, `total_score`, `plus_score`, `minus_score`, `create_user_id`, `update_user_id`, `publish_time`, `create_time`, `update_time`
+    </sql>
+
+    <!--查询条件 无WHERE-->
+    <sql id="sql_qualityInspection_query_nowhere">
+        <trim prefix=" " prefixOverrides="AND|OR">
+            <if test="id != null">AND id = {id}</if>
+            <if test="qiType != null">AND qi_type = {qiType}</if>
         </trim>
-        view_logic_id IN
-        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-        WHERE id = #{id}
-    </query>
+    </sql>
 
-    <insert id="addQuestionnaireTargetQuestions" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id" >
-        INSERT INTO questionnaire_target_question
-        (
-            id, view_logic_id, order_no
-        )
-        VALUES
-        <foreach collection="list" item="item" index="index" separator=",">
-            (
-            0, #{item.viewLogicId}, #{item.orderNo}
-            )
-        </foreach>
-    </insert>
-
-    <select id="queryQuestionnaireTemplateForPage"  resultMap="QuestionnaireTemplateResultMap" >
+    <!-- 根据属性查询质检任务 -->
+    <select id="queryQualityInspectionByProperty">
         SELECT
-            <include refid="sql_questionnaireTemplate_item"/>,
-            (
-                select
-                    ifnull(count(*),0)
-                from
-                    answer_sheet t
-                where
-                    t.status = 1 and
-                    exists
-                    (
-                        select 1 from questionnaire_version qv where qv.qnr_id = qt.id and qv.id = t.qnr_version_id
-                    )
-            ) as answer_count
-        FROM questionnaire_template qt
+            `id`, `qi_type`, `qit_id`, `status`, `service_id`
+            <!-- include refid="sql_qualityInspection_item"/ -->
+        FROM quality_inspection_tasks
         <where>
+            <!-- 查询条件 无WHERE -->
             <trim prefix=" " prefixOverrides="AND|OR">
-                <choose>
-                    <when test="questionnaireTemplate.status != null">
-                        AND status = #{questionnaireTemplate.status}
-                    </when>
-                    <otherwise>
-                        AND status > 0 and 4 > status
-                    </otherwise>
-                </choose>
-
-                <if test="questionnaireTemplate.targetType != null">AND target_type = #{questionnaireTemplate.targetType} </if>
-                <if test="questionnaireTemplate.answerCount != null">AND answer_count = #{questionnaireTemplate.answerCount} </if>
-                <if test="questionnaireTemplate.beginTime != null">
-                    AND create_date between #{questionnaireTemplate.beginTime} and #{questionnaireTemplate.endTime}
+                <if test="id != null">
+                    OR id = {id}
                 </if>
-                <if test="questionnaireTemplate.createEmpId != null">AND create_emp_id = #{questionnaireTemplate.createEmpId} </if>
-                <if test="questionnaireTemplate.createEmpName != null">AND create_emp_name like concat(#{questionnaireTemplate.createEmpName}, '%') </if>
-
-                <if test="questionnaireTemplate.masterEmpId != null and questionnaireTemplate.isAdmin == '0'.toString() ">
-                    AND master_emp_id = #{questionnaireTemplate.masterEmpId}
-                </if>
-
-                <if test="questionnaireTemplate.masterEmpName != null">AND master_emp_name like concat(#{questionnaireTemplate.masterEmpName}, '%') </if>
-                <if test="questionnaireTemplate.modifyEmpId != null">AND modify_emp_id = #{questionnaireTemplate.modifyEmpId} </if>
-                <if test="questionnaireTemplate.modifyEmpName != null">AND modify_emp_name like concat(#{questionnaireTemplate.modifyEmpName}, '%') </if>
-                <if test="questionnaireTemplate.title != null">AND title like concat('%', #{questionnaireTemplate.title}, '%') </if>
-                <if test="questionnaireTemplate.partnerId != null">AND partner_id = #{questionnaireTemplate.partnerId} </if>
-                <if test="questionnaireTemplate.partnerName != null">AND partner_name like concat(#{questionnaireTemplate.partnerName}, '%') </if>
+                <if test="qiType != null">AND qi_type = {qiType}</if>
             </trim>
         </where>
     </select>
-</pulse>
+
+    <!-- 根据质检任务属性与分页信息分页查询质检任务信息 -->
+    <select id="queryQualityInspectionWithPage">
+        SELECT
+            <include refid="sql_qualityInspection_item"/>
+        FROM quality_inspection_tasks
+        <where>
+            <include refid="sql_qualityInspection_query_nowhere"/>
+        </where>
+    </select>
+
+    <update id="syncServiceLogStatisticsByIdList" parameterType="java.util.List">
+        UPDATE
+            service_log_statistics ss
+        LEFT JOIN service_logs sl ON sl.id = ss.service_id
+        LEFT JOIN users u ON sl.seat_id = u.seat_id
+        LEFT JOIN employees e ON u.employee_id = e.id
+        LEFT JOIN skill_groups sg ON sg.id = sl.skill_group_id
+        LEFT JOIN modified_tasks mt ON mt.task_type = 2 AND mt.task_id = ss.service_id
+        LEFT JOIN data_codes dc_contact_type ON dc_contact_type.type_marker = 'communication_mode' AND dc_contact_type.type_name IS NULL AND dc_contact_type.type_code = sl.contact_type
+        LEFT JOIN data_codes dc_service_type ON dc_service_type.type_marker = 'service_type' AND dc_service_type.type_name IS NULL AND dc_service_type.type_code = sl.service_type
+        LEFT JOIN data_codes dc_service_status ON dc_service_status.type_marker = 'service_state' AND dc_service_status.type_name IS NULL AND dc_service_status.type_code = sl.status
+        LEFT JOIN data_codes dc_service_object ON dc_service_object.type_marker = 'service_object' AND dc_service_object.type_name IS NULL AND dc_service_object.type_code = sl.service_obj
+        SET
+            ss.labels_name =
+            (
+                SELECT group_concat(l.label_name)
+                FROM
+                service_log_labels sll
+                LEFT JOIN labels l ON l.id = sll.label_code
+                WHERE
+                service_log_id = sl.id
+            ),
+            ss.seat_name = e.staff_name,
+            ss.skill_group_name = sg.group_name,
+            ss.contact_type_name = dc_contact_type.code_value,
+            ss.service_type_name = dc_service_type.code_value,
+            ss.status_name = dc_service_status.code_value,
+            ss.service_object_name = dc_service_object.code_value,
+            ss.sync_time = mt.update_time,
+            ss.service_sub_type_name = queryDataCodeParentNames(sl.service_sub_type),
+            ss.service_end_time = CASE WHEN sl.status = 2 THEN sl.update_time ELSE NULL END,
+            ss.tlength = CASE WHEN sl.status = 2 THEN convert((UNIX_TIMESTAMP(sl.update_time) - UNIX_TIMESTAMP(sl.contact_time)) / 3600, DECIMAL(10, 1)) ELSE NULL END
+        where
+            ss.service_id IN
+        <foreach item="id" separator="," prefix="(" suffix=")">
+            {id}
+        </foreach>
+    </update>
+
+    <!-- 插入 SSG SF 扩展数据 -->
+    <insert id="addSsgAccountBaseLogWithBatch" parameterType="java.util.List">
+        INSERT INTO ssg_account_base_logs
+        (
+            baidu_account, product_name, data_pull_time, data_pull_date, import_time, mark
+        )
+        VALUES
+        <foreach itemType="bean|base" separator=",">
+        (
+            {baiduAccount, {productName, {dataPullTime}, {dataPullTime}, now(), {mark}
+        )
+        </foreach>
+    </insert>
+
+    <update id="syncQualityInspectionStatusByServiceLog" parameterType="bean" >
+        UPDATE service_logs SET
+        <trim suffixOverrides=",">
+            <choose>
+                <when test="qiStatus == 0">
+                    <if test="qiUser != null"> qi_user = null, </if>
+                    <if test="qiStatus != null"> qi_status = #{qiStatus}, </if>
+                </when>
+                <otherwise>
+                    <if test="qiUser != null"> qi_user = #{qiUser}, </if>
+                    <if test="qiStatus != null"> qi_status = #{qiStatus}, </if>
+                </otherwise>
+            </choose>
+            <if test="purpose != null"> purpose = #{purpose}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+</mapper>

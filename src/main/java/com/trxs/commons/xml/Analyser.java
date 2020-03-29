@@ -1,11 +1,15 @@
 package com.trxs.commons.xml;
 
+import com.trxs.commons.util.ObjectStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.imageio.plugins.jpeg.JPEGImageReadParam;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.MessageFormat;
+
+import static com.trxs.commons.io.FileTools.getBufferedReaderBySource;
 
 public class Analyser
 {
@@ -37,6 +41,86 @@ public class Analyser
         maxIndex = capacity - 1;
     }
 
+    public static Element readXmlBySource( String source )
+    {
+        ObjectStack<Element> stack = new ObjectStack<>(128);
+
+        BufferedReader bufferedReader = getBufferedReaderBySource(source); // "/sql/pulse.xml"
+
+        Analyser analyser = new Analyser(bufferedReader, 1024);
+
+        Element version = analyser.getVersion(null);
+
+        long t0 = System.nanoTime();
+
+        TagAnalyser tempTag;
+        TagAnalyser tag = new TagAnalyser();
+        Element element;
+        Element parent = null;
+
+        do
+        {
+            tempTag = analyser.advance(tag);
+            if ( tempTag == null )
+            {
+                parent = stack.pop();
+                continue;
+            }
+
+            if ( tempTag.getType() == NodeType.ANNOTATION )
+            {
+                continue;
+            }
+
+            if ( tag.getType() == NodeType.ELEMENT )
+            {
+                element = tag.createElement(parent);
+                if ( parent == null && element.isHeader() )
+                {
+                    parent = element;
+                    stack.push(parent);
+                    continue;
+                }
+                else if ( parent == null )
+                {
+                    throw new RuntimeException("Xml格式不对, 没有根节点!!!");
+                }
+
+                if ( element.isHeader() )
+                {
+                    parent.addContent(element);
+                    stack.push(element);
+                    parent = element;
+                }
+                else if ( element.isNoBody() ) // 没有内容节点 <include refid="sql_questionnaireTemplate_item"/>
+                {
+                    parent.addContent(element);
+                }
+                else if ( stack.isNotEmpty() )
+                {
+                    parent = stack.pop();
+                    if ( ! parent.getName().equalsIgnoreCase(element.getName()) ) throw new RuntimeException(MessageFormat.format("{0}, xml格式错误!", tag.getContent()));
+                    if ( stack.isEmpty() ) return parent;
+                    parent = stack.peek();
+                }
+                else
+                {
+                    throw new RuntimeException("Xml格式不对!!!");
+                }
+            }
+            else
+            {
+                XmlText xmlText = new XmlText(tag.getContent(), parent);
+                if ( parent != null ) parent.addContent(xmlText);
+            }
+        }while (tempTag != null);
+        long t1 = System.nanoTime();
+
+        logger.debug("readXmlBySource -> dt={}", (t1-t0)/1000);
+
+        return parent;
+    }
+
     public TagAnalyser advance(TagAnalyser tag)
     {
         String text = null;
@@ -52,11 +136,17 @@ public class Analyser
                     break;
                 case 1: // read <tag>, </tag>
                     nodeType = NodeType.ELEMENT;
-                    advanceChar = getTokenByChar('>'); addChar(advanceChar);
+                    advanceChar = getTokenByChar('>');
+                    if ( advanceChar > 0 ) addChar(advanceChar);
                     break;
             }
             if ( advanceChar == -1 ) return null;
 
+            if ( advanceChar == -2 )
+            {
+                advanceChar = reader.read();
+                nodeType = NodeType.ANNOTATION;
+            }
             text = new String(chars,0, index);
             next();
         }
@@ -64,7 +154,6 @@ public class Analyser
         {
             e.printStackTrace();
         }
-
         return text != null ? tag.load(nodeType, text) : null;
     }
 
@@ -130,6 +219,7 @@ public class Analyser
                         {
                             element = new Element(chars, index, parent);
                             if ( c == '>' ) return element;
+
                             status++;
                         }
                         else
@@ -166,7 +256,10 @@ public class Analyser
                             c = skipSpaces(skipChars);
                         }
 
-                        if ( c != '=' ) throw new RuntimeException(MessageFormat.format("获取属性名称失败, 缺少等号! 单是发现[{0}]", c ) );
+                        if ( c != '=' )
+                        {
+                            throw new RuntimeException(MessageFormat.format("获取属性名称[{0}]失败, 缺少等号! 单是发现[{1}]", new String(chars, 0, index), (char)c ) );
+                        }
                         attributeName = new String(chars,0, index).trim();
                         status++;
                         break;
@@ -325,12 +418,35 @@ public class Analyser
 
     public int getTokenByChar( final int ch ) throws IOException
     {
-        int c;
-        while ( (c=reader.read()) != ch )
+        int c, searchChar = ch;
+        int saveIndex = index;
+        char []prefixChars = {0,0,0};
+
+        boolean isReadTag, isAnnotation = false;
+        if ( searchChar == '>' ) isReadTag = true; else isReadTag = false;
+        while ( (c=reader.read()) != searchChar )
         {
             if ( c == -1 ) break;
             if ( index + 1 > chars.length ) dilatation(chars.length*2);
             chars[index++] = (char) c;
+            if ( isReadTag && index == 4 )
+            {
+                if ( chars[0] == '<' && chars[1] == '!' && chars[2] == '-' && chars[3] == '-' )
+                {
+                    searchChar = 0;
+                    isAnnotation = true;
+                }
+            }
+
+            if ( prefixChars[1] != 0 ) prefixChars[0] = prefixChars[1];
+            if ( prefixChars[2] != 0 ) prefixChars[1] = prefixChars[2];
+            prefixChars[2] = (char)c;
+
+            if ( isAnnotation && prefixChars[1] == '-' && prefixChars[1] == '-' && prefixChars[2] == '>')
+            {
+                c = -2;
+                break;
+            }
         }
         return c;
     }

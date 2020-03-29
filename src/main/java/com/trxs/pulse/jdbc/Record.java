@@ -1,4 +1,4 @@
-package com.trxs.commons.jdbc;
+package com.trxs.pulse.jdbc;
 
 import com.trxs.commons.bean.AccessObject;
 import com.trxs.commons.util.TextFormatTools;
@@ -6,14 +6,14 @@ import net.sf.cglib.beans.BeanGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Proxy;
 import java.text.MessageFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import static com.trxs.commons.jdbc.SnakeToCamelRequestParameterUtil.camelToSnake;
+import static com.trxs.pulse.jdbc.SnakeToCamelParameterUtil.camelToSnake;
+import static com.trxs.pulse.jdbc.SnakeToCamelParameterUtil.snakeToCamel;
 
 final public class Record
 {
@@ -37,7 +37,6 @@ final public class Record
             logger.warn("The name of table can't be null!");
             throw new RuntimeException("Table name is null!!!");
         }
-
         tableName = table;
     }
 
@@ -94,7 +93,7 @@ final public class Record
      */
     public static void addField(String tableName, Map<String, Object> metaMap)
     {
-        String propertyName = SnakeToCamelRequestParameterUtil.snakeToCamel((String)metaMap.get("COLUMN_NAME"));
+        String propertyName = snakeToCamel((String)metaMap.get("COLUMN_NAME"));
         Record.addField( tableName, propertyName, (String)metaMap.get("CLASS_NAME"), (Integer)metaMap.get("ORDINAL_POSITION") );
     }
 

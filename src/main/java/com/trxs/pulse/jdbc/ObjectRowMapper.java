@@ -1,4 +1,4 @@
-package com.trxs.commons.jdbc;
+package com.trxs.pulse.jdbc;
 
 import com.trxs.commons.bean.GeneralBeanTools;
 import org.springframework.jdbc.core.RowMapper;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.trxs.commons.jdbc.SnakeToCamelRequestParameterUtil.snakeToCamel;
+import static com.trxs.pulse.jdbc.SnakeToCamelParameterUtil.snakeToCamel;
 
 /**
  * @author zengshengwen 2019 19-1-17 下午11:43
@@ -33,10 +33,10 @@ public class ObjectRowMapper implements RowMapper<Object>
     {
         if ( classMap == null )
         {
-            classMap = new ConcurrentHashMap<>();
-            getClassInfo(classMap , resultSet.getMetaData());
-            generalBeanTools = new GeneralBeanTools(classMap);
-            propertyClassMap.put(sqlId, classMap);
+            Map<String, Class<?>> map = new ConcurrentHashMap<>();
+            getClassInfo(map , resultSet.getMetaData());
+            generalBeanTools = new GeneralBeanTools(map);
+            propertyClassMap.put(sqlId, map); classMap = map;
         }
 
         return newObject(resultSet);

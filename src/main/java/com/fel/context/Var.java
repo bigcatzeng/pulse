@@ -8,9 +8,11 @@ import com.fel.common.Null;
  *
  * @param <T> 变量的类型
  */
-public class Var {
+public class Var
+{
 	
-	public Var(String name,Object value,Class<?> type){
+	public Var(String name,Object value,Class<?> type)
+	{
 		this.name = name;
 		this.value = value;
 		this.type = type;

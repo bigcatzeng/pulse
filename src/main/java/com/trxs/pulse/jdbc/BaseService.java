@@ -1,6 +1,7 @@
-package com.trxs.commons.jdbc;
+package com.trxs.pulse.jdbc;
 
 import com.trxs.commons.util.TextFormatTools;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +24,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import static com.trxs.commons.jdbc.SnakeToCamelRequestParameterUtil.camelToSnake;
+import static com.trxs.pulse.jdbc.SnakeToCamelParameterUtil.camelToSnake;
 
 public class BaseService
 {
-    public final static Logger logger = LoggerFactory.getLogger(BaseService.class.getName());
-    public final static SQLProvider sqlProvider = new SQLProvider();
-    private String sourceWithSQL = "/templates/default.sql";
+    private final static Logger logger = LoggerFactory.getLogger(BaseService.class.getName());
+
+    @Autowired
+    protected SQLProvider sqlProvider;
 
     @Autowired
     protected JdbcTemplate jdbcTemplate;
 
-    public BaseService() { sqlProvider.init(sourceWithSQL); }
-
-    public BaseService( String source )
-    {
-        sourceWithSQL = source; sqlProvider.init(sourceWithSQL);
-    }
+    public BaseService() {}
 
     @PostConstruct
     public void initDatabaseMetaData()
@@ -136,12 +133,13 @@ public class BaseService
 
     public <T> T queryValueForObject(String sqlKey, Class<T> requiredType, Object... args)
     {
-        return jdbcTemplate.queryForObject(sqlProvider.getSQL(sqlKey), requiredType, args);
+
+        return jdbcTemplate.queryForObject(sqlProvider.getSqlByKey(sqlKey), requiredType, args);
     }
 
     public Object queryForObject(String sqlKey, Object... args)
     {
-        return jdbcTemplate.queryForObject(sqlProvider.getSQL(sqlKey), args, new ObjectRowMapper(sqlKey));
+        return jdbcTemplate.queryForObject(sqlProvider.getSqlByKey(sqlKey), args, new ObjectRowMapper(sqlKey));
     }
 
     /**
@@ -172,12 +170,13 @@ public class BaseService
         return jdbcTemplate.query(sql, queryArgs, rowMapper);
     }
 
+
     public int update( String sqlKey, Object... args)
     {
-        return jdbcTemplate.update(sqlProvider.getSQL(sqlKey), args);
+        return jdbcTemplate.update(sqlProvider.getSqlByKey(sqlKey), args);
     }
 
-    public int update(String sqlKey, Map<String, Object> parameters, boolean requireKey)
+    public int insert(String sqlKey, Map<String, Object> parameters, boolean requireKey)
     {
         int rows;
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource(parameters);
@@ -187,18 +186,18 @@ public class BaseService
         if ( requireKey )
         {
             KeyHolder keyholder=new GeneratedKeyHolder();
-            rows = nameParamJdbcTemp.update(sqlProvider.getSQL(sqlKey), sqlParameterSource, keyholder);
+            rows = nameParamJdbcTemp.update(sqlProvider.getSqlByKey(sqlKey), sqlParameterSource, keyholder);
             parameters.put("lastId", keyholder.getKey());
             return rows;
         }
 
-        rows = nameParamJdbcTemp.update(sqlProvider.getSQL(sqlKey), sqlParameterSource);
+        rows = nameParamJdbcTemp.update(sqlProvider.getSqlByKey(sqlKey), sqlParameterSource);
         return rows;
     }
 
     public <T> int[][] insertObjects(String sqlKey, List<T> objects, final ParameterizedPreparedStatementSetter<T> pss)
     {
-        return jdbcTemplate.batchUpdate( sqlProvider.getSQL(sqlKey), objects, objects.size(), pss );
+        return jdbcTemplate.batchUpdate( sqlProvider.getSqlByKey(sqlKey), objects, objects.size(), pss );
     }
 
     public void test()
@@ -283,13 +282,7 @@ public class BaseService
 
         if (totalSize == 0)
         {
-            return PageBean.<T>builder()
-                    .elements(new ArrayList<>())
-                    .page(1)
-                    .size(0)
-                    .totalPage(0)
-                    .totalSize(0)
-                    .build();
+            return new PageBean();
         }
 
         //总页数
@@ -301,7 +294,7 @@ public class BaseService
         sql = sql +" limit "+ limit +" offset "+offset;
         logger.info(sql);
         List<T> elements = jdbcTemplate.query(sql,queryArgs,rowMapper);
-        return PageBean.<T>builder().elements(elements).totalSize(totalSize).totalPage(totalPage).page(page).size(size).build();
+        return PageBean.<T>build(elements, totalSize, totalPage, page, size);
     }
 
     public Record save(Record record)

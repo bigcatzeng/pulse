@@ -9,6 +9,7 @@ public class TagAnalyser extends Analyser
     private NodeType type;
     private String content;
     private boolean isEnd;
+    private boolean isAnnotation = false;
     public NodeType getType() {
         return type;
     }
@@ -22,7 +23,10 @@ public class TagAnalyser extends Analyser
         type = t;
         content = text;
         reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(content.getBytes())), 4096);
-        if ( t == NodeType.ELEMENT ) isEnd = content.substring(1,2).equalsIgnoreCase("/");
+        if ( t == NodeType.ELEMENT )
+            isEnd = content.substring(1,2).equalsIgnoreCase("/");
+        else if ( t == NodeType.ANNOTATION )
+            isAnnotation = true;
         return this;
     }
 

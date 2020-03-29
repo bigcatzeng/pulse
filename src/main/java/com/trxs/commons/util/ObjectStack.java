@@ -23,6 +23,11 @@ public class ObjectStack<E>
         return elements == null ? 0 : elements.length;
     }
 
+    public boolean isEmpty()
+    {
+        return index < 0;
+    }
+
     public boolean isNotEmpty()
     {
         return index >= 0 ;
@@ -49,4 +54,5 @@ public class ObjectStack<E>
         if ( index < 0 ) throw new RuntimeException("The stack is empty!");
         return (E) elements[index];
     }
+
 }

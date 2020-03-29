@@ -1,4 +1,4 @@
-create database pulse default character set utf8mb4 collate utf8mb4_unicode_ci;
+  create database pulse default character set utf8mb4 collate utf8mb4_unicode_ci;
 -- we don't know how to generate schema pulse (class Schema) :(
 -- grant all privileges on `pulse`.* to 'root'@'192.168.135.80' identified by 'VwUt4NxGw8p3Bj5S';
 

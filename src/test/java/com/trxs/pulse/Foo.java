@@ -7,6 +7,14 @@ public class Foo
 
     private Foo children;
 
+    public Foo() { }
+
+    public Foo(int i, String n)
+    {
+        name = n;
+        size = i;
+    }
+
     public String getName() {
         return name;
     }

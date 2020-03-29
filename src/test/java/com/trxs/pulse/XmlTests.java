@@ -1,17 +1,26 @@
 package com.trxs.pulse;
 
-import com.trxs.commons.io.FileTools;
-import com.trxs.commons.util.ObjectStack;
-import com.trxs.commons.xml.*;
+import com.alibaba.fastjson.JSON;
+import com.trxs.pulse.jdbc.ObjectProxyFactory;
+import com.trxs.commons.xml.Element;
+import com.trxs.pulse.jdbc.SQLAction;
+import com.trxs.pulse.jdbc.SQLRender;
+import com.trxs.pulse.jdbc.SqlFormatterUtils;
+import org.apache.tools.ant.types.resources.Intersect;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-import static com.trxs.commons.io.FileTools.getBufferedReaderBySource;
 import static com.trxs.commons.io.FileTools.getBufferedReaderByString;
+import static com.trxs.commons.xml.Analyser.readXmlBySource;
 
 public class XmlTests
 {
@@ -47,72 +56,46 @@ public class XmlTests
     @Test
     public void test1()
     {
-        FileTools fileTools = FileTools.getInstance();
-        ObjectStack<Element> stack = new ObjectStack<>(128);
-
-        BufferedReader bufferedReader = getBufferedReaderBySource("/sql/pulse.xml");
-
-        Analyser analyser = new Analyser(bufferedReader, 1024);
-
-        Element version = analyser.getVersion(null);
-
         long t0 = System.nanoTime();
-        TagAnalyser tempTag;
-        TagAnalyser tag = new TagAnalyser();
-        Element element;
-        Element parent = null;
 
-        do
-        {
-            tempTag = analyser.advance(tag);
-            if ( tempTag == null )
-            {
-                parent = stack.pop();
-                continue;
-            }
+        Element root = readXmlBySource("/sql/pulse.xml");
 
-            if ( tag.getType() == NodeType.ELEMENT )
-            {
-                element = tag.createElement(parent);
-                if ( parent == null && element.isHeader() )
-                {
-                    parent = element;
-                    stack.push(parent);
-                    continue;
-                }
-                else if ( parent == null )
-                {
-                    throw new RuntimeException("Xml格式不对, 没有根节点!!!");
-                }
-
-                if ( element.isHeader() )
-                {
-                    parent.addContent(element);
-                    stack.push(element);
-                    parent = element;
-                }
-                else if ( element.isNoBody() ) // 没有内容节点 <include refid="sql_questionnaireTemplate_item"/>
-                {
-                    parent.addContent(element);
-                }
-                else if ( stack.isNotEmpty() )
-                {
-                    stack.pop(); parent = stack.peek();
-                }
-                else
-                {
-                    throw new RuntimeException("Xml格式不对!!!");
-                }
-            }
-            else
-            {
-                XmlText xmlText = new XmlText(tag.getContent(), parent);
-                if ( parent != null ) parent.addContent(xmlText);
-            }
-        }while (tempTag != null);
         long t1 = System.nanoTime();
 
-        logger.debug("dt={}", (t1-t0)/1000);
+        logger.debug("root name = {}, dt={}", root.getName(), (t1-t0)/1000);
+
+        Element e = root.findChildrenById("queryQualityInspectionByProperty");
+        SQLRender sqlRender = new SQLRender();
+        Map<String, Object> context = new HashMap<>();
+        context.put("id", 333);
+        context.put("qiType", 4);
+        SQLAction a = sqlRender.render(e, context);
+
+        SqlFormatterUtils sqlFormatterUtils = new SqlFormatterUtils();
+        String sql = sqlFormatterUtils.format(a.getSqlText());
+
+        logger.debug("\n{}", sql);
         return;
     }
+
+    @Test
+    public void test2()
+    {
+        Foo foo = new Foo();
+
+        Foo fooNew = ObjectProxyFactory.createProxy(foo);
+
+        fooNew.setSize(333);
+        fooNew.setName("ddddd");
+        logger.debug("{}, {}", fooNew.getClass().getTypeName(), JSON.toJSONString(fooNew));
+
+        return;
+    }
+
+    @Test
+    public void test3()
+    {
+        return;
+    }
+
 }

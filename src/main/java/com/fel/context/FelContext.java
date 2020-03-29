@@ -3,9 +3,8 @@ package com.fel.context;
 import com.fel.common.Null;
 
 
-public interface FelContext {
-
-	
+public interface FelContext
+{
 	Null NULL = new Null();
 
 	/**
@@ -30,6 +29,4 @@ public interface FelContext {
 	 Var getVar(String name);
 	
 	 void setVar(Var var);
-
-
 }

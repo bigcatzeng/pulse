@@ -12,19 +12,14 @@ import java.util.Map;
  * 更合适的实现方式是使用组合，而不是继承，这里继承HashMap是为了提高get方法的效率。
  */
 @SuppressWarnings("serial")
-public class MapContext extends HashMap<String, Var> implements FelContext {
-	public MapContext() {
-	}
+public class MapContext extends HashMap<String, Var> implements FelContext
+{
+	public MapContext() {}
 
-	public MapContext(Map<String,Object> map){
-//		this.putAll(map);
-		if(map != null){
-			for (Entry<String, Object> e : map.entrySet()) {
-				String name = e.getKey();
-				Object value = e.getValue();
-				this.set(name, value);
-			}
-		}
+	public MapContext(Map<String,Object> map)
+	{
+		// this.putAll(map);
+		if(map != null) map.forEach( (K,V) -> this.set(K,V));
 	}
 
 	@Override
@@ -46,12 +41,16 @@ public class MapContext extends HashMap<String, Var> implements FelContext {
 
 
 	@Override
-	public void set(String name, Object value) {
+	public void set(String name, Object value)
+	{
 		// 如果变量已经存在，就不再重复创建变量。
 		Var var = getVar(name);
-		if (var != null) {
+		if (var != null)
+		{
 			var.setValue(value);
-		} else {
+		}
+		else
+		{
 			this.put(name, new Var(name, value));
 		}
 	}
@@ -61,12 +60,14 @@ public class MapContext extends HashMap<String, Var> implements FelContext {
 	}
 
 	@Override
-	public Var getVar(String name) {
+	public Var getVar(String name)
+	{
 		return super.get(name);
 	}
 
 	@Override
-	public void setVar(Var var) {
+	public void setVar(Var var)
+	{
 		super.put(var.getName(), var);
 	}
 

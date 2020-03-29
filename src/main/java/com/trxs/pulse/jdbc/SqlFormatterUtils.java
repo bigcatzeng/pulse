@@ -1,13 +1,12 @@
-package com.trxs.pulse;
-
-import org.springframework.test.context.jdbc.Sql;
+package com.trxs.pulse.jdbc;
 
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-public class SqlFormatterUtils {
+public class SqlFormatterUtils
+{
 
     private static final Set<String> BEGIN_CLAUSES = new HashSet<String>();
     private static final Set<String> END_CLAUSES = new HashSet<String>();
@@ -22,7 +21,8 @@ public class SqlFormatterUtils {
         return new FormatProcess(source).perform().trim();
     }
 
-    static {
+    static
+    {
         BEGIN_CLAUSES.add("left");
         BEGIN_CLAUSES.add("right");
         BEGIN_CLAUSES.add("inner");
@@ -322,43 +322,5 @@ public class SqlFormatterUtils {
             }
             this.beginLine = true;
         }
-    }
-
-    public static void main(String[] args) {
-
-        System.out.println(new SqlFormatterUtils().format("select aa,bb,cc,dd from ta1,(select ee,ff,gg from ta2 where ee=ff) ta3 where aa=bb and cc=dd group by dd order by createtime desc limit 3 "));
-
-        System.out.println(new SqlFormatterUtils().format("select\n" +
-                "       qt.id,\n" +
-                "       qt.status,\n" +
-                "       qt.target_type as targetType,\n" +
-                "       qt.partner_id as partnerId,\n" +
-                "       qt.master_emp_id as employeeId,\n" +
-                "       qrt.id as richId,\n" +
-                "       qrt.rich_title as richTitle,\n" +
-                "       qrt.rich_desc as richDesc,\n" +
-                "       qp.id as profileId,\n" +
-                "       qp.is_show_order as isShowOrder,\n" +
-                "       qp.is_random_order as isRandomOrder,\n" +
-                "       qp.welcome_pic as welcomePic,\n" +
-                "       qp.welcome_pic_mobile as welcomePicMobile,\n" +
-                "       qp.is_limit as isLimit,\n" +
-                "       qp.is_repeat as isRepeat,\n" +
-                "       qp.is_expired as isExpired,\n" +
-                "       qp.expired_date as expiredDate,\n" +
-                "       (\n" +
-                "select\n" +
-                "                     group_concat(emp_id)\n" +
-                "              from\n" +
-                "                   questionnaire_authorized qa\n" +
-                "              where\n" +
-                "                  qa.qnr_id = qt.id\n" +
-                "       ) as authorizedEmployees\n" +
-                "FROM\n" +
-                "     questionnaire_template qt\n" +
-                "LEFT JOIN questionnaire_profile qp on qp.qnr_id = qt.id\n" +
-                "LEFT JOIN questionnaire_rich_text qrt on qrt.qnr_id = qt.id\n" +
-                "where\n" +
-                "    qt.id = ?;"));
     }
 }

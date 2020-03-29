@@ -1,4 +1,4 @@
-package com.trxs.pulse;
+package com.trxs.commons.xml;
 
 import com.trxs.commons.xml.Node;
 import com.trxs.commons.xml.NodeType;

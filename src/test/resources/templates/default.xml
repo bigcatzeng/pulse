@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- parameterBind = "placeholderParameter" or "NamedParameter" -->
+<!-- parameterType = "bean" "" -->
+<mapper parameterBind="placeholderParameter" parameterType="bean" >
+
+    <!-- 查询条件 无WHERE -->
+    <sql id="sql_qualityInspection_query_nowhere">
+        <trim prefix=" " prefixOverrides="AND|OR">
+            <if test="id != null">AND id = :id</if>
+            <if test="qiType != null">AND qi_type = :qiType</if>
+            <if test="qitId != null">AND qit_id = :qitId</if>
+            <if test="status != null">AND status = :status</if>
+            <if test="serviceId != null">AND service_id = :serviceId</if>
+            <if test="outboundCallId != null">AND outbound_call_id = :outboundCallId</if>
+        </trim>
+    </sql>
+
+    <!-- 插入 质检任务 -->
+    <insert id="addQualityInspection" parameterType="bean|base" >
+        INSERT INTO quality_inspection_tasks
+        <trim prefix=" (" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="qiType != null">qi_type,</if>
+            <if test="qitId != null">qit_id,</if>
+            <if test="status != null">status,</if>
+            <if test="serviceId != null">service_id,</if>
+            <if test="outboundCallId != null">outbound_call_id,</if>
+            <if test="customerName != null">customer_name,</if>
+            <if test="qiSeat != null">qi_seat,</if>
+            <if test="qiTarget != null">qi_target,</if>
+            <if test="totalScore != null">total_score,</if>
+            <if test="plusScore != null">plus_score,</if>
+            <if test="minusScore != null">minus_score,</if>
+            <if test="createUserId != null">create_user_id,</if>
+            <if test="updateUserId != null">update_user_id,</if>
+            <if test="publishTime != null">publish_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">:id,</if>
+            <if test="qiType != null">:qiType,</if>
+            <if test="qitId != null">:qitId,</if>
+            <if test="status != null">:status,</if>
+            <if test="serviceId != null">:serviceId,</if>
+            <if test="outboundCallId != null">:outboundCallId,</if>
+            <if test="customerName != null">:customerName,</if>
+            <if test="qiSeat != null">:qiSeat,</if>
+            <if test="qiTarget != null">:qiTarget,</if>
+            <if test="totalScore != null">:totalScore,</if>
+            <if test="plusScore != null">:plusScore,</if>
+            <if test="minusScore != null">:minusScore,</if>
+            <if test="createUserId != null">:createUserId,</if>
+            <if test="updateUserId != null">:updateUserId,</if>
+            <if test="publishTime != null">:publishTime,</if>
+            <if test="createTime != null">:createTime,</if>
+            <if test="updateTime != null">:updateTime,</if>
+        </trim>
+    </insert>
+
+    <!-- 根据标识，修改 质检任务 -->
+    <update id="modifyQualityInspection" parameterType="bean">
+        UPDATE quality_inspection_tasks SET
+        <trim suffixOverrides=",">
+            <if test="qiType != null">qi_type = :qiType,</if>
+            <if test="qitId != null">qit_id = :qitId,</if>
+            <if test="status != null">status = :status,</if>
+            <if test="serviceId != null">service_id = :serviceId,</if>
+            <if test="outboundCallId != null">biz_id = :outboundCallId,</if>
+            <if test="customerName != null">customer_name = :customerName,</if>
+            <if test="qiSeat != null">qi_seat = :qiSeat,</if>
+            <if test="qiTarget != null">qi_target = :qiTarget,</if>
+            <if test="totalScore != null">total_score = :totalScore,</if>
+            <if test="plusScore != null">plus_score = :plusScore,</if>
+            <if test="minusScore != null">minus_score = :minusScore,</if>
+            <if test="createUserId != null">create_user_id = :createUserId,</if>
+            <if test="updateUserId != null">update_user_id = :updateUserId,</if>
+            <if test="publishTime != null">publish_time = :publishTime,</if>
+            <if test="createTime != null">create_time = :createTime,</if>
+            <if test="updateTime != null">update_time = :updateTime,</if>
+        </trim>
+        WHERE
+        id = :id;
+    </update>
+
+    <!-- 根据属性查询质检任务 -->
+    <select id="queryQualityInspectionByProperty">
+        SELECT
+        <include refid="sql_qualityInspection_item"/>
+        FROM quality_inspection_tasks
+        <where>
+            <!-- 查询条件 无WHERE -->
+            <trim prefix=" " prefixOverrides="AND|OR">
+                <if test="id != null">AND id = :id</if>
+                <if test="qiType != null">AND qi_type = :qiType</if>
+                <if test="qitId != null">AND qit_id = :qitId</if>
+                <if test="status != null">AND status = :status</if>
+                <if test="serviceId != null">AND service_id = :serviceId</if>
+                <if test="outboundCallId != null">AND outbound_call_id = :outboundCallId</if>
+                <if test="customerName != null">AND customer_name like concat( customerName, '%')</if>
+                <if test="qiSeat != null">AND qi_seat = :qiSeat</if>
+                <if test="qiTarget != null">AND qi_target = :qiTarget</if>
+                <if test="totalScore != null">AND total_score = :totalScore</if>
+                <if test="plusScore != null">AND plus_score = :plusScore</if>
+                <if test="minusScore != null">AND minus_score = :minusScore</if>
+                <if test="createUserId != null">AND create_user_id = :createUserId</if>
+                <if test="updateUserId != null">AND update_user_id = :updateUserId</if>
+            </trim>
+        </where>
+    </select>
+
+    <!-- 根据质检任务属性与分页信息分页查询质检任务信息 -->
+    <select id="queryQualityInspectionWithPage">
+        SELECT
+        <include refid="sql_qualityInspection_item"/>
+        FROM quality_inspection_tasks
+        <where>
+            <include refid="sql_qualityInspection_query_nowhere"/>
+        </where>
+    </select>
+
+    <update id="syncServiceLogStatisticsByIdList" parameterType="java.util.List">
+        UPDATE
+        service_log_statistics ss
+        LEFT JOIN service_logs sl ON sl.id = ss.service_id
+        LEFT JOIN users u ON sl.seat_id = u.seat_id
+        LEFT JOIN employees e ON u.employee_id = e.id
+        LEFT JOIN skill_groups sg ON sg.id = sl.skill_group_id
+        LEFT JOIN modified_tasks mt ON mt.task_type = 2 AND mt.task_id = ss.service_id
+        LEFT JOIN data_codes dc_contact_type ON dc_contact_type.type_marker = 'communication_mode' AND dc_contact_type.type_name IS NULL AND dc_contact_type.type_code = sl.contact_type
+        LEFT JOIN data_codes dc_service_type ON dc_service_type.type_marker = 'service_type' AND dc_service_type.type_name IS NULL AND dc_service_type.type_code = sl.service_type
+        LEFT JOIN data_codes dc_service_status ON dc_service_status.type_marker = 'service_state' AND dc_service_status.type_name IS NULL AND dc_service_status.type_code = sl.status
+        LEFT JOIN data_codes dc_service_object ON dc_service_object.type_marker = 'service_object' AND dc_service_object.type_name IS NULL AND dc_service_object.type_code = sl.service_obj
+        SET
+        ss.labels_name =
+        (
+        SELECT group_concat(l.label_name)
+        FROM
+        service_log_labels sll
+        LEFT JOIN labels l ON l.id = sll.label_code
+        WHERE
+        service_log_id = sl.id
+        ),
+        ss.seat_name = e.staff_name,
+        ss.skill_group_name = sg.group_name,
+        ss.contact_type_name = dc_contact_type.code_value,
+        ss.service_type_name = dc_service_type.code_value,
+        ss.status_name = dc_service_status.code_value,
+        ss.service_object_name = dc_service_object.code_value,
+        ss.sync_time = mt.update_time,
+        ss.service_sub_type_name = queryDataCodeParentNames(sl.service_sub_type),
+        ss.service_end_time = CASE WHEN sl.status = 2 THEN sl.update_time ELSE NULL END,
+        ss.tlength = CASE WHEN sl.status = 2 THEN convert((UNIX_TIMESTAMP(sl.update_time) - UNIX_TIMESTAMP(sl.contact_time)) / 3600, DECIMAL(10, 1)) ELSE NULL END
+        where
+        ss.service_id IN
+        <foreach item="id" separator="," open="(" close=")">
+            :id
+        </foreach>
+    </update>
+
+    <!-- 插入 SSG SF 扩展数据 -->
+    <insert id="addSsgAccountBaseLogWithBatch" parameterType="java.util.List">
+        INSERT INTO ssg_account_base_logs
+        (
+        baidu_account, product_name, data_pull_time, data_pull_date, import_time, mark
+        )
+        VALUES
+        <foreach itemType="bean|base" separator=",">
+            (
+            :baiduAccount, :productName, :dataPullTime, :dataPullTime, now(), :mark
+            )
+        </foreach>
+    </insert>
+
+    <update id="syncQualityInspectionStatusByServiceLog" parameterType="bean" >
+        UPDATE service_logs SET
+        <trim suffixOverrides=",">
+            <choose>
+                <when test="qiStatus == 0">
+                    <if test="qiUser != null"> qi_user = null, </if>
+                    <if test="qiStatus != null"> qi_status = #{qiStatus}, </if>
+                </when>
+                <otherwise>
+                    <if test="qiUser != null"> qi_user = #{qiUser}, </if>
+                    <if test="qiStatus != null"> qi_status = #{qiStatus}, </if>
+                </otherwise>
+            </choose>
+            <if test="purpose != null"> purpose = #{purpose}, </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+</mapper>

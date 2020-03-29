@@ -1,6 +1,6 @@
 package com.trxs.pulse;
 
-import com.trxs.commons.jdbc.BaseService;
+import com.trxs.pulse.jdbc.BaseService;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;

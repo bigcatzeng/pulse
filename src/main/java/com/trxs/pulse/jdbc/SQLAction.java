@@ -1,6 +1,4 @@
-package com.trxs.commons.jdbc;
-
-import java.util.Map;
+package com.trxs.pulse.jdbc;
 
 public class SQLAction
 {
@@ -35,7 +33,8 @@ public class SQLAction
         return action;
     }
 
-    public void setAction(SQLEnum action) {
+    public void setAction(SQLEnum action)
+    {
         this.action = action;
     }
 }

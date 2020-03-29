@@ -1,17 +1,17 @@
 package com.trxs.pulse.service;
 
-import com.trxs.commons.jdbc.BaseService;
-import com.trxs.commons.jdbc.Record;
+import com.trxs.pulse.jdbc.BaseService;
+import com.trxs.pulse.jdbc.Record;
+import com.trxs.pulse.jdbc.SqlFormatterUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class PulseService  extends BaseService
+public class PulseService extends BaseService
 {
-    public PulseService()
-    {
-        super("/sql/pulse.sql");
-    }
+    private final static Logger logger = LoggerFactory.getLogger(PulseService.class.getName());
 
     public void test()
     {
@@ -22,6 +22,7 @@ public class PulseService  extends BaseService
         Record domainsRecord = Record.newInstance(tableName);
         domainsRecord.setField("id", Integer.valueOf(-1));
         domainsRecord.setField("subsystem", Integer.valueOf(33));
+        save(domainsRecord);
 
         logger.debug("id = {}, insertSQL:{}", domainsRecord.getField("id"), domainsRecord.insertAction().getSqlText() );
 
@@ -31,6 +32,11 @@ public class PulseService  extends BaseService
         rows = delRecordById("p_domains", 49);
         logger.debug("rows={}", rows);
 
+        String sql = sqlProvider.getSqlByKey("getQuestionnaireTemplateById");
+
+        SqlFormatterUtils sqlFormatterUtils = new SqlFormatterUtils();
+
+        logger.debug("sql -> {}", sqlFormatterUtils.format(sql));
         return;
     }
 }

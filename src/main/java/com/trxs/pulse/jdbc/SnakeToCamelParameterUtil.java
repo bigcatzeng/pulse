@@ -1,8 +1,6 @@
-package com.trxs.commons.jdbc;
+package com.trxs.pulse.jdbc;
 
-import org.springframework.lang.Nullable;
-
-public class SnakeToCamelRequestParameterUtil
+public class SnakeToCamelParameterUtil
 {
     /**
      * Convert a column name with underscores to the corresponding property name using "camel case".
@@ -10,7 +8,7 @@ public class SnakeToCamelRequestParameterUtil
      * @param name the column name to be converted
      * @return the name using "camel case"
      */
-    public static String snakeToCamel(@Nullable String name)
+    public static String snakeToCamel(String name)
     {
         boolean nextIsUpper = false;
         StringBuilder result = new StringBuilder();
@@ -50,7 +48,7 @@ public class SnakeToCamelRequestParameterUtil
         return result.toString();
     }
 
-    public static String camelToSnake(@Nullable String name)
+    public static String camelToSnake(String name)
     {
         StringBuilder result = new StringBuilder();
 
