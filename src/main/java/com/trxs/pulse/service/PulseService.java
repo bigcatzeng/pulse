@@ -2,7 +2,7 @@ package com.trxs.pulse.service;
 
 import com.trxs.pulse.jdbc.BaseService;
 import com.trxs.pulse.jdbc.Record;
-import com.trxs.pulse.jdbc.SqlFormatterUtils;
+import com.trxs.pulse.jdbc.SQLFormatterUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -34,7 +34,7 @@ public class PulseService extends BaseService
 
         String sql = sqlProvider.getSqlByKey("getQuestionnaireTemplateById");
 
-        SqlFormatterUtils sqlFormatterUtils = new SqlFormatterUtils();
+        SQLFormatterUtils sqlFormatterUtils = new SQLFormatterUtils();
 
         logger.debug("sql -> {}", sqlFormatterUtils.format(sql));
         return;

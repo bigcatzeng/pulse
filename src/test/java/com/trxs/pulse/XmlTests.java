@@ -1,23 +1,19 @@
 package com.trxs.pulse;
 
 import com.alibaba.fastjson.JSON;
-import com.trxs.pulse.jdbc.ObjectProxyFactory;
+import com.trxs.commons.util.ConcurrentObjectStack;
+import com.trxs.commons.util.ObjectStack;
+import com.trxs.pulse.jdbc.*;
 import com.trxs.commons.xml.Element;
-import com.trxs.pulse.jdbc.SQLAction;
-import com.trxs.pulse.jdbc.SQLRender;
-import com.trxs.pulse.jdbc.SqlFormatterUtils;
-import org.apache.tools.ant.types.resources.Intersect;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.UnaryOperator;
 
 import static com.trxs.commons.io.FileTools.getBufferedReaderByString;
 import static com.trxs.commons.xml.Analyser.readXmlBySource;
@@ -64,14 +60,31 @@ public class XmlTests
 
         logger.debug("root name = {}, dt={}", root.getName(), (t1-t0)/1000);
 
-        Element e = root.findChildrenById("queryQualityInspectionByProperty");
-        SQLRender sqlRender = new SQLRender();
+        ObjectStack objectStack = new ConcurrentObjectStack<Integer>(1000 );
+
+        for ( int i = 0; i < 1000; ++i ) objectStack.push(Integer.valueOf(i));
+
+        t0 = System.nanoTime();
+        objectStack.pop();
+        t1 = System.nanoTime();
+
+        logger.debug("Stack pop dt={}", (t1-t0)/1000);
+
+        Map<String, Element> elementMap = new HashMap<>();
+
+        //Element e = root.findChildrenById("");
+
+        SQLRender sqlRender = new SQLRender(root);
         Map<String, Object> context = new HashMap<>();
         context.put("id", 333);
+        context.put("type", 1);
         context.put("qiType", 4);
-        SQLAction a = sqlRender.render(e, context);
+        context.put("taskType", 4);
+        context.put("planType", 4);
 
-        SqlFormatterUtils sqlFormatterUtils = new SqlFormatterUtils();
+        SQLAction a = sqlRender.render("queryQualityInspectionWithPage", context);
+
+        SQLFormatterUtils sqlFormatterUtils = new SQLFormatterUtils();
         String sql = sqlFormatterUtils.format(a.getSqlText());
 
         logger.debug("\n{}", sql);
@@ -95,6 +108,23 @@ public class XmlTests
     @Test
     public void test3()
     {
+        AtomicReference<Foo> atomicReferenceFoo = new AtomicReference<>(new Foo());
+
+        UnaryOperator<Foo> unaryOperator = new UnaryOperator<Foo>()
+        {
+            @Override
+            public Foo apply(Foo foo)
+            {
+                foo.setName("xxxx");
+                return foo;
+            }
+        };
+
+        long t0 = System.nanoTime();
+        atomicReferenceFoo.getAndUpdate(unaryOperator);
+        long t1 = System.nanoTime();
+
+        logger.debug("dt={}", t1-t0);
         return;
     }
 

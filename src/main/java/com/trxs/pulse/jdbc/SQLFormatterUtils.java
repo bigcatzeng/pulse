@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-public class SqlFormatterUtils
+public class SQLFormatterUtils
 {
 
     private static final Set<String> BEGIN_CLAUSES = new HashSet<String>();

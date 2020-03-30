@@ -17,4 +17,24 @@ public class XmlText extends Node
     {
         return Text;
     }
+
+    @Override
+    public String getId()
+    {
+        return "";
+    }
+
+    @Override
+    public void setId(String id)
+    {
+    }
+
+    @Override
+    public String getName()
+    {
+        return "";
+    }
+
+    @Override
+    public void setName(String id){}
 }

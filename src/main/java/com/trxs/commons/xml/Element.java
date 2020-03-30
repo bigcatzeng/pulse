@@ -10,7 +10,8 @@ public class Element extends Node
     public static final String []  levelTwoNames = { "sql", "insert", "update", "select", "delete" };
     public static final String []levelThreeNames = { "sql", "where", "trim", "include", "foreach", "choose", "otherwise", "if" };
 
-    private String name;
+    private String id = "";
+    private String name = "";
     private List<Attribute> attributes = new ArrayList<>();
     private List<Node> contents = new ArrayList<>();
     private boolean isNoBody = false;
@@ -30,9 +31,16 @@ public class Element extends Node
         name = name.toUpperCase();
     }
 
+    @Override
     public String getName()
     {
         return name;
+    }
+
+    @Override
+    public void setName(String name)
+    {
+        this.name = name;
     }
 
     public boolean hasAttribute(final String name)
@@ -91,7 +99,19 @@ public class Element extends Node
         if ( contents.size() == 0 ) return null;
 
         List<Node> elements = contents.stream().filter( node -> node.getNodeType() == NodeType.ELEMENT && node.getId().equals(id) ).collect(Collectors.toList());
+
         if ( elements.size() > 0 ) return (Element) elements.get(0); else return null;
     }
 
+    @Override
+    public String getId()
+    {
+        return id;
+    }
+
+    @Override
+    public void setId(String id)
+    {
+        this.id = id;
+    }
 }

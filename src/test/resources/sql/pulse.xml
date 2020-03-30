@@ -16,8 +16,7 @@
     <!-- 根据属性查询质检任务 -->
     <select id="queryQualityInspectionByProperty">
         SELECT
-            `id`, `qi_type`, `qit_id`, `status`, `service_id`
-            <!-- include refid="sql_qualityInspection_item"/ -->
+            <include refid="sql_qualityInspection_item"/>
         FROM quality_inspection_tasks
         <where>
             <!-- 查询条件 无WHERE -->
@@ -37,6 +36,14 @@
         FROM quality_inspection_tasks
         <where>
             <include refid="sql_qualityInspection_query_nowhere"/>
+            <choose>
+                <when test="type == 1">
+                    <if test="taskType != null">AND pt.task_type = {taskType}, </if>
+                </when>
+                <otherwise>
+                    <if test="planType != null">AND sp.plan_type = {planType}, </if>
+                </otherwise>
+            </choose>
         </where>
     </select>
 

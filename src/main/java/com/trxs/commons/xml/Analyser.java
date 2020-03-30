@@ -451,6 +451,7 @@ public class Analyser
         return c;
     }
 
+    // ˌdaɪləˈteɪʃn
     private void dilatation(int newCapacity)
     {
         char []buffer = new char[chars.length*2];
