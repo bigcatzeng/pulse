@@ -59,7 +59,7 @@ create table p_cron_tasks
 	job_type tinyint not null comment '任务动作类型 0-http 1-MQ ...',
 	job_id int null comment '任务动作id',
 	state tinyint null comment '0-停止状态 1-激活状态',
-	cront_expression varchar(128) not null comment 'cron 表达式',
+	cron_expression varchar(128) not null comment 'cron 表达式',
 	create_time datetime default CURRENT_TIMESTAMP not null
 );
 

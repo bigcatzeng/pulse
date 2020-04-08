@@ -38,10 +38,10 @@
             <include refid="sql_qualityInspection_query_nowhere"/>
             <choose>
                 <when test="type == 1">
-                    <if test="taskType != null">AND pt.task_type = {taskType}, </if>
+                    <if test="taskType != null">AND pt.task_type = {taskType}</if>
                 </when>
                 <otherwise>
-                    <if test="planType != null">AND sp.plan_type = {planType}, </if>
+                    <if test="planType != null">AND sp.plan_type = {planType}</if>
                 </otherwise>
             </choose>
         </where>
@@ -86,17 +86,15 @@
         </foreach>
     </update>
 
-    <!-- 插入 SSG SF 扩展数据 -->
-    <insert id="addSsgAccountBaseLogWithBatch" parameterType="java.util.List">
+    <!-- 插入 SSG SF 扩展数据 parameterType="java.util.List" -->
+    <insert id="addSsgAccountBaseLogWithBatch" >
         INSERT INTO ssg_account_base_logs
         (
             baidu_account, product_name, data_pull_time, data_pull_date, import_time, mark
         )
         VALUES
-        <foreach itemType="bean|base" separator=",">
-        (
-            {baiduAccount, {productName, {dataPullTime}, {dataPullTime}, now(), {mark}
-        )
+        <foreach collections="list-1" separator=",">
+        ( {.baiduAccount}, {.productName}, {.dataPullTime}, {.dataPullTime}, now(), {mark}, 's sxxx ' )
         </foreach>
     </insert>
 

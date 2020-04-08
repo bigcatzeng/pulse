@@ -1,26 +1,22 @@
 package com.trxs.commons.util;
 
-import com.trxs.pulse.jdbc.SQLRender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ObjectStack<E>
+public class IntegerStack
 {
-    private static Logger logger = LoggerFactory.getLogger(ObjectStack.class );
     private int index;
     private int maxIndex;
     private int maxCapacity = 1024;
     private int defaultCapacity = 32;
-    private volatile Object[] elements;
-    private int []hashCodeList;
+    private volatile Integer[] elements;
 
-    public ObjectStack(int limit)
+    public IntegerStack(int limit)
     {
         index       = -1;
         maxIndex    = defaultCapacity - 1;
-        maxCapacity = limit < 32 ? 32 : limit;
-        elements    = new Object[defaultCapacity];
-        hashCodeList= new int[elements.length];
+        maxCapacity = limit;
+        elements    = new Integer[defaultCapacity];
     }
 
 
@@ -49,51 +45,43 @@ public class ObjectStack<E>
         return index >= 0 ;
     }
 
-    public void init( E []es)
-    {
-        for ( E e : es ) push(e);
-    }
-
-    public boolean push( E e)
+    public void push( Integer e)
     {
         if ( index < maxIndex )
         {
             elements[++index] = e;
-            return true;
+            return;
         }
 
-        return dilatation(e);
+        if ( dilatation(e) ) return;
+
+        throw new RuntimeException("The stack was overflow!");
     }
 
     // ˌdaɪləˈteɪʃn
-    private boolean dilatation( E e)
+    private boolean dilatation( Integer e)
     {
-        if ( elements.length*2 > maxCapacity )
-        {
-            logger.warn("The stack was overflow!!!");
-            return false;
-        }
+        if ( elements.length*2 > maxCapacity ) return false;
 
-        Object[] newElements = new Object[elements.length*2];
+        Integer[] newElements = new Integer[elements.length*2];
         System.arraycopy(elements, 0, newElements, 0, elements.length);
         maxIndex = newElements.length - 1;
         elements = newElements;
 
         elements[++index] = e;
-        logger.info("Stack@{} dilatation the capacity to {}!", this.hashCode(), newElements.length);
 
         return true;
     }
 
-    public E pop()
+    public Integer pop()
     {
         if ( index < 0 ) throw new RuntimeException("The stack is empty!");
-        return (E) elements[index--];
+        return elements[index--];
     }
 
-    public E peek()
+    public Integer peek()
     {
         if ( index < 0 ) throw new RuntimeException("The stack is empty!");
-        return (E) elements[index];
+        return elements[index];
     }
 }

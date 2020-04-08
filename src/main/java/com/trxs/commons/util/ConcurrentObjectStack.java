@@ -10,19 +10,18 @@ public class ConcurrentObjectStack<T> extends ObjectStack<T>
         super(capacity);
     }
 
-    public T push( T e)
+    public boolean push( T e)
     {
-        T t;
         try
         {
-            while ( false == mutex.compareAndSet(0, 1) ) Thread.yield();
-            t = super.push(e);
+            int count = 0;
+            while ( count++ < 1000 && false == mutex.compareAndSet(0, 1) ) Thread.yield();
+            return super.push(e);
         }
         finally
         {
             mutex.set(0);
         }
-        return t;
     }
 
     public T pop()

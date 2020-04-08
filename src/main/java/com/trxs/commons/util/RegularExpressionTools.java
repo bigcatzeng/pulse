@@ -11,11 +11,7 @@ import java.util.regex.Pattern;
 
 public class RegularExpressionTools
 {
-    private static Logger logger = LoggerFactory.getLogger(RegularExpressionTools.class);
-
-    private RegularExpressionTools()
-    {
-    }
+    private RegularExpressionTools() { }
 
     private enum Singleton
     {
