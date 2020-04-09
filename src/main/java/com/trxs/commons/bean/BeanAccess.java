@@ -47,7 +47,7 @@ public class BeanAccess
         return;
     }
 
-    public int getPropertyIndexByName(String name)
+    public int indexForGetPropertyByName(String name)
     {
         for ( int i = 0; i < getMethodNames.length; ++i )
         {
@@ -56,7 +56,16 @@ public class BeanAccess
         return -1;
     }
 
-    public int setPropertyIndexByName(String name)
+    public int indexForGetPropertyByName(String name, int defaultValue )
+    {
+        for ( int i = 0; i < getMethodNames.length; ++i )
+        {
+            if ( name.equals(getMethodNames[i]) ) return i;
+        }
+        return defaultValue;
+    }
+
+    public int indexForSetPropertyByName(String name)
     {
         for ( int i = 0; i < setMethodNames.length; ++i )
         {

@@ -1,7 +1,6 @@
 package com.trxs.pulse;
 
 import com.alibaba.fastjson.JSON;
-import com.esotericsoftware.reflectasm.MethodAccess;
 import com.fel.Expression;
 import com.fel.FelEngineImpl;
 import com.trxs.commons.bean.BeanAccess;
@@ -19,7 +18,6 @@ import sun.misc.Unsafe;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.text.MessageFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.UnaryOperator;
@@ -161,7 +159,7 @@ public class XmlTests
         Object obj = ssgAccountBaseLog;
         BeanAccess accessBean = new BeanAccess(obj);
 
-        int index = accessBean.setPropertyIndexByName("baiduAccount");
+        int index = accessBean.indexForSetPropertyByName("baiduAccount");
 
         String sql=null;
 

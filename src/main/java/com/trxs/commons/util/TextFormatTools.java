@@ -13,6 +13,8 @@ import static com.trxs.commons.unsafe.UnsafeTools.getUnsafe;
 
 public class TextFormatTools
 {
+    private static final int ITEM_INDEX = 100000;
+
     private static RegularExpressionTools regularExpressionTools = RegularExpressionTools.getInstance();
     private static Map<String, Rendering> templateMap = new ConcurrentHashMap<>();
     private static Unsafe unsafe = getUnsafe();
@@ -78,7 +80,7 @@ public class TextFormatTools
         return context.renderSQL(objects, parameterMap);
     }
 
-    public String renderForeachSQL(String template, List<Object> objects, Map<String,Object> contextMap, String collections, String key, int index)
+    public String renderForeachSQL(String template, List<Object> objects, Map<String,Object> contextMap, String collections, int index)
     {
         Rendering context = templateMap.get(template);
         if ( context == null )
@@ -86,7 +88,7 @@ public class TextFormatTools
             context = new Rendering(analyseTemplate(template));
             templateMap.put(template, context);
         }
-        return context.renderForeachSQL(objects, contextMap, collections, key, index);
+        return context.renderForeachSQL(objects, contextMap, collections, index);
     }
 
     public String renderSQL(String template, List<Object> objects, Object... parameters)
@@ -161,7 +163,7 @@ public class TextFormatTools
         sb.delete(0, sb.length());
 
         char ch;
-        int status, startIndex=0, endIndex=0, type=0;
+        int status, startIndex=0, endIndex=0, type=0, foreachIndex=-1;
         String value = null;
 
         while ( startIndex < chars.length )
@@ -187,9 +189,18 @@ public class TextFormatTools
                     {
                         endIndex = chars.length;
                     }
-                    value = new String(chars, startIndex+1, endIndex - startIndex - 2);
+                    if ( chars[startIndex+1] == '.' )
+                    {
+                        foreachIndex = ITEM_INDEX;
+                        value = new String(chars, startIndex+2, endIndex - startIndex - 3);
+                    }
+                    else
+                    {
+                        foreachIndex = -1;
+                        value = new String(chars, startIndex+1, endIndex - startIndex - 2);
+                    }
             }
-            items.add(new TemplateItem(value, type));
+            items.add(new TemplateItem(value, type, foreachIndex));
             startIndex = endIndex;
         }
 
@@ -213,10 +224,11 @@ public class TextFormatTools
 
         private int foreachIndex = -1;
 
-        public TemplateItem(String text, int type)
+        public TemplateItem(String text, int type, int index)
         {
             value = text;
             isVar = type;
+            foreachIndex = index;
         }
 
         public TemplateItem(String text)
@@ -275,12 +287,13 @@ public class TextFormatTools
             return sb.toString();
         }
 
-        private String renderForeachSQL(List<Object> objects, Map<String,Object> parameterMap, String collections, String key, int index)
+        private String renderForeachSQL(List<Object> objects, Map<String,Object> parameterMap, String collectionName, int index)
         {
-            int len = sb.length();
-            sb.delete(0, len);
-            Object item = parameterMap.get(collections);
-            BeanAccess itemAccess = new BeanAccess(item);
+            int len = sb.length(); sb.delete(0, len);
+            List<Object> collections = (List<Object>) parameterMap.get(collectionName);
+            // Todo 改成静态类, 避免 new 操作
+            BeanAccess itemAccess = new BeanAccess(collections.get(index));
+
             for ( int i = 0; i < items.length; ++i )
             {
                 if ( items[i].isVar == 0 )
@@ -290,15 +303,17 @@ public class TextFormatTools
                 }
                 sb.append( "?" );
                 String varName = items[i].value;
-                if ( varName.charAt(0) == '.' )
+                if ( items[i].foreachIndex > -1 )
                 {
-                    if ( items[i].foreachIndex < 0 ) itemAccess.getPropertyIndexByName()
+                    if ( items[i].foreachIndex == ITEM_INDEX ) items[i].foreachIndex = itemAccess.indexForGetPropertyByName(varName, ITEM_INDEX);
+                    if ( items[i].foreachIndex <  ITEM_INDEX ) objects.add(itemAccess.getValueByIndex(items[i].foreachIndex));
                 }
                 else
                 {
                     objects.add(parameterMap.get(varName));
                 }
             }
+
             return sb.toString();
         }
 

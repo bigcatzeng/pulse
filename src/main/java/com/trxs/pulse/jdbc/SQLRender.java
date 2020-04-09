@@ -105,7 +105,7 @@ public class SQLRender
         }
     }
 
-    void renderForeachNode(Node node, StringBuilder builder, Map<String, Object> context, List<Object> objects, String collections, String itemName, int index)
+    void renderForeachNode(Node node, StringBuilder builder, Map<String, Object> context, List<Object> objects, String collections, int index)
     {
         if ( node instanceof Element )
         {
@@ -114,7 +114,7 @@ public class SQLRender
         else if ( node instanceof XmlText )
         {
             String xmlText = ((XmlText) node).getText();
-            String result = textFormatTools.renderForeachSQL(xmlText, objects, context, collections, itemName, index);
+            String result = textFormatTools.renderForeachSQL(xmlText, objects, context, collections, index);
             builder.append(result);
         }
     }
@@ -229,7 +229,6 @@ public class SQLRender
     {
         final StringBuilder sb = builderPool.pop();
 
-        String itemName = element.getAttributeByName("item");
         String separator = element.getAttributeByName("separator");
         String collections = element.getAttributeByName("collections");
 
@@ -239,7 +238,7 @@ public class SQLRender
         for ( int i = 0, max = items.size(); i < max; ++i)
         {
             if ( sb.length() > 0 ) sb.delete(0,sb.length());
-            for ( Node n : element.getContents() ) renderForeachNode(n, sb, context, objects, collections, itemName, i );
+            for ( Node n : element.getContents() ) renderForeachNode(n, sb, context, objects, collections, i );
             skipToSpace(sb);
             trimRight(sb, " \t\r\n");
             values.add(sb.toString());
